@@ -8,8 +8,8 @@
   },
   "rail": {
     "intro": [
-      "Antes de começar, combinem quem relata e quem olha o tempo.",
-      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+      "Antes de começar, combinem *quem relata* e *quem olha o tempo*.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
     ],
     "steps": [
       {
@@ -53,14 +53,20 @@
     "number": "1",
     "title": "O que está em jogo?",
     "time": "10 min",
-    "left": { "title": "O que o programa oferece" },
-    "right": { "title": "O que pede em troca" }
+    "left": {
+      "title": "O que o programa oferece"
+    },
+    "right": {
+      "title": "O que pede em troca"
+    }
   },
   "decision": {
     "number": "2",
     "title": "A decisão do grupo",
     "time": "20 min",
-    "paths": { "title": "Caminhos possíveis" },
+    "paths": {
+      "title": "Caminhos possíveis"
+    },
     "recommendation": {
       "title": "Nossa recomendação",
       "hint": "O que fazer, em que condições e quem responde."
@@ -70,15 +76,22 @@
       "categories": [
         {
           "title": "Autonomia e supervisão humana",
-          "questions": ["Quem decide os limites desse uso?", "Onde uma pessoa precisa validar?"]
+          "questions": [
+            "Quem decide os limites desse uso?",
+            "Onde uma pessoa precisa validar?"
+          ]
         },
         {
           "title": "Equidade",
-          "questions": ["Quem é afetado? Alguém fica de fora?"]
+          "questions": [
+            "Quem é afetado? Alguém fica de fora?"
+          ]
         },
         {
           "title": "Legislações e normas",
-          "questions": ["Que dados entram nisso? O que precisa estar no contrato?"]
+          "questions": [
+            "Que dados entram nisso? O que precisa estar no contrato?"
+          ]
         }
       ]
     }

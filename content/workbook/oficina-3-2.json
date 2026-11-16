@@ -8,8 +8,8 @@
   },
   "rail": {
     "intro": [
-      "Antes de começar, combinem quem relata e quem olha o tempo.",
-      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+      "Antes de começar, combinem *quem relata* e *quem olha o tempo*.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
     ],
     "steps": [
       {
@@ -41,9 +41,16 @@
     "time": "45 min",
     "note": "Ajuda pouco e exige pouco cuidado: a rede não precisa orientar.",
     "cells": [
-      { "title": "Incentivar" },
-      { "title": "Limitar", "hint": "Sob quais condições?" },
-      { "title": "Proibir" }
+      {
+        "title": "Incentivar"
+      },
+      {
+        "title": "Limitar",
+        "hint": "Sob quais condições?"
+      },
+      {
+        "title": "Proibir"
+      }
     ]
   },
   "orientation": {

@@ -11,12 +11,7 @@ type SectionViewProps = {
 export function SectionView({ section, publication, showMasthead }: SectionViewProps) {
   if (section.layout === 'workbook') {
     return (
-      <WorkbookPage
-        id={section.id}
-        page={section.page}
-        publicationTitle={publication.title}
-        folio={section.folio}
-      />
+      <WorkbookPage id={section.id} page={section.page} />
     )
   }
 

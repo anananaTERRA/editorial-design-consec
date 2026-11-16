@@ -8,8 +8,8 @@
   },
   "rail": {
     "intro": [
-      "Antes de começar, combinem quem relata e quem olha o tempo.",
-      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+      "Antes de começar, combinem *quem relata* e *quem olha o tempo*.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
     ],
     "steps": [
       {
@@ -48,12 +48,30 @@
     "time": "25 min",
     "center": "Professor(a)",
     "zones": [
-      { "title": "Pensa e sente", "hint": "O que essa pessoa espera da IA? O que a preocupa?" },
-      { "title": "Vê", "hint": "O que acontece ao redor dela, na escola e na rede?" },
-      { "title": "Ouve", "hint": "O que essa pessoa ouve?" },
-      { "title": "Fala e faz", "hint": "Como usa a IA hoje? Ela revisa o que a ferramenta produz?" },
-      { "title": "Dores", "hint": "O que trava?" },
-      { "title": "Ganhos", "hint": "O que mudaria para melhor no trabalho dela?" }
+      {
+        "title": "Pensa e sente",
+        "hint": "O que essa pessoa espera da IA? O que a preocupa?"
+      },
+      {
+        "title": "Vê",
+        "hint": "O que acontece ao redor dela, na escola e na rede?"
+      },
+      {
+        "title": "Ouve",
+        "hint": "O que essa pessoa ouve?"
+      },
+      {
+        "title": "Fala e faz",
+        "hint": "Como usa a IA hoje? Ela revisa o que a ferramenta produz?"
+      },
+      {
+        "title": "Dores",
+        "hint": "O que trava?"
+      },
+      {
+        "title": "Ganhos",
+        "hint": "O que mudaria para melhor no trabalho dela?"
+      }
     ]
   },
   "training": {
@@ -61,10 +79,18 @@
     "title": "A formação que faz sentido",
     "time": "15 min",
     "fields": [
-      { "title": "A dor que escolhemos resolver" },
-      { "title": "O que precisa aprender" },
-      { "title": "Formato e momento" },
-      { "title": "Quem conduz" }
+      {
+        "title": "A dor que escolhemos resolver"
+      },
+      {
+        "title": "O que precisa aprender"
+      },
+      {
+        "title": "Formato e momento"
+      },
+      {
+        "title": "Quem conduz"
+      }
     ]
   },
   "orientation": {

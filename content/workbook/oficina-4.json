@@ -8,8 +8,8 @@
   },
   "rail": {
     "intro": [
-      "Antes de começar, combinem quem relata e quem olha o tempo.",
-      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+      "Antes de começar, combinem *quem relata* e *quem olha o tempo*.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
     ],
     "steps": [
       {
@@ -42,9 +42,18 @@
   },
   "processLabel": "Processo escolhido:",
   "columns": [
-    { "title": "Incentivar", "hint": "Em que a IA pode ajudar neste processo, e como?" },
-    { "title": "Limitar", "hint": "O que uma pessoa precisa validar, e sob quais condições?" },
-    { "title": "Proibir", "hint": "O que nunca fica só com a IA, e como fazer valer?" }
+    {
+      "title": "Incentivar",
+      "hint": "Em que a IA pode ajudar neste processo, e como?"
+    },
+    {
+      "title": "Limitar",
+      "hint": "O que uma pessoa precisa validar, e sob quais condições?"
+    },
+    {
+      "title": "Proibir",
+      "hint": "O que nunca fica só com a IA, e como fazer valer?"
+    }
   ],
   "orientation": {
     "number": "2",

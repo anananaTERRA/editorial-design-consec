@@ -6,12 +6,6 @@
   "author": "CONSED",
   "sections": [
     {
-      "id": "capa",
-      "strategy": "flow",
-      "layout": "standard",
-      "source": "chapters/capa.mdx"
-    },
-    {
       "id": "oficina-1a",
       "strategy": "workbook",
       "layout": "workbook",

@@ -17,18 +17,16 @@ import { ConsedLogo } from '../components/ConsedLogo'
 type WorkbookPageProps = {
   id: string
   page: WorkbookPageContent
-  publicationTitle: string
-  folio?: 'on' | 'off'
 }
 
-export function WorkbookPage({ id, page, publicationTitle, folio }: WorkbookPageProps) {
+export function WorkbookPage({ id, page }: WorkbookPageProps) {
   return (
     <article
       id={id}
       className={`sheet layout-workbook wb-variant-${page.variant}`}
       data-layout="workbook"
       data-paginate="off"
-      {...(folio === 'off' ? { 'data-folio': 'off' } : {})}
+      data-folio="off"
     >
       <div className="wb-page">
         <WorkbookHeaderView header={page.header} />
@@ -38,7 +36,7 @@ export function WorkbookPage({ id, page, publicationTitle, folio }: WorkbookPage
             <WorkbookBody page={page} />
           </main>
         </div>
-        <WorkbookFooter publicationTitle={publicationTitle} />
+        <WorkbookFooter />
       </div>
     </article>
   )
@@ -47,10 +45,7 @@ export function WorkbookPage({ id, page, publicationTitle, folio }: WorkbookPage
 function WorkbookHeaderView({ header }: { header: WorkbookHeader }) {
   return (
     <header className="wb-header">
-      <div className="wb-header-top">
-        <p className="wb-eyebrow">{header.eyebrow}</p>
-        <ConsedLogo size={9} />
-      </div>
+      <p className="wb-eyebrow">{header.eyebrow}</p>
       <div className="wb-header-title-row">
         <div className="wb-header-copy">
           <h1 className="wb-title">{header.title}</h1>
@@ -65,8 +60,19 @@ function WorkbookHeaderView({ header }: { header: WorkbookHeader }) {
           </div>
         ) : null}
       </div>
-      <div className="wb-header-rule" />
     </header>
+  )
+}
+
+function renderRailIntro(text: string) {
+  return text.split(/(\*[^*]+\*)/g).map((part, index) =>
+    part.startsWith('*') && part.endsWith('*') && part.length > 2 ? (
+      <em className="wb-rail-em" key={index}>
+        {part.slice(1, -1)}
+      </em>
+    ) : (
+      part
+    ),
   )
 }
 
@@ -76,18 +82,20 @@ function WorkbookRailView({ rail }: { rail: WorkbookRail }) {
       <h2 className="wb-rail-title">Passo a passo</h2>
       {rail.intro.map((paragraph, index) => (
         <p className="wb-rail-intro" key={index}>
-          {paragraph}
+          {renderRailIntro(paragraph)}
         </p>
       ))}
       <div className="wb-rail-steps">
         {rail.steps.map((step, index) => (
           <div className={`wb-rail-step wb-rail-step--${step.kind}`} key={index}>
-            {step.kind === 'step' ? (
-              <span className="wb-step-num">{step.number}</span>
-            ) : (
-              <span className={`wb-pill wb-pill--${step.kind}`}>{step.label}</span>
-            )}
             <div className="wb-rail-step-head">
+              {step.kind === 'step' ? (
+                <span className="wb-step-num" data-step={step.number}>
+                  {step.number}
+                </span>
+              ) : (
+                <span className={`wb-pill wb-pill--${step.kind}`}>{step.label}</span>
+              )}
               <strong>{step.title}</strong>
               <span className="wb-time">{step.time}</span>
             </div>
@@ -99,12 +107,11 @@ function WorkbookRailView({ rail }: { rail: WorkbookRail }) {
   )
 }
 
-function WorkbookFooter({ publicationTitle }: { publicationTitle: string }) {
+function WorkbookFooter() {
   return (
     <footer className="wb-footer">
       <ConsedLogo markOnly size={11} />
       <span className="wb-footer-rule" aria-hidden="true" />
-      <span className="wb-footer-label">Caderno de oficinas · {publicationTitle}</span>
     </footer>
   )
 }
@@ -127,9 +134,11 @@ function Panel({
   children: ReactNode
 }) {
   return (
-    <section className={`wb-panel ${className ?? ''}`.trim()}>
+    <section className={`wb-panel ${className ?? ''}`.trim()} data-step={panel.number}>
       <header className="wb-panel-head">
-        <span className="wb-panel-num">{panel.number}</span>
+        <span className="wb-panel-num" data-step={panel.number}>
+          {panel.number}
+        </span>
         <h2 className="wb-panel-title">{panel.title}</h2>
         <span className="wb-panel-time">{panel.time}</span>
       </header>
@@ -185,17 +194,29 @@ function CaseBody({ page }: { page: WorkbookCasePage }) {
 
 function ProfileBody({ page }: { page: WorkbookProfilePage }) {
   const [primary, ...secondary] = page.training.fields
+  const upperZones = page.empathy.zones.slice(0, 4)
+  const lowerZones = page.empathy.zones.slice(4)
   return (
     <div className="wb-profile">
       <Panel panel={page.empathy} className="wb-panel--empathy">
         <div className="wb-empathy">
-          {page.empathy.zones.map((zone, index) => (
-            <div className={`wb-empathy-zone wb-empathy-zone--${index + 1}`} key={index}>
-              <p className="wb-zone-title">{zone.title}</p>
-              {zone.hint ? <p className="wb-zone-hint">{zone.hint}</p> : null}
-            </div>
-          ))}
-          <div className="wb-empathy-center">{page.empathy.center}</div>
+          <div className="wb-empathy-top">
+            {upperZones.map((zone, index) => (
+              <div className={`wb-empathy-zone wb-empathy-zone--${index + 1}`} key={index}>
+                <p className="wb-zone-title">{zone.title}</p>
+                {zone.hint ? <p className="wb-zone-hint">{zone.hint}</p> : null}
+              </div>
+            ))}
+            <div className="wb-empathy-center">{page.empathy.center}</div>
+          </div>
+          <div className="wb-empathy-bottom">
+            {lowerZones.map((zone, index) => (
+              <div className={`wb-empathy-zone wb-empathy-zone--${index + 5}`} key={index}>
+                <p className="wb-zone-title">{zone.title}</p>
+                {zone.hint ? <p className="wb-zone-hint">{zone.hint}</p> : null}
+              </div>
+            ))}
+          </div>
         </div>
       </Panel>
 

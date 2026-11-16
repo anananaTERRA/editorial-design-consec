@@ -31,6 +31,9 @@
   --color-text: #233746;
   --color-paper: #ffffff;
   --color-accent: #64e15e;
+  --color-accent-soft: #8dea89;
+  --color-blue-soft: #bddffb;
+  --color-turquoise-soft: #aae6ec;
   --color-blue: #008ff1;
   --color-turquoise: #3ec1d2;
   --color-lime: #c3e11d;
@@ -41,7 +44,7 @@
   --color-magenta: #e441b0;
   --color-pink: #ff6f95;
   --color-muted: #48667a;
-  --color-rule: #d3dfe7;
+  --color-rule: #bccdd9;
   --color-panel: #f2f6f9;
   --color-panel-2: #e9f3f7;
   --color-highlight: #eaf7ee;
