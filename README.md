@@ -6,11 +6,11 @@ Documento editorial da CONSED feito como site: o conteúdo vive em JSON e MDX, a
 
 ## Estado atual
 
-- **11 páginas:** capa + 10 folhas de oficina (casos 1A/1B, perfis 2A/2B/2C, oficinas 3.1, 3.2, 4 e casos 5A/5B).
+- **10 páginas:** 10 folhas de oficina (casos 1A/1B, perfis 2A/2B/2C, oficinas 3.1, 3.2, 4 e casos 5A/5B). O caderno não tem capa.
 - **Formato:** A4 paisagem, 297 × 210 mm. A impressão usa 303 × 216 mm com 3 mm de sangria.
 - **Identidade:** Instrument Sans (Fontsource), azul `#0b5384`, verde `#64e15e` e a paleta gráfica da CONSED.
 - **Conteúdo:** transcrito do PDF `consec_origin.pdf` e conferido contra o OCR. Precisa de revisão editorial antes de publicar.
-- **Marca:** a marca CONSED na capa e no rodapé é uma reconstrução vetorial provisória. Os logos oficiais e os logos dos apoiadores ainda não foram fornecidos em vetor.
+- **Marca:** a marca CONSED no rodapé é uma reconstrução vetorial provisória. Os logos oficiais e os logos dos apoiadores ainda não foram fornecidos em vetor.
 
 ## Requisitos
 
@@ -30,7 +30,7 @@ npm run dev
 
 Abra **http://127.0.0.1:5173**. `npm run visualizar` e `npm run editar` abrem o mesmo site, com atualização automática ao salvar.
 
-A edição é em arquivos, com o agente: os textos das oficinas ficam em `content/workbook/*.json`, e a capa em `content/chapters/capa.mdx`.
+A edição é em arquivos, com o agente: os textos das oficinas ficam em `content/workbook/*.json`.
 
 ## PDF
 
@@ -62,7 +62,6 @@ Gera `output/document-print.pdf` (303 × 216 mm, com 3 mm de sangria). Não há 
 | Caminho | Papel |
 | --- | --- |
 | `content/document.json` | Ordem de leitura e metadados |
-| `content/chapters/capa.mdx` | Capa (frontmatter `sheetVariant: cover`) |
 | `content/workbook/*.json` | Conteúdo das 10 folhas de oficina |
 | `src/layouts/WorkbookPage.tsx` | Modelos `case`, `profile`, `trajectory`, `matrix` e `process` |
 | `src/content/schema.ts` | Validação do manifesto e dos modelos de oficina |
@@ -88,7 +87,7 @@ O schema em `src/content/schema.ts` rejeita campos faltando, variantes desconhec
 O que ainda depende de você:
 
 1. Confirmar o título, o subtítulo e o ano da publicação.
-2. Enviar os logos vetoriais oficiais (CONSED, Vivo, Itaú, FGV, Vozes) — hoje a capa usa uma marca provisória e os apoiadores como texto.
+2. Enviar os logos vetoriais oficiais (CONSED, Vivo, Itaú, FGV, Vozes) — hoje o rodapé usa uma marca provisória.
 3. Enviar os arquivos de fonte, se quiser substituir a versão Fontsource.
 4. Dizer se as caixas em branco devem continuar para preenchimento à mão ou virar campos editáveis no navegador.
 5. Revisar o texto transcrito do PDF de origem.

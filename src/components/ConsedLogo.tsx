@@ -1,3 +1,5 @@
+import marcaConsed from '../assets/consec-marca.png'
+
 type ConsedLogoProps = {
   /** Mark only, no wordmark. */
   markOnly?: boolean
@@ -7,49 +9,21 @@ type ConsedLogoProps = {
 }
 
 /**
- * Marca provisória construída a partir dos arcos da identidade CONSED.
- * Substituir pelo arquivo vetorial oficial quando ele chegar.
+ * Marca CONSED: arte oficial extraída do deck de identidade
+ * (`_entrada/marca/consec_identidadevisual.pdf`, 184 × 184 px, fundo transparente).
+ * O arquivo vetorial oficial ainda não existe no projeto; quando chegar,
+ * basta substituir `src/assets/consec-marca.png`.
  */
 export function ConsedLogo({ markOnly = false, size = 10, className }: ConsedLogoProps) {
   const classes = ['consed-logo', className].filter(Boolean).join(' ')
   return (
     <span className={classes} style={{ fontSize: `${size}pt` }}>
-      <svg className="consed-mark" viewBox="0 0 64 64" aria-hidden="true">
-        <g fill="none" strokeLinecap="round">
-          <circle
-            cx="32"
-            cy="32"
-            r="26"
-            stroke="#64e15e"
-            strokeWidth="2.6"
-            strokeDasharray="118 56"
-            transform="rotate(-58 32 32)"
-          />
-          <circle
-            cx="32"
-            cy="32"
-            r="21"
-            stroke="#3ec1d2"
-            strokeWidth="2.6"
-            strokeDasharray="86 52"
-            transform="rotate(-24 32 32)"
-          />
-          <circle
-            cx="32"
-            cy="32"
-            r="16"
-            stroke="#008ff1"
-            strokeWidth="2.6"
-            strokeDasharray="54 48"
-            transform="rotate(8 32 32)"
-          />
-          <path
-            d="M41 23.5A11.5 11.5 0 1 0 41 40.5"
-            stroke="#0b5384"
-            strokeWidth="3.6"
-          />
-        </g>
-      </svg>
+      <img
+        className="consed-mark"
+        src={marcaConsed}
+        alt={markOnly ? 'CONSED' : ''}
+        aria-hidden={markOnly ? undefined : true}
+      />
       {markOnly ? null : <span className="consed-wordmark">CONSED</span>}
     </span>
   )

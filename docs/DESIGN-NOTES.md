@@ -51,7 +51,7 @@ A capa usa uma composição de arcos construída em SVG, inspirada na capa do de
 ## O que é provisório
 
 - Título, subtítulo e ausência de ano.
-- Marca CONSED desenhada em SVG e logos de apoio em texto.
+- Marca CONSED: raster oficial recortado do deck de identidade (`_entrada/marca/consec_identidadevisual.pdf`, imagem 184 × 184 px, fundo transparente), salvo em `src/assets/consec-marca.png` (180 × 180). Não existe vetor no material recebido. No rodapé a marca é impressa a 8 mm, o que dá ~570 dpi; o limite seguro desse arquivo é ~15 mm a 300 dpi. Para usar a marca maior que isso (capa, cartaz), pedir o vetor à CONSED. Os logos de apoio continuam em texto.
 - Fontes via Fontsource; podem ser trocadas pelos arquivos licenciados.
 - Campos de “Grupo / Relator(a)” e as caixas de resposta são impressos em branco; não há inputs.
 - Texto transcrito por OCR; precisa de revisão editorial.

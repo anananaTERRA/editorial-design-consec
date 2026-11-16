@@ -16,7 +16,7 @@ Coloque os arquivos em `_entrada/`. A pasta fica fora do git até a triagem.
 | Título/subtítulo/ano finais | **Pendente** | — |
 | Revisão do texto transcrito | **Pendente** | — |
 
-Enquanto os logos não chegam, a capa usa uma reconstrução vetorial da marca CONSED e os apoiadores como texto. Não trate essa marca como o arquivo oficial.
+Enquanto os logos não chegam, o rodapé usa uma reconstrução vetorial da marca CONSED. Não trate essa marca como o arquivo oficial.
 
 ## O que ainda é necessário
 

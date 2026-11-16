@@ -14,7 +14,7 @@ This repository builds the CONSED workshop workbook as a React site (Vite) and e
 
 Three layers stay separate:
 
-1. **Content** — `content/document.json` is the only reading order. The cover is `content/chapters/capa.mdx`. The ten workshop sheets are JSON in `content/workbook/`.
+1. **Content** — `content/document.json` is the only reading order. The ten workshop sheets are JSON in `content/workbook/`. The project has no cover page (`content/chapters/` is empty); the PDF starts at the first workshop.
 2. **Composition** — `src/layouts/WorkbookPage.tsx` renders five variants: `case`, `profile`, `trajectory`, `matrix`, `process`. The schema is `src/content/schema.ts`.
 3. **Output** — `src/lib/paginateDesk.ts` prints the sheets. Workshop pages are fixed (`data-paginate="off"`) and are not split. `scripts/build-pdf.ts` builds and prints with Playwright.
 
