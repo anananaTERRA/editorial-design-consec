@@ -1,0 +1,15 @@
+node_modules
+dist
+output/*
+!output/.gitkeep
+test-results
+playwright-report
+blob-report
+.DS_Store
+*.tsbuildinfo
+*.log
+
+# Materiais recebidos da equipe (marca, fontes, documentos).
+# Ficam fora do git até serem triados e convertidos.
+_entrada/*
+!_entrada/LEIA-ME.md

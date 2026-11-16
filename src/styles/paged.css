@@ -1,0 +1,70 @@
+@page {
+  /* Literal: Chromium does not resolve var() inside @page. Mirrors tokens.css. */
+  size: 297mm 210mm;
+  margin: 0;
+  font-family: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  color: #605c55;
+
+  @top-left {
+    content: none;
+  }
+
+  @top-right {
+    content: none;
+  }
+
+  @bottom-center {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+
+  @bottom-right {
+    content: none;
+  }
+}
+
+@page :left {
+  margin: 0;
+}
+
+@page :right {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+.kicker,
+.masthead {
+  break-after: avoid;
+  break-inside: avoid;
+}
+
+h1 + *,
+h2 + *,
+h3 + *,
+.kicker + * {
+  break-before: avoid;
+}
+
+.figure,
+.editorial-table,
+.pull-quote,
+.highlight,
+.text-columns {
+  break-inside: avoid;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+p {
+  orphans: 3;
+  widows: 3;
+  text-wrap: pretty;
+  hyphenate-limit-lines: 2;
+  hyphenate-limit-last: always;
+}

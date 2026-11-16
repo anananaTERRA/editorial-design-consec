@@ -1,0 +1,94 @@
+{
+  "variant": "case",
+  "header": {
+    "eyebrow": "Oficina 1 · Governança · Caso 1A",
+    "title": "A proposta de parceria",
+    "subtitle": "O secretário precisa decidir se aceita a parceria, em que condições e quem responderá pela decisão.",
+    "fields": true
+  },
+  "rail": {
+    "intro": [
+      "Antes de começar, combinem quem relata e quem olha o tempo.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+    ],
+    "steps": [
+      {
+        "kind": "start",
+        "label": "Início",
+        "title": "Leitura individual",
+        "time": "10 min",
+        "body": "Leia o caso com calma. No lugar do secretário, o que você faria?"
+      },
+      {
+        "kind": "step",
+        "number": "1",
+        "title": "O que está em jogo?",
+        "time": "10 min",
+        "body": "Conversem sobre o que a proposta oferece e o que ela pede em troca. É bom ouvir todo mundo."
+      },
+      {
+        "kind": "step",
+        "number": "2",
+        "title": "A decisão do grupo",
+        "time": "20 min",
+        "body": "Pensem em mais de um caminho antes de escolher. As três perguntas do quadro ao lado ajudam a testar a escolha, e o cartão da Resolução também. Se o grupo não chegar a um acordo, anotem as duas posições."
+      },
+      {
+        "kind": "step",
+        "number": "3",
+        "title": "Do caso à orientação de governança",
+        "time": "20 min",
+        "body": "Agora deixem o caso de lado e pensem só em governança. O que serviria para qualquer rede? Anotem pelo menos três pontos."
+      },
+      {
+        "kind": "end",
+        "label": "Fim",
+        "title": "Troca em plenária",
+        "time": "20 min",
+        "body": "Quem relata conta para a plenária o que o grupo decidiu, em até 3 minutos."
+      }
+    ]
+  },
+  "fields": {
+    "number": "1",
+    "title": "O que está em jogo?",
+    "time": "10 min",
+    "left": { "title": "O que a parceria oferece" },
+    "right": { "title": "O que pede em troca" }
+  },
+  "decision": {
+    "number": "2",
+    "title": "A decisão do grupo",
+    "time": "20 min",
+    "paths": { "title": "Caminhos possíveis" },
+    "recommendation": {
+      "title": "Nossa recomendação",
+      "hint": "O que fazer, em que condições e quem responde."
+    },
+    "questions": {
+      "title": "Três perguntas para testar a escolha",
+      "categories": [
+        {
+          "title": "Autonomia e supervisão humana",
+          "questions": ["Quem decide os limites desse uso?", "Onde uma pessoa precisa validar?"]
+        },
+        {
+          "title": "Equidade",
+          "questions": ["Quem é afetado? Alguém fica de fora?"]
+        },
+        {
+          "title": "Legislações e normas",
+          "questions": ["Que dados entram nisso? O que precisa estar no contrato?"]
+        }
+      ]
+    }
+  },
+  "orientation": {
+    "number": "3",
+    "title": "Do caso à orientação de governança",
+    "time": "20 min",
+    "prompt": "Na governança de IA, toda rede deveria...",
+    "hint": "Pelo menos três pontos.",
+    "style": "lines"
+  }
+}

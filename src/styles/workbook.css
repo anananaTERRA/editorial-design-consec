@@ -1,0 +1,833 @@
+/* CONSED workbook pages — A4 landscape, one workshop sheet per page. */
+
+.consed-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  color: var(--color-ink);
+  line-height: 1;
+  flex: none;
+}
+
+.consed-mark {
+  width: 1.9em;
+  height: 1.9em;
+  display: block;
+}
+
+.consed-wordmark {
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.layout-workbook {
+  background:
+    radial-gradient(circle at 104% 34%, transparent 0 37.8%, rgba(11, 83, 132, 0.05) 38% 38.2%, transparent 38.4%),
+    radial-gradient(circle at 104% 34%, rgba(62, 193, 210, 0.06) 0 29%, transparent 29.3%),
+    var(--color-paper);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.wb-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Header */
+.wb-header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2mm;
+}
+
+.wb-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+}
+
+.wb-eyebrow {
+  margin: 0;
+  font-size: 6.4pt;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.wb-header-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.wb-header-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.wb-title {
+  margin: 0;
+  font-size: 23pt;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+.wb-subtitle {
+  margin: 1.4mm 0 0;
+  font-size: 8.4pt;
+  line-height: 1.3;
+  color: var(--color-muted);
+}
+
+.wb-group-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+  padding-bottom: 0.8mm;
+  font-size: 6.6pt;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.wb-group-label {
+  font-weight: 600;
+}
+
+.wb-group-line {
+  display: block;
+  width: 16mm;
+  height: 3.2mm;
+  border-bottom: 0.25mm solid #8aa0ae;
+}
+
+.wb-group-line--wide {
+  width: 36mm;
+}
+
+.wb-header-rule {
+  height: 1mm;
+  margin-top: 1.4mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}
+
+/* Body: rail + main */
+.wb-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 4mm;
+  padding-top: 3mm;
+}
+
+.wb-rail {
+  flex: none;
+  width: 54mm;
+  box-sizing: border-box;
+  padding: 4mm 3.6mm;
+  border-radius: 3mm;
+  background: var(--color-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 2.2mm;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.wb-rail-title {
+  margin: 0;
+  font-size: 13pt;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.wb-rail-intro {
+  margin: 0;
+  font-size: 6.9pt;
+  line-height: 1.34;
+  color: var(--color-text);
+}
+
+.wb-rail-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2.7mm;
+  margin-top: 0.6mm;
+}
+
+.wb-rail-step {
+  display: grid;
+  grid-template-columns: 6mm 1fr;
+  column-gap: 2mm;
+  row-gap: 0.9mm;
+}
+
+.wb-rail-step--start,
+.wb-rail-step--end {
+  grid-template-columns: 1fr;
+}
+
+.wb-step-num {
+  width: 5.6mm;
+  height: 5.6mm;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 7pt;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wb-pill {
+  justify-self: start;
+  padding: 0.9mm 2.6mm 0.8mm;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 6pt;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.wb-pill--end {
+  background: var(--color-blue);
+}
+
+.wb-rail-step-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5mm;
+}
+
+.wb-rail-step-head strong {
+  font-size: 7.3pt;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-time {
+  font-size: 6.2pt;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.wb-rail-step-body {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 6.8pt;
+  line-height: 1.33;
+  color: var(--color-text);
+}
+
+/* Main column */
+.wb-main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wb-panel {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 3mm;
+  border: 0.28mm solid #cfdae2;
+  border-radius: 2.5mm;
+  background: var(--color-paper);
+}
+
+.wb-panel-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 2mm;
+}
+
+.wb-panel-num {
+  width: 6mm;
+  height: 6mm;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-size: 8pt;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.wb-panel-title {
+  flex: 1;
+  margin: 0;
+  font-size: 10.4pt;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-panel-time {
+  font-size: 6.6pt;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.wb-panel-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fields */
+.wb-field-grid {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 3mm;
+}
+
+.wb-field-grid--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.wb-field {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 2.4mm 3mm;
+  border: 0.25mm solid #d7e2e9;
+  border-radius: 1.8mm;
+  background: #fbfdfe;
+}
+
+.wb-field-title {
+  margin: 0;
+  font-size: 7.5pt;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-field-hint {
+  margin: 0.7mm 0 0;
+  font-size: 6.5pt;
+  line-height: 1.28;
+  color: var(--color-muted);
+}
+
+.wb-field-space {
+  flex: 1;
+  min-height: 4mm;
+}
+
+/* Case */
+.wb-case {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.wb-panel--case-fields {
+  flex: 1.02;
+}
+
+.wb-panel--case-decision {
+  flex: 1.42;
+}
+
+.wb-panel--orientation {
+  flex: 0.94;
+}
+
+.wb-decision {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.08fr 1.02fr 1.1fr;
+  grid-template-rows: 1fr;
+  gap: 2.6mm;
+}
+
+.wb-questions {
+  box-sizing: border-box;
+  padding: 2.4mm 3mm;
+  border: 0.25mm solid #cfe6d8;
+  border-radius: 1.8mm;
+  background: #eef7f1;
+}
+
+.wb-questions-title {
+  margin: 0 0 1.8mm;
+  font-size: 7.2pt;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.wb-question {
+  margin-bottom: 1.6mm;
+}
+
+.wb-question:last-child {
+  margin-bottom: 0;
+}
+
+.wb-question-cat {
+  margin: 0;
+  font-size: 6.1pt;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.wb-question-line {
+  margin: 0.4mm 0 0;
+  font-size: 6.3pt;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+/* Orientation */
+.wb-orientation-prompt {
+  margin: 0 0 2mm;
+  font-size: 7.8pt;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-orientation-hint {
+  font-weight: 400;
+  font-size: 6.6pt;
+  color: var(--color-muted);
+}
+
+.wb-answer-lines {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6mm;
+}
+
+.wb-answer-line {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 6mm 1fr;
+  align-items: end;
+  gap: 2mm;
+}
+
+.wb-answer-num {
+  width: 5mm;
+  height: 5mm;
+  border: 0.28mm solid var(--color-ink);
+  border-radius: 50%;
+  color: var(--color-ink);
+  font-size: 6.4pt;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.wb-dash {
+  display: block;
+  height: 0.4mm;
+  border-bottom: 0.25mm dashed #9fb2bf;
+}
+
+.wb-answer-boxes {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2.5mm;
+}
+
+.wb-answer-box {
+  position: relative;
+  min-height: 14mm;
+  padding: 2mm;
+  border: 0.25mm solid #d7e2e9;
+  border-radius: 1.5mm;
+  background: #fbfdfe;
+}
+
+.wb-answer-box .wb-answer-num {
+  position: absolute;
+  top: 2mm;
+  left: 2mm;
+}
+
+/* Profile */
+.wb-profile {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.wb-panel--empathy {
+  flex: 1.52;
+}
+
+.wb-empathy {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 0.82fr;
+  border: 0.25mm solid #d7e2e9;
+  border-radius: 1.5mm;
+  overflow: hidden;
+}
+
+.wb-empathy-zone {
+  min-width: 0;
+  padding: 2.6mm 3mm;
+  border-bottom: 0.25mm solid #e1eaf0;
+  border-right: 0.25mm solid #e1eaf0;
+}
+
+.wb-empathy-zone--2,
+.wb-empathy-zone--4 {
+  border-right: none;
+  text-align: right;
+}
+
+.wb-empathy-zone--5,
+.wb-empathy-zone--6 {
+  border-bottom: none;
+}
+
+.wb-zone-title {
+  margin: 0;
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-zone-hint {
+  margin: 0.6mm 0 0;
+  font-size: 6.4pt;
+  line-height: 1.28;
+  color: var(--color-muted);
+}
+
+.wb-empathy-center {
+  position: absolute;
+  top: 33.333%;
+  left: 50%;
+  z-index: 1;
+  width: 30mm;
+  height: 30mm;
+  transform: translate(-50%, -50%);
+  border: 0.35mm solid var(--color-ink);
+  border-radius: 50%;
+  background: #edf4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3mm;
+  text-align: center;
+  font-size: 7.8pt;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-profile-bottom {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 3mm;
+}
+
+.wb-training {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1.12fr;
+  gap: 3mm;
+}
+
+.wb-training-main {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.wb-training-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+  padding-left: 3mm;
+  border-left: 0.25mm solid #d7e2e9;
+}
+
+.wb-inline-field .wb-dash {
+  margin-top: 1.1mm;
+}
+
+/* Trajectory */
+.wb-trajectory-page {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.wb-panel--trajectory {
+  flex: 1.62;
+}
+
+.wb-traj {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 32mm repeat(3, 1fr);
+  gap: 2mm;
+}
+
+.wb-traj-stage {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 1.8mm 2.5mm;
+  border-radius: 1.8mm;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 7.4pt;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.wb-traj-stage-num {
+  width: 5mm;
+  height: 5mm;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-ink);
+  font-size: 6.4pt;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.wb-traj-label {
+  padding: 2mm 2mm 0 0;
+}
+
+.wb-traj-cell {
+  border: 0.25mm solid #d7e2e9;
+  border-radius: 1.5mm;
+  background: #fbfdfe;
+}
+
+/* Matrix */
+.wb-matrix-page {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.72fr 1fr;
+  gap: 3mm;
+}
+
+.wb-matrix-wrap {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 5mm 1fr;
+  gap: 1.5mm;
+}
+
+.wb-axis-y {
+  position: relative;
+  display: block;
+  font-size: 5.9pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.wb-axis-y span {
+  position: absolute;
+  left: 50%;
+  writing-mode: vertical-rl;
+  transform: translateX(-50%) rotate(180deg);
+  white-space: nowrap;
+}
+
+.wb-axis-y span:first-child {
+  top: 0;
+}
+
+.wb-axis-y span:last-child {
+  bottom: 0;
+}
+
+.wb-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2.2mm;
+}
+
+.wb-matrix-cell {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2.6mm 3mm;
+  border: 0.25mm solid #d7e2e9;
+  border-radius: 1.5mm;
+  background: #fbfdfe;
+}
+
+.wb-matrix-note {
+  display: flex;
+  align-items: center;
+  padding: 3mm;
+  border: 0.3mm dashed #b9c9d4;
+  border-radius: 1.5mm;
+  background: var(--color-panel);
+  font-size: 6.8pt;
+  line-height: 1.3;
+  color: var(--color-muted);
+}
+
+.wb-axis-x {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2mm;
+  margin-top: 1.5mm;
+  margin-left: 6.5mm;
+  font-size: 5.9pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.wb-cell-title {
+  margin: 0;
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.wb-cell-hint {
+  margin: 0.7mm 0 0;
+  font-size: 6.5pt;
+  line-height: 1.28;
+  color: var(--color-muted);
+}
+
+/* Process */
+.wb-process-page {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.wb-panel--process {
+  flex: 1.55;
+}
+
+.wb-process-label {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 2.2mm;
+  font-size: 7.2pt;
+  color: var(--color-ink);
+}
+
+.wb-process-line {
+  flex: 1;
+  border-bottom: 0.25mm solid #8aa0ae;
+}
+
+.wb-process-columns {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2.5mm;
+}
+
+/* Footer */
+.wb-footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  height: 6mm;
+  margin-top: 2.2mm;
+  padding-right: 9mm;
+}
+
+.wb-footer-rule {
+  flex: 1;
+  height: 0.8mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}
+
+.wb-footer-label {
+  font-size: 5.9pt;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}

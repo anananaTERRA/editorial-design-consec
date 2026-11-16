@@ -1,0 +1,357 @@
+html {
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-leading);
+  color: var(--color-text);
+  background: white;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 2;
+}
+
+p {
+  margin: 0 0 var(--stack-paragraph);
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+}
+
+a:hover {
+  text-decoration-color: var(--color-blue);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-ink);
+  font-weight: 600;
+  line-height: 1.12;
+  hyphens: manual;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  margin: 0 0 var(--stack-after-h1);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  margin: var(--stack-before-h2) 0 var(--stack-after-h2);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  margin: var(--stack-before-h3) 0 var(--stack-after-h3);
+}
+
+.kicker {
+  font-size: var(--text-kicker);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--stack-after-kicker);
+}
+
+/* Page frame for flow pages. Workbook pages use .wb-page. */
+.page-frame {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.page-body {
+  flex: 1;
+  min-height: 0;
+  max-width: var(--text-measure);
+}
+
+.layout-cover .page-body {
+  max-width: none;
+  height: 100%;
+}
+
+.page-header {
+  flex: none;
+  margin-bottom: var(--space-3);
+}
+
+/* Masthead */
+.masthead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1mm 6mm;
+  margin: 0 0 var(--space-4);
+  padding-bottom: 2.5mm;
+  border-bottom: 0.3mm solid var(--color-ink);
+}
+
+.masthead p {
+  margin: 0;
+}
+
+.masthead-title {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.masthead-subtitle {
+  grid-column: 1 / -1;
+  font-size: var(--text-small);
+  color: var(--color-muted);
+}
+
+.masthead-author {
+  font-size: 8pt;
+  color: var(--color-muted);
+  text-align: right;
+}
+
+/* Cover */
+.cover {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.cover-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6mm;
+}
+
+.cover-brand-label {
+  font-size: 6pt;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cover-partner {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.cover-mid {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 0;
+}
+
+.cover-copy {
+  flex: 1;
+  min-width: 0;
+  padding: 4mm 0;
+}
+
+.cover-eyebrow {
+  margin: 0 0 3mm;
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+.cover-title {
+  margin: 0;
+  max-width: 150mm;
+  font-size: 46pt;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+
+.cover-subtitle {
+  margin: 4mm 0 0;
+  max-width: 128mm;
+  font-size: 12.5pt;
+  line-height: 1.3;
+  color: var(--color-muted);
+}
+
+.cover-art {
+  flex: none;
+  width: 108mm;
+  height: 108mm;
+}
+
+.cover-art svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.cover-rule {
+  height: 1.2mm;
+  background: var(--gradient-brand);
+}
+
+.cover-partners {
+  font-size: 6.4pt;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+}
+
+.cover-partners strong {
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Pull quote */
+.pull-quote {
+  margin: var(--stack-block) 0;
+  padding: 0 0 0 5mm;
+  border-left: 0.7mm solid var(--color-accent);
+  color: var(--color-ink);
+  font-size: 13pt;
+  line-height: 1.3;
+}
+
+.pull-quote-body p {
+  margin: 0;
+}
+
+.pull-quote-attribution {
+  margin-top: var(--stack-pullquote-attribution);
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* Highlight box */
+.highlight {
+  margin: var(--stack-block) 0;
+  padding: 4mm 5mm;
+  background: var(--color-highlight);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.highlight-caution {
+  background: #fdf1e7;
+}
+
+.highlight-title {
+  margin: 0 0 var(--stack-highlight-title);
+  font-size: var(--text-kicker);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.highlight-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Two-column block */
+.text-columns {
+  column-count: 2;
+  column-gap: var(--column-gap);
+  margin: var(--space-3) 0;
+}
+
+.text-columns p:last-child {
+  margin-bottom: 0;
+}
+
+/* Figure */
+.figure {
+  margin: var(--stack-block) 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure figcaption,
+.editorial-table caption {
+  font-size: var(--text-small);
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
+.figure figcaption {
+  margin-top: var(--stack-figcaption);
+}
+
+.figure-credit {
+  display: block;
+}
+
+/* Editorial table */
+.editorial-table {
+  margin: var(--stack-block) 0;
+}
+
+.editorial-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+  line-height: 1.35;
+}
+
+.editorial-table caption {
+  caption-side: bottom;
+  padding-top: 2mm;
+  text-align: left;
+}
+
+.editorial-table th {
+  padding: 1.8mm 2mm;
+  border-bottom: 0.35mm solid var(--color-ink);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.editorial-table td {
+  padding: 2mm;
+  border-bottom: 1px solid var(--color-rule);
+  vertical-align: top;
+}

@@ -1,0 +1,57 @@
+{
+  "variant": "matrix",
+  "header": {
+    "eyebrow": "Oficina 3.2 · IA no ensino e na aprendizagem",
+    "title": "A IA no trabalho do educador",
+    "subtitle": "Onde a IA ajuda no trabalho de quem ensina, e onde a decisão é da pessoa?",
+    "fields": true
+  },
+  "rail": {
+    "intro": [
+      "Antes de começar, combinem quem relata e quem olha o tempo.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+    ],
+    "steps": [
+      {
+        "kind": "step",
+        "number": "1",
+        "title": "A matriz",
+        "time": "45 min",
+        "body": "Cada pessoa escreve, em post-its, os usos de IA que conhece entre professores e coordenadores da sua rede, um por post-it. Depois decidam juntos onde cada um fica. Os que derem mais discussão são os mais importantes: conversem sobre eles com calma."
+      },
+      {
+        "kind": "step",
+        "number": "2",
+        "title": "Da matriz à orientação",
+        "time": "20 min",
+        "body": "Agora olhem para a matriz inteira e pensem só no uso de IA pelos educadores. O que serviria para qualquer rede? Anotem pelo menos três pontos."
+      },
+      {
+        "kind": "end",
+        "label": "Fim",
+        "title": "Troca em plenária",
+        "time": "25 min",
+        "body": "Quem relata conta para a plenária o que o grupo registrou, em até 3 minutos."
+      }
+    ]
+  },
+  "matrix": {
+    "number": "1",
+    "title": "A matriz",
+    "time": "45 min",
+    "note": "Ajuda pouco e exige pouco cuidado: a rede não precisa orientar.",
+    "cells": [
+      { "title": "Incentivar" },
+      { "title": "Limitar", "hint": "Sob quais condições?" },
+      { "title": "Proibir" }
+    ]
+  },
+  "orientation": {
+    "number": "2",
+    "title": "Da matriz à orientação",
+    "time": "20 min",
+    "prompt": "No uso de IA pelos educadores, toda rede deveria...",
+    "hint": "Pelo menos três pontos.",
+    "style": "lines"
+  }
+}

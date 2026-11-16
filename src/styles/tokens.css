@@ -1,0 +1,71 @@
+/*
+ * Identidade CONSED — caderno de oficinas em A4 paisagem.
+ * Fonte: Instrument Sans (SIL Open Font License), carregada via Fontsource.
+ * Cores: paleta gráfica do manual (p. 16) + azul de texto.
+ */
+:root {
+  --page-width: 297mm;
+  --page-height: 210mm;
+  --print-page-snap: 1mm;
+  --bleed: 0mm;
+  --margin-top: 11mm;
+  --margin-bottom: 11mm;
+  --margin-inner: 12mm;
+  --margin-outer: 12mm;
+  --content-height: calc(var(--page-height) - var(--margin-top) - var(--margin-bottom));
+  --text-measure: 172mm;
+
+  --font-sans: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Instrument Sans", Georgia, serif;
+
+  --text-body: 8.5pt;
+  --text-leading: 1.42;
+  --text-h1: 24pt;
+  --text-h2: 11pt;
+  --text-h3: 9pt;
+  --text-kicker: 6.8pt;
+  --text-small: 7pt;
+  --text-rail: 7pt;
+
+  --color-ink: #0b5384;
+  --color-text: #233746;
+  --color-paper: #ffffff;
+  --color-accent: #64e15e;
+  --color-blue: #008ff1;
+  --color-turquoise: #3ec1d2;
+  --color-lime: #c3e11d;
+  --color-yellow: #edd62d;
+  --color-orange: #e5822b;
+  --color-red: #e5472b;
+  --color-purple: #9150d8;
+  --color-magenta: #e441b0;
+  --color-pink: #ff6f95;
+  --color-muted: #48667a;
+  --color-rule: #d3dfe7;
+  --color-panel: #f2f6f9;
+  --color-panel-2: #e9f3f7;
+  --color-highlight: #eaf7ee;
+  --color-desk: #e4ebf1;
+  --color-folio: #48667a;
+  --gradient-brand: linear-gradient(90deg, #64e15e 0%, #3ec1d2 44%, #008ff1 100%);
+
+  --space-1: 2mm;
+  --space-2: 3mm;
+  --space-3: 4mm;
+  --space-4: 6mm;
+  --space-5: 8mm;
+  --space-6: 12mm;
+  --column-gap: 6mm;
+
+  --stack-after-kicker: var(--space-1);
+  --stack-after-h1: var(--space-2);
+  --stack-after-h2: var(--space-2);
+  --stack-after-h3: var(--space-1);
+  --stack-before-h2: var(--space-4);
+  --stack-before-h3: var(--space-3);
+  --stack-paragraph: 0.7em;
+  --stack-block: var(--space-3);
+  --stack-figcaption: 2mm;
+  --stack-highlight-title: 2mm;
+  --stack-pullquote-attribution: 2.5mm;
+}

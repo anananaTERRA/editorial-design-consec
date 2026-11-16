@@ -1,0 +1,57 @@
+{
+  "variant": "trajectory",
+  "header": {
+    "eyebrow": "Oficina 3.1 · IA no ensino e na aprendizagem",
+    "title": "A trajetória do estudante",
+    "subtitle": "Como a IA entra, ou não entra, em cada etapa da vida escolar?",
+    "fields": true
+  },
+  "rail": {
+    "intro": [
+      "Antes de começar, combinem quem relata e quem olha o tempo.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+    ],
+    "steps": [
+      {
+        "kind": "step",
+        "number": "1",
+        "title": "A trajetória",
+        "time": "45 min",
+        "body": "Percorram as três etapas, uma de cada vez. No uso de IA pelos estudantes, o que a rede deveria incentivar, limitar e proibir, e como faria isso? O cartão da Resolução traz o que já está definido para cada etapa."
+      },
+      {
+        "kind": "step",
+        "number": "2",
+        "title": "Da trajetória à orientação",
+        "time": "20 min",
+        "body": "Agora olhem para o conjunto e pensem só no uso de IA pelos estudantes. O que serviria para qualquer rede? Anotem pelo menos três pontos."
+      },
+      {
+        "kind": "end",
+        "label": "Fim",
+        "title": "Troca em plenária",
+        "time": "25 min",
+        "body": "Quem relata conta para a plenária o que o grupo registrou, em até 3 minutos."
+      }
+    ]
+  },
+  "main": {
+    "number": "1",
+    "title": "A trajetória, etapa por etapa",
+    "time": "45 min"
+  },
+  "stages": ["Educação Infantil", "Anos iniciais", "Anos finais"],
+  "rows": [
+    { "title": "Incentivar", "hint": "O quê, e como?" },
+    { "title": "Limitar", "hint": "O quê, e sob quais condições?" },
+    { "title": "Proibir", "hint": "O quê, além do que a Resolução já veda, e como fazer valer?" }
+  ],
+  "orientation": {
+    "number": "2",
+    "title": "Da trajetória à orientação de ensino e aprendizagem",
+    "time": "20 min",
+    "prompt": "No uso de IA pelos estudantes, toda rede deveria...",
+    "hint": "Pelo menos três pontos.",
+    "style": "boxes"
+  }
+}

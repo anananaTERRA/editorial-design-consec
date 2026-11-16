@@ -1,0 +1,25 @@
+/*
+ * Print layout profile. Geometry only.
+ * Page size is A4 landscape plus 3mm bleed on every edge (303mm × 216mm).
+ * scripts/build-pdf.ts repeats that size when it prints the site.
+ * There are no crop marks and no color conversion.
+ */
+:root {
+  --bleed: 3mm;
+  --margin-inner: 20mm;
+  --margin-outer: 20mm;
+  --color-paper: #ffffff;
+}
+
+@page {
+  size: 303mm 216mm;
+  margin: 0;
+}
+
+@page :left {
+  margin: 0;
+}
+
+@page :right {
+  margin: 0;
+}

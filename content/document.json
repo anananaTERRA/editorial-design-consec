@@ -1,0 +1,75 @@
+{
+  "id": "ia-na-educacao-oficinas",
+  "language": "pt-BR",
+  "title": "IA na educação",
+  "subtitle": "Caderno de oficinas para as redes estaduais",
+  "author": "CONSED",
+  "sections": [
+    {
+      "id": "capa",
+      "strategy": "flow",
+      "layout": "standard",
+      "source": "chapters/capa.mdx"
+    },
+    {
+      "id": "oficina-1a",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-1a.json"
+    },
+    {
+      "id": "oficina-1b",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-1b.json"
+    },
+    {
+      "id": "oficina-2a",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-2a.json"
+    },
+    {
+      "id": "oficina-2b",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-2b.json"
+    },
+    {
+      "id": "oficina-2c",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-2c.json"
+    },
+    {
+      "id": "oficina-3-1",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-3-1.json"
+    },
+    {
+      "id": "oficina-3-2",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-3-2.json"
+    },
+    {
+      "id": "oficina-4",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-4.json"
+    },
+    {
+      "id": "oficina-5a",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-5a.json"
+    },
+    {
+      "id": "oficina-5b",
+      "strategy": "workbook",
+      "layout": "workbook",
+      "source": "workbook/oficina-5b.json"
+    }
+  ]
+}

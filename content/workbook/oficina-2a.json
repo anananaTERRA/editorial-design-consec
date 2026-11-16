@@ -1,0 +1,78 @@
+{
+  "variant": "profile",
+  "header": {
+    "eyebrow": "Oficina 2 · Formação · Perfil A",
+    "title": "Técnico(a) da secretaria",
+    "subtitle": "Que formação em IA faria diferença para essa pessoa?",
+    "fields": true
+  },
+  "rail": {
+    "intro": [
+      "Antes de começar, combinem quem relata e quem olha o tempo.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+    ],
+    "steps": [
+      {
+        "kind": "step",
+        "number": "1",
+        "title": "Mapa de empatia",
+        "time": "25 min",
+        "body": "Pensem em alguém real da sua rede com esse papel. Coloquem-se no lugar dessa pessoa e escrevam em cada área do mapa."
+      },
+      {
+        "kind": "step",
+        "number": "2",
+        "title": "A formação que faz sentido",
+        "time": "15 min",
+        "body": "Escolham uma das dores do mapa e desenhem uma formação que ajude a resolvê-la: o que a pessoa precisa aprender, em que formato e quem conduz."
+      },
+      {
+        "kind": "step",
+        "number": "3",
+        "title": "Do perfil à orientação",
+        "time": "10 min",
+        "body": "Agora deixem o perfil de lado e pensem só em formação. O que serviria para qualquer rede? Anotem pelo menos três pontos."
+      },
+      {
+        "kind": "end",
+        "label": "Fim",
+        "title": "Troca em plenária",
+        "time": "10 min",
+        "body": "Quem relata conta para a plenária o que o grupo propôs, em até 2 minutos."
+      }
+    ]
+  },
+  "empathy": {
+    "number": "1",
+    "title": "Mapa de empatia",
+    "time": "25 min",
+    "center": "Técnico(a) da secretaria",
+    "zones": [
+      { "title": "Pensa e sente", "hint": "O que essa pessoa espera da IA? O que a preocupa?" },
+      { "title": "Vê", "hint": "O que acontece ao redor dela, na escola e na rede?" },
+      { "title": "Ouve", "hint": "O que essa pessoa ouve?" },
+      { "title": "Fala e faz", "hint": "Como usa a IA hoje? Ela revisa o que a ferramenta produz?" },
+      { "title": "Dores", "hint": "O que trava?" },
+      { "title": "Ganhos", "hint": "O que mudaria para melhor no trabalho dela?" }
+    ]
+  },
+  "training": {
+    "number": "2",
+    "title": "A formação que faz sentido",
+    "time": "15 min",
+    "fields": [
+      { "title": "A dor que escolhemos resolver" },
+      { "title": "O que precisa aprender" },
+      { "title": "Formato e momento" },
+      { "title": "Quem conduz" }
+    ]
+  },
+  "orientation": {
+    "number": "3",
+    "title": "Do perfil à orientação de formação",
+    "time": "10 min",
+    "prompt": "Na formação em IA, toda rede deveria...",
+    "hint": "Pelo menos três pontos.",
+    "style": "lines"
+  }
+}

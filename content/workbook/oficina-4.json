@@ -1,0 +1,57 @@
+{
+  "variant": "process",
+  "header": {
+    "eyebrow": "Oficina 4 · Gestão educacional com IA",
+    "title": "A IA em um processo de gestão",
+    "subtitle": "Em um processo da rede, o que a IA pode fazer e o que continua com as pessoas?",
+    "fields": true
+  },
+  "rail": {
+    "intro": [
+      "Antes de começar, combinem quem relata e quem olha o tempo.",
+      "Quanto mais detalhe vocês colocarem aqui, melhor. É desse registro que sai o guia."
+    ],
+    "steps": [
+      {
+        "kind": "step",
+        "number": "1",
+        "title": "O processo e a IA",
+        "time": "35 min",
+        "body": "Escolham um processo de gestão que vocês conhecem bem, da secretaria ou da escola. Antes de escrever, contem uns aos outros como ele funciona hoje, do começo ao fim. Depois, registrem o que a rede deveria incentivar, limitar e proibir no uso de IA nesse processo."
+      },
+      {
+        "kind": "step",
+        "number": "2",
+        "title": "Do processo à orientação",
+        "time": "15 min",
+        "body": "Agora pensem no uso de IA na gestão como um todo. O que serviria para qualquer rede? Anotem pelo menos três pontos."
+      },
+      {
+        "kind": "end",
+        "label": "Fim",
+        "title": "Troca em plenária",
+        "time": "20 min",
+        "body": "Quem relata conta para a plenária o que o grupo registrou, em até 2 minutos."
+      }
+    ]
+  },
+  "main": {
+    "number": "1",
+    "title": "O processo e a IA",
+    "time": "35 min"
+  },
+  "processLabel": "Processo escolhido:",
+  "columns": [
+    { "title": "Incentivar", "hint": "Em que a IA pode ajudar neste processo, e como?" },
+    { "title": "Limitar", "hint": "O que uma pessoa precisa validar, e sob quais condições?" },
+    { "title": "Proibir", "hint": "O que nunca fica só com a IA, e como fazer valer?" }
+  ],
+  "orientation": {
+    "number": "2",
+    "title": "Do processo à orientação de gestão educacional",
+    "time": "15 min",
+    "prompt": "No uso de IA na gestão educacional, toda rede deveria...",
+    "hint": "Pelo menos três pontos.",
+    "style": "boxes"
+  }
+}

@@ -1,0 +1,145 @@
+@media screen {
+  body {
+    background: var(--color-desk);
+  }
+
+  .preview-banner {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 8px 16px;
+    background: #24352f;
+    color: #f3efe6;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .desk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 32px 24px 48px;
+  }
+
+  .sheet-fit {
+    width: min(100%, var(--page-width));
+    container-type: inline-size;
+  }
+
+  .sheet-scale {
+    height: calc(var(--page-height) * min(1, 100cqi / var(--page-width)));
+    overflow: hidden;
+  }
+
+  .sheet-scale > .sheet {
+    transform: scale(min(1, 100cqi / var(--page-width)));
+    transform-origin: top left;
+  }
+
+  .sheet {
+    box-shadow: 0 16px 40px rgba(28, 25, 21, 0.16);
+  }
+}
+
+/* Same page frame on the desk and in the PDF. */
+.sheet {
+  box-sizing: border-box;
+  width: var(--page-width);
+  max-width: var(--page-width);
+  min-height: var(--page-height);
+  margin: 0;
+  padding: var(--margin-top) var(--margin-outer) var(--margin-bottom) var(--margin-inner);
+  background: var(--color-paper);
+}
+
+.desk .sheet {
+  height: var(--page-height);
+  max-height: var(--page-height);
+  overflow: hidden;
+  position: relative;
+}
+
+.paginate-source {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--page-width);
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sheet-page[data-page-side='left'] {
+  padding-right: var(--margin-inner);
+  padding-left: var(--margin-outer);
+}
+
+.folio {
+  position: absolute;
+  bottom: 8mm;
+  z-index: 12;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-folio);
+}
+
+.sheet-page[data-page-side='right'] .folio {
+  right: 9mm;
+}
+
+.sheet-page[data-page-side='left'] .folio {
+  left: 9mm;
+}
+
+.sheet-page[data-folio='off'] .folio {
+  display: none;
+}
+
+@media print {
+  html,
+  body,
+  #root,
+  .desk {
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    background: transparent;
+  }
+
+  .preview-banner,
+  .paginate-source {
+    display: none !important;
+  }
+
+  .sheet-fit,
+  .sheet-scale {
+    display: contents;
+  }
+
+  .desk .sheet {
+    width: var(--page-width);
+    min-width: var(--page-width);
+    max-width: var(--page-width);
+    height: var(--page-height);
+    min-height: var(--page-height);
+    max-height: var(--page-height);
+    margin: 0;
+    overflow: hidden;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    break-inside: avoid;
+    break-after: page;
+  }
+
+  .desk {
+    overflow-x: clip;
+    overflow-clip-margin: var(--bleed);
+  }
+}
