@@ -1,0 +1,43 @@
+{
+  "variant": "roteiro",
+  "number": "3",
+  "axis": "IA NO ENSINO E NA APRENDIZAGEM",
+  "city": "CURITIBA",
+  "guests": [
+    {
+      "name": "Silvana Tosin Janoski Hinça",
+      "role": "Gerente de Inovação Pedagógica"
+    }
+  ],
+  "opening": "Vamos começar o dia pelo eixo de ensino e aprendizagem, a partir de uma experiência de Curitiba: o projeto Detetives da Inteligência Artificial. Para isso, recebemos Silvana, gerente de inovação pedagógica da rede, para entender o que os estudantes aprendem sobre IA, como os professores trabalham com ela e que critérios orientam as escolas. Essa conversa alimentará as duas oficinas desta manhã.",
+  "questions": [
+    {
+      "number": "1",
+      "text": "O que é o projeto Detetives da Inteligência Artificial e o que os estudantes aprendem com ele?"
+    },
+    {
+      "number": "2",
+      "text": "Que necessidade motivou a proposta?"
+    },
+    {
+      "number": "3",
+      "text": "No projeto, o que fica com os estudantes e o que fica sob a responsabilidade do professor?"
+    },
+    {
+      "number": "4",
+      "text": "Como os professores são preparados para conduzir projetos como esse?"
+    },
+    {
+      "number": "5",
+      "text": "A experiência mudou alguma ideia sobre o que a rede deve incentivar, limitar ou proibir?"
+    },
+    {
+      "number": "6",
+      "text": "Para além do projeto, como a rede de Curitiba enxerga o uso de IA no ensino e na aprendizagem de forma geral?"
+    },
+    {
+      "number": "7",
+      "text": "Na sua percepção, qual decisão pedagógica não deve ser delegada à ferramenta?"
+    }
+  ]
+}

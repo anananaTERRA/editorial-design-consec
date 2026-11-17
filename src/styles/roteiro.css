@@ -1,0 +1,263 @@
+/*
+ * Roteiros de conversa — A4 paisagem pensada para redução a A5.
+ * A4 paisagem reduzido a A5 paisagem = 70,7%.
+ * Corpo de 11,5 pt chega a ~8,1 pt no A5; abertura de 14 pt chega a ~9,9 pt.
+ * Margens laterais de 20 mm e coluna de perguntas de 175 mm: linha de ~85 caracteres.
+ */
+
+.sheet.layout-roteiro {
+  /* Margem lateral maior que a do caderno: melhora o comprimento de linha
+     e mantém o digital igual ao perfil de impressão. */
+  padding-left: 20mm;
+  padding-right: 20mm;
+  background:
+    radial-gradient(circle at 107% -16%, transparent 0 35.6%, rgba(11, 83, 132, 0.05) 35.8% 36.1%, transparent 36.3%),
+    radial-gradient(circle at 107% -16%, rgba(62, 193, 210, 0.045) 0 27.4%, transparent 27.7%),
+    radial-gradient(circle at 107% -16%, rgba(100, 225, 94, 0.06) 0 19.2%, transparent 19.5%),
+    var(--color-paper);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.sheet.sheet-page.layout-roteiro {
+  padding-left: 20mm;
+  padding-right: 20mm;
+}
+
+.rt-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  hyphens: manual;
+}
+
+/* Header */
+.rt-header {
+  flex: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 86mm;
+  column-gap: 9mm;
+  align-items: end;
+  padding-top: 1mm;
+}
+
+.rt-heading {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5mm;
+}
+
+.rt-number {
+  flex: none;
+  width: 14mm;
+  height: 14mm;
+  margin-top: -1.44mm;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-size: 17pt;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rt-title {
+  margin: 0;
+  font-size: 30pt;
+  font-weight: 600;
+  line-height: 0.97;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  text-wrap: balance;
+  hyphens: manual;
+}
+
+.rt-guest {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6mm;
+  padding-bottom: 0.6mm;
+}
+
+.rt-city {
+  margin: 0 0 0.4mm;
+  font-size: 10.2pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.rt-guest-line {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4mm;
+}
+
+.rt-guest-name {
+  font-size: 10.4pt;
+  font-weight: 600;
+  line-height: 1.18;
+  color: var(--color-ink);
+}
+
+.rt-guest-role {
+  font-size: 9.5pt;
+  line-height: 1.24;
+  color: var(--color-muted);
+}
+
+.rt-rule {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 1.4mm;
+  margin-top: 3.5mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}
+
+/* Body */
+.rt-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 76mm minmax(0, 1fr);
+  column-gap: 6mm;
+  padding-top: 4.5mm;
+}
+
+.rt-label {
+  margin: 0 0 2.4mm;
+  font-size: 9.2pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.rt-opening {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rt-opening-text {
+  margin: 0;
+  font-size: 14pt;
+  line-height: 1.45;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+/* Questions */
+.rt-questions {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rt-question-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.4mm;
+}
+
+.rt-question {
+  display: grid;
+  grid-template-columns: 7.4mm minmax(0, 1fr);
+  column-gap: 3.2mm;
+}
+
+/* Pergunta seguinte a um bloco condicional: mais ar para separar os blocos. */
+.rt-question:has(.rt-followup) + .rt-question {
+  margin-top: 2.8mm;
+}
+
+.rt-question-num {
+  width: 7.4mm;
+  height: 7.4mm;
+  margin-top: -0.7mm;
+  border-radius: 50%;
+  background: var(--color-panel);
+  color: var(--color-ink);
+  font-size: 9.6pt;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rt-question-body {
+  min-width: 0;
+}
+
+.rt-question-text {
+  margin: 0;
+  font-size: 11.5pt;
+  line-height: 1.46;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.rt-followup {
+  margin-top: 2mm;
+}
+
+.rt-followup-label {
+  margin: 0 0 1.2mm;
+  font-size: 9.6pt;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.rt-followup-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1mm;
+}
+
+.rt-followup-items li {
+  display: grid;
+  grid-template-columns: 5.2mm minmax(0, 1fr);
+  font-size: 10pt;
+  line-height: 1.42;
+  color: var(--color-ink);
+}
+
+.rt-followup-marker {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+/* Footer */
+.rt-footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  height: 6mm;
+  margin-top: 2.2mm;
+}
+
+.rt-footer-rule {
+  flex: 1;
+  height: 0.8mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}

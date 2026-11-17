@@ -48,6 +48,28 @@ A capa usa uma composição de arcos construída em SVG, inspirada na capa do de
 | p. 9 | `case` | Caso 5A — A planilha na conta pessoal |
 | p. 10 | `case` | Caso 5B — O letramento em IA nos anos finais |
 
+O documento **Experiências das Redes de Ensino** usa um modelo próprio:
+
+| Origem | Modelo | Conteúdo |
+| --- | --- | --- |
+| PDF da editoria | `roteiro` | 5 roteiros de conversa (Rio, Manaus, Curitiba, São Paulo, Fortaleza) |
+
+## Roteiros de conversa (A5)
+
+O PDF da editoria (`_entrada/conteudo/experiencias-redes-ensino.pdf`) traz 5 roteiros em A4 retrato, com corpo de ~9 pt. Reduzidos a A5, ficariam com ~6,4 pt. Em vez de reproduzir o retrato, o conteúdo foi recomposto em A4 paisagem:
+
+- uma folha por convidado, fixa, sem repaginação;
+- título 30 pt, abertura 14 pt, perguntas 11,5 pt — em A5, ~21 pt, ~9,9 pt e ~8,1 pt;
+- margens laterais de 20 mm (o caderno usa 12 mm) e coluna de perguntas de 175 mm, para encurtar a linha e manter digital e impressão iguais;
+- cabeçalho com número e eixo à esquerda e cidade/convidados à direita; eixos longos podem ocupar duas linhas;
+- duas colunas: abertura à esquerda, perguntas à direita;
+- blocos “Se não respondido anteriormente:” em azul, menores, com mais espaço antes da pergunta seguinte;
+- entrelinha aberta (1,46 nas perguntas) e sem hifenização, para leitura rápida em A5;
+- nenhum texto novo: só o conteúdo do PDF, com os rótulos `ABERTURA` e `PERGUNTAS`;
+- fundo com arcos discretos da identidade, no canto superior direito.
+
+Páginas com menos perguntas (São Paulo) ficam com mais ar. É consequência do texto curto e do corpo grande, não de conteúdo faltando. Se a editoria preferir ocupar essa área, o caminho é dividir o roteiro em duas páginas (abertura + perguntas) ou aumentar o corpo, não encolher a fonte.
+
 ## O que é provisório
 
 - Título, subtítulo e ausência de ano.

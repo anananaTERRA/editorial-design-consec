@@ -1,6 +1,7 @@
 import type { LoadedPublication, LoadedSection } from '../content/loadDocument'
 import { StandardPage } from './StandardPage'
 import { WorkbookPage } from './WorkbookPage'
+import { RoteiroPage } from './RoteiroPage'
 
 type SectionViewProps = {
   section: LoadedSection
@@ -12,6 +13,12 @@ export function SectionView({ section, publication, showMasthead }: SectionViewP
   if (section.layout === 'workbook') {
     return (
       <WorkbookPage id={section.id} page={section.page} />
+    )
+  }
+
+  if (section.layout === 'roteiro') {
+    return (
+      <RoteiroPage id={section.id} page={section.page} />
     )
   }
 

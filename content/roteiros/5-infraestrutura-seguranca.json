@@ -1,0 +1,53 @@
+{
+  "variant": "roteiro",
+  "number": "5",
+  "axis": "INFRAESTRUTURA E SEGURANÇA",
+  "city": "FORTALEZA",
+  "guests": [
+    {
+      "name": "Bruno Rodrigues Barros",
+      "role": "Coordenador Executivo de TIC"
+    }
+  ],
+  "opening": "Chegamos ao último eixo do encontro: as condições para que o uso de IA aconteça de forma segura nas redes. Para essa conversa, recebemos Bruno, coordenador executivo de TIC de Fortaleza, que compartilhou um protótipo de uso de IA na análise de registros de infraestrutura e segurança da rede. Vamos ouvi-lo para entendermos melhor que decisões estão em jogo quando falamos de infraestrutura e segurança da informação.",
+  "questions": [
+    {
+      "number": "1",
+      "text": "Que desafio motivou o protótipo desenvolvido pela rede, e em que estágio ele está?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "a)",
+            "text": "O que vocês já aprenderam com essa experiência?"
+          }
+        ]
+      }
+    },
+    {
+      "number": "2",
+      "text": "Que critérios uma equipe de TI deveria usar para decidir o que pode entrar em uma ferramenta de IA?"
+    },
+    {
+      "number": "3",
+      "text": "Em muitas redes, professores e gestores usam versões gratuitas e contas pessoais. Na sua percepção, como uma secretaria deveria lidar com isso?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "a)",
+            "text": "O que funciona melhor: proibir, orientar ou oferecer uma alternativa institucional?"
+          }
+        ]
+      }
+    },
+    {
+      "number": "4",
+      "text": "Houve algum desafio de infraestrutura e segurança que parecia difícil e para o qual vocês encontraram solução?"
+    },
+    {
+      "number": "5",
+      "text": "Para encerrar, que conselho você daria a uma rede que está iniciando esse caminho agora?"
+    }
+  ]
+}

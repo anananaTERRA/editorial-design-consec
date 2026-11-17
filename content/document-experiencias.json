@@ -1,0 +1,39 @@
+{
+  "id": "experiencias-redes-ensino",
+  "language": "pt-BR",
+  "title": "Experiências das Redes de Ensino",
+  "subtitle": "Roteiros de conversa",
+  "author": "CONSED",
+  "sections": [
+    {
+      "id": "roteiro-1-governanca",
+      "strategy": "roteiro",
+      "layout": "roteiro",
+      "source": "roteiros/1-governanca.json"
+    },
+    {
+      "id": "roteiro-2-formacao",
+      "strategy": "roteiro",
+      "layout": "roteiro",
+      "source": "roteiros/2-formacao.json"
+    },
+    {
+      "id": "roteiro-3-ensino-aprendizagem",
+      "strategy": "roteiro",
+      "layout": "roteiro",
+      "source": "roteiros/3-ensino-aprendizagem.json"
+    },
+    {
+      "id": "roteiro-4-gestao",
+      "strategy": "roteiro",
+      "layout": "roteiro",
+      "source": "roteiros/4-gestao.json"
+    },
+    {
+      "id": "roteiro-5-infraestrutura-seguranca",
+      "strategy": "roteiro",
+      "layout": "roteiro",
+      "source": "roteiros/5-infraestrutura-seguranca.json"
+    }
+  ]
+}

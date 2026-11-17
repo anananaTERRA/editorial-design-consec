@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
-import { ContentError, parseDocument, parseWorkbookPage } from '../src/content/schema'
+import { ContentError, parseDocument, parseRoteiroPage, parseWorkbookPage } from '../src/content/schema'
 import { assertDesignTokens, assertLength, readCustomProperty, readText } from './design-tokens'
 
 const root = process.cwd()
@@ -28,9 +28,15 @@ function guard(run: () => void) {
   }
 }
 
-const manifestPath = path.join(contentDir, 'document.json')
-const manifest = readJson(manifestPath)
-const document = guardValue(() => parseDocument(manifest))
+const manifestFiles = ['document.json', 'document-experiencias.json'].map((name) =>
+  path.join(contentDir, name),
+)
+const documents = manifestFiles.map((file) => {
+  const manifest = readJson(file)
+  return manifest === undefined
+    ? undefined
+    : guardValue(() => parseDocument(manifest))
+})
 
 guard(() => {
   const tokensFile = 'src/styles/tokens.css'
@@ -79,7 +85,9 @@ guard(() => {
 const referenced = new Set<string>()
 const referencedAssets = new Set<string>()
 
-if (document) {
+const loadedDocuments = documents.filter((document) => document !== undefined)
+
+for (const document of loadedDocuments) {
   for (const section of document.sections) {
     const absolute = path.join(contentDir, section.source)
     referenced.add(section.source)
@@ -92,15 +100,21 @@ if (document) {
     } else {
       const json = readJson(absolute)
       if (json !== undefined) {
-        guard(() => parseWorkbookPage(json, section.source))
+        guard(() =>
+          section.strategy === 'roteiro'
+            ? parseRoteiroPage(json, section.source)
+            : parseWorkbookPage(json, section.source),
+        )
       }
     }
   }
+}
 
+if (loadedDocuments.length === manifestFiles.length) {
   guard(() => {
     for (const source of listContentFiles()) {
       if (!referenced.has(source)) {
-        throw new Error(`content/${source} is not listed in content/document.json`)
+        throw new Error(`content/${source} is not listed in a document manifest`)
       }
     }
   })
@@ -138,8 +152,11 @@ if (errors.length > 0) {
 }
 
 console.log('Document validation passed')
-if (document) {
-  console.log(`${document.sections.length} sections · ${referencedAssets.size} asset reference(s)`)
+if (loadedDocuments.length > 0) {
+  const sections = loadedDocuments.reduce((total, document) => total + document.sections.length, 0)
+  console.log(
+    `${loadedDocuments.length} document(s) · ${sections} sections · ${referencedAssets.size} asset reference(s)`,
+  )
 }
 
 function readJson(file: string): unknown {
@@ -206,7 +223,7 @@ function resolveAsset(reference: string): string {
 
 function listContentFiles(): string[] {
   const files: string[] = []
-  for (const folder of ['chapters', 'workbook']) {
+  for (const folder of ['chapters', 'workbook', 'roteiros']) {
     const directory = path.join(contentDir, folder)
     if (!existsSync(directory)) continue
     for (const file of readdirSync(directory)) {

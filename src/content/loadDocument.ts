@@ -1,12 +1,39 @@
 import type { ComponentType } from 'react'
-import rawDocument from '../../content/document.json'
-import { ContentError, parseDocument, parseWorkbookPage } from './schema'
-import type { EditorialDocument, WorkbookPageContent } from './types'
+import rawWorkbookDocument from '../../content/document.json'
+import rawRoteirosDocument from '../../content/document-experiencias.json'
+import { ContentError, parseDocument, parseRoteiroPage, parseWorkbookPage } from './schema'
+import type {
+  EditorialDocument,
+  RoteiroPageContent,
+  WorkbookPageContent,
+} from './types'
 
 type MdxModule = {
   default: ComponentType
   frontmatter?: unknown
 }
+
+export type DocumentKey = 'oficinas' | 'experiencias'
+
+export const documentChoices: {
+  key: DocumentKey
+  label: string
+  href: string
+  manifestId: string
+}[] = [
+  {
+    key: 'oficinas',
+    label: 'Caderno de oficinas',
+    href: './',
+    manifestId: 'ia-na-educacao-oficinas',
+  },
+  {
+    key: 'experiencias',
+    label: 'Experiências das Redes de Ensino',
+    href: './?doc=experiencias',
+    manifestId: 'experiencias-redes-ensino',
+  },
+]
 
 export type LoadedSection =
   | {
@@ -27,6 +54,13 @@ export type LoadedSection =
       folio?: 'on' | 'off'
       page: WorkbookPageContent
     }
+  | {
+      id: string
+      strategy: 'roteiro'
+      layout: 'roteiro'
+      source: string
+      page: RoteiroPageContent
+    }
 
 export type LoadedPublication = Omit<EditorialDocument, 'sections'> & {
   sections: LoadedSection[]
@@ -37,6 +71,16 @@ const workbookModules = import.meta.glob('../../content/workbook/*.json', {
   eager: true,
   import: 'default',
 })
+const roteiroModules = import.meta.glob('../../content/roteiros/*.json', {
+  eager: true,
+  import: 'default',
+})
+
+export function documentKeyFromLocation(): DocumentKey {
+  if (typeof window === 'undefined') return 'oficinas'
+  const requested = new URLSearchParams(window.location.search).get('doc')
+  return requested === 'experiencias' ? 'experiencias' : 'oficinas'
+}
 
 function findModule(modules: Record<string, unknown>, source: string): unknown {
   const match = Object.entries(modules).find(([key]) =>
@@ -44,7 +88,7 @@ function findModule(modules: Record<string, unknown>, source: string): unknown {
   )
   if (!match) {
     throw new ContentError(
-      `No loaded module matches content/${source}. The file must sit in content/chapters/ or content/workbook/.`,
+      `No loaded module matches content/${source}. The file must sit in content/chapters/, content/workbook/, or content/roteiros/.`,
     )
   }
   return match[1]
@@ -78,8 +122,8 @@ function readFrontmatter(frontmatter: unknown, source: string) {
   }
 }
 
-export function loadPublication(): LoadedPublication {
-  const document = parseDocument(rawDocument)
+export function loadPublication(key: DocumentKey = documentKeyFromLocation()): LoadedPublication {
+  const document = parseDocument(key === 'experiencias' ? rawRoteirosDocument : rawWorkbookDocument)
   const sections = document.sections.map((section): LoadedSection => {
     if (section.strategy === 'flow') {
       const loaded = findModule(mdxModules, section.source)
@@ -99,6 +143,16 @@ export function loadPublication(): LoadedPublication {
         source: section.source,
         ...readFrontmatter(mdx.frontmatter, section.source),
         Content: mdx.default,
+      }
+    }
+
+    if (section.strategy === 'roteiro') {
+      return {
+        id: section.id,
+        strategy: 'roteiro',
+        layout: 'roteiro',
+        source: section.source,
+        page: parseRoteiroPage(findModule(roteiroModules, section.source), section.source),
       }
     }
 

@@ -28,10 +28,19 @@ Você não precisa mexer em código. Peça em português, como faria para uma pe
 
 > Preciso de uma página de abertura para a oficina 4, com o título grande e uma citação. Use a identidade da CONSED.
 
+**Editar um roteiro de conversa**
+
+> No roteiro da Havila (Manaus), troque a pergunta 5 por: …
+
+> No roteiro da Juliana (São Paulo), acrescente uma pergunta depois da 3: …
+
+Os roteiros ficam em `content/roteiros/*.json` e abrem em http://127.0.0.1:5173/?doc=experiencias.
+
 ## O que o agente precisa saber
 
 - O conteúdo das oficinas fica em `content/workbook/*.json`.
-- A ordem das páginas fica em `content/document.json`.
+- O conteúdo dos roteiros fica em `content/roteiros/*.json`.
+- A ordem das páginas fica em `content/document.json` (oficinas) e `content/document-experiencias.json` (roteiros).
 - A identidade (cores, fontes, margens) fica em `src/styles/tokens.css`.
 - O PDF só é gerado quando você pedir (“gerar o PDF”, “fechar a versão para a gráfica”).
 

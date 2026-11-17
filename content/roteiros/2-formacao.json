@@ -1,0 +1,48 @@
+{
+  "variant": "roteiro",
+  "number": "2",
+  "axis": "FORMAÇÃO",
+  "city": "MANAUS",
+  "guests": [
+    {
+      "name": "Havila de Almeida Matos",
+      "role": "Assessora Pedagógica"
+    }
+  ],
+  "opening": "Na próxima oficina, vamos pensar a formação de IA para públicos diversos, como equipes das secretarias, gestores escolares, professores. Para abrir essa reflexão, recebemos Havila, assessora pedagógica de Manaus. A rede registrou ações formativas, entre elas um módulo de 40 horas sobre IA na Educação Básica. Queremos entender como essas ações chegam aos profissionais e, quando for o caso, às famílias e à comunidade escolar, e o que as outras capitais podem aprender com esse caminho.",
+  "questions": [
+    {
+      "number": "1",
+      "text": "Como Manaus organizou as ações formativas em IA?"
+    },
+    {
+      "number": "2",
+      "text": "Na média das redes que responderam ao diagnóstico, 64% das sedes indicam formação já realizada; nas escolas, 40%. O que funcionou em Manaus para a formação chegar às escolas, e quem ainda não foi alcançado?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "c)",
+            "text": "Quais barreiras apareceram durante o percurso? (Ex.: conectividade ou familiaridade com a tecnologia)"
+          }
+        ]
+      }
+    },
+    {
+      "number": "3",
+      "text": "O que os profissionais mais pedem para aprender e o que, na sua percepção, precisa fazer parte das formações mesmo sem ser solicitado? Por quê?"
+    },
+    {
+      "number": "4",
+      "text": "A experiência mostrou diferenças entre as necessidades de cada público?"
+    },
+    {
+      "number": "5",
+      "text": "Algumas redes também oferecem formação sobre IA para famílias e para a comunidade escolar. Manaus fez algo nessa direção? Se sim, como foi; se não, faz sentido incluir?"
+    },
+    {
+      "number": "6",
+      "text": "O que vocês fariam de outro modo se começassem agora?"
+    }
+  ]
+}

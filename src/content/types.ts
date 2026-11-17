@@ -5,8 +5,8 @@ export type TextRun = {
   href?: string
 }
 
-export type CompositionStrategy = 'flow' | 'workbook'
-export type SectionLayout = 'standard' | 'workbook'
+export type CompositionStrategy = 'flow' | 'workbook' | 'roteiro'
+export type SectionLayout = 'standard' | 'workbook' | 'roteiro'
 
 export type DocumentSection = {
   id: string
@@ -144,3 +144,34 @@ export type WorkbookPageContent =
   | WorkbookTrajectoryPage
   | WorkbookMatrixPage
   | WorkbookProcessPage
+
+/* ---------- Roteiro de conversa content model ---------- */
+
+export type RoteiroGuest = {
+  name: string
+  role: string
+}
+
+export type RoteiroFollowUpItem = {
+  marker: string
+  text: string
+}
+
+export type RoteiroQuestion = {
+  number: string
+  text: string
+  followUp?: {
+    label: string
+    items: RoteiroFollowUpItem[]
+  }
+}
+
+export type RoteiroPageContent = {
+  variant: 'roteiro'
+  number: string
+  axis: string
+  city: string
+  guests: RoteiroGuest[]
+  opening: string
+  questions: RoteiroQuestion[]
+}

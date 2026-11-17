@@ -1,0 +1,44 @@
+{
+  "variant": "roteiro",
+  "number": "4",
+  "axis": "GESTÃO EDUCACIONAL COM IA",
+  "city": "SÃO PAULO",
+  "guests": [
+    {
+      "name": "Juliana Lemos Demaya",
+      "role": "Assistente Técnico de Educação"
+    }
+  ],
+  "opening": "Vamos discutir agora o uso de IA na gestão educacional. São Paulo registra uma experiência na validação de documentos de fornecedores no Portal do Uniforme, com a solução TRÍADE. Recebemos Juliana para entender que desafio motivou a iniciativa, como ela funciona e que cuidados permitem usá-la com responsabilidade.",
+  "questions": [
+    {
+      "number": "1",
+      "text": "Juliana, como a rede de São Paulo tem inovado no uso de IA na gestão educacional?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "a)",
+            "text": "Que problemas de gestão elas ajudam a resolver?"
+          }
+        ]
+      }
+    },
+    {
+      "number": "2",
+      "text": "Nessas iniciativas, em que momentos uma pessoa precisa analisar, corrigir ou confirmar o que a IA faz?"
+    },
+    {
+      "number": "3",
+      "text": "Que cuidados com dados e contratos vocês consideram indispensáveis?"
+    },
+    {
+      "number": "4",
+      "text": "Na sua percepção, que critério é indispensável para escolher por onde começar o uso de IA na gestão?"
+    },
+    {
+      "number": "5",
+      "text": "Para encerrar, que conselhos você daria a uma rede que começa esse caminho agora?"
+    }
+  ]
+}

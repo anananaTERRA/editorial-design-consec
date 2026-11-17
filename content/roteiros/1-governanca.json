@@ -1,0 +1,69 @@
+{
+  "variant": "roteiro",
+  "number": "1",
+  "axis": "GOVERNANÇA",
+  "city": "RIO DE JANEIRO",
+  "guests": [
+    {
+      "name": "Ana Paula Massonetto",
+      "role": "Subsecretária de Inovação e Projetos Estratégicos"
+    },
+    {
+      "name": "Maurício Martins",
+      "role": "Chefe de Tecnologia da Subipe"
+    }
+  ],
+  "opening": "Até aqui ouvimos diferentes perspectivas sobre a inteligência artificial e os desafios que ela traz para as redes. Agora vamos a uma pergunta prática: por onde uma secretaria começa quando decide construir orientações para o uso de IA? O Rio de Janeiro está fazendo esse trabalho, e a Subsecretária Ana Paula aceitou compartilhar os bastidores do processo: como começou, quem participou, o que foi difícil e o que aprenderam.",
+  "questions": [
+    {
+      "number": "1",
+      "text": "O que levou a Secretaria do Rio a decidir construir orientações para o uso de IA? Qual foi o primeiro passo ou situações que contribuíram para impulsionar o processo?"
+    },
+    {
+      "number": "2",
+      "text": "Quem precisou estar envolvido nesse processo e como vocês organizaram o trabalho entre as diferentes áreas da Secretaria?"
+    },
+    {
+      "number": "3",
+      "text": "Quais foram as principais etapas do percurso, desde as primeiras conversas até o estágio atual? Quanto tempo esse processo levou?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "a)",
+            "text": "Como vocês organizaram as discussões e os momentos de construção?"
+          },
+          {
+            "marker": "b)",
+            "text": "Alguma etapa exigiu mais tempo do que esperavam?"
+          }
+        ]
+      }
+    },
+    {
+      "number": "4",
+      "text": "A IA envolve questões pedagógicas, administrativas, técnicas e de segurança. Como vocês organizaram as contribuições e decidiram o que precisava ser discutido primeiro?",
+      "followUp": {
+        "label": "Se não respondido anteriormente:",
+        "items": [
+          {
+            "marker": "a)",
+            "text": "Como lidaram com diferentes opiniões?"
+          },
+          {
+            "marker": "b)",
+            "text": "Como encaminharam questões para as quais ainda não havia uma resposta clara?"
+          }
+        ]
+      }
+    },
+    {
+      "number": "5",
+      "text": "Qual foi a maior dificuldade enfrentada ao longo da construção das orientações? Como conseguiram lidar e/ou encaminhar esses desafios?"
+    },
+    {
+      "number": "6",
+      "text": "Quais recomendações você deixaria para uma rede que está iniciando o processo agora?"
+    }
+  ]
+}

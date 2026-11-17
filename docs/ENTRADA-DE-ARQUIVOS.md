@@ -10,6 +10,7 @@ Coloque os arquivos em `_entrada/`. A pasta fica fora do git até a triagem.
 | Paleta em SVG | Recebido | `_entrada/marca/consec_cores.svg` |
 | Documento de origem (10 páginas) | Recebido | `_entrada/conteudo/consec_origin.pdf` |
 | Texto do original (OCR) | Recebido | `_entrada/conteudo/consec_origin-ocr.txt` |
+| Roteiros de conversa (5 páginas) | Recebido | `_entrada/conteudo/experiencias-redes-ensino.pdf` |
 | Logo CONSED em vetor | **Pendente** | — |
 | Logos de apoio em vetor | **Pendente** | — |
 | Arquivos de fonte | **Pendente (opcional)** | — |
@@ -37,6 +38,7 @@ O projeto usa Instrument Sans via Fontsource (SIL OFL). Se a instituição tiver
 
 - Texto revisado das 10 oficinas. O PDF de origem tem o texto em curvas; a transcrição atual veio de OCR.
 - Confirmar se os títulos das oficinas, tempos e enunciados estão exatos.
+- Revisar os 5 roteiros de conversa (nomes, cargos, perguntas e subitens) e confirmar se o texto pode circular como está.
 - Se houver casos, perfis ou etapas que não estão no PDF, enviar em DOCX ou Markdown.
 - Imagens, se forem entrar nas páginas (hoje o caderno é só tipográfico).
 

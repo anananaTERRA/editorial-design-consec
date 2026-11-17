@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
-import { useLayoutEffect, useRef } from 'react'
-import type { LoadedPublication } from '../content/loadDocument'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { documentChoices, type LoadedPublication } from '../content/loadDocument'
 import { resolveProfile } from '../engine/profile'
 import { paginationEngine } from '../engine/pagination'
 import { paginateInto } from '../lib/paginateDesk'
@@ -18,6 +18,14 @@ export function DocumentShell({ publication }: { publication: LoadedPublication 
   const deskRef = useRef<HTMLDivElement>(null)
   const sourceRef = useRef<HTMLDivElement>(null)
 
+  const screenCopy = publication.sections.every((section) => section.layout === 'roteiro')
+    ? 'Prévia em folhas A4 paisagem, uma por convidado. Impressão em A5 paisagem.'
+    : profileCopy.screen
+
+  useEffect(() => {
+    document.title = `${publication.title} — ${publication.subtitle}`
+  }, [publication.title, publication.subtitle])
+
   const mastheadSectionId = publication.sections.find(
     (section) => section.layout === 'standard' && section.sheetVariant !== 'cover',
   )?.id
@@ -31,7 +39,20 @@ export function DocumentShell({ publication }: { publication: LoadedPublication 
 
   return (
     <MDXProvider components={mdxComponents}>
-      <p className="preview-banner">{profileCopy[profile]}</p>
+      <div className="preview-banner">
+        <span>{profile === 'screen' ? screenCopy : profileCopy[profile]}</span>
+        <nav className="preview-docs" aria-label="Documentos">
+          {documentChoices.map((choice) => (
+            <a
+              key={choice.key}
+              href={choice.href}
+              aria-current={publication.id === choice.manifestId ? 'page' : undefined}
+            >
+              {choice.label}
+            </a>
+          ))}
+        </nav>
+      </div>
       <div
         ref={deskRef}
         className="desk"

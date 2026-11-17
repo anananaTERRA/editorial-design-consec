@@ -12,14 +12,21 @@ const previewPort = 4174
 
 const profile = readFlag('--profile')
 if (profile !== 'digital' && profile !== 'print') {
-  console.error('Usage: tsx scripts/build-pdf.ts --profile digital|print')
+  console.error('Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias]')
   process.exit(1)
 }
 
+const requestedDocument = readFlag('--doc') ?? 'oficinas'
+if (requestedDocument !== 'oficinas' && requestedDocument !== 'experiencias') {
+  console.error('Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias]')
+  process.exit(1)
+}
+
+const documentOutput = requestedDocument === 'oficinas' ? 'document' : requestedDocument
 const outputPath = path.join(
   root,
   'output',
-  profile === 'print' ? 'document-print.pdf' : 'document-digital.pdf',
+  profile === 'print' ? `${documentOutput}-print.pdf` : `${documentOutput}-digital.pdf`,
 )
 mkdirSync(path.dirname(outputPath), { recursive: true })
 
@@ -94,7 +101,10 @@ async function printSite(file: string, outputProfile: PdfOutputProfile) {
     })
     page.setDefaultTimeout(180_000)
     page.setDefaultNavigationTimeout(180_000)
-    await page.goto(`http://127.0.0.1:${previewPort}/`, { waitUntil: 'networkidle' })
+    await page.goto(
+      `http://127.0.0.1:${previewPort}/${requestedDocument === 'experiencias' ? '?doc=experiencias' : ''}`,
+      { waitUntil: 'networkidle' },
+    )
     await page.waitForFunction(() => {
       const root = globalThis as unknown as {
         document: { documentElement: { dataset: { pagesReady?: string } } }

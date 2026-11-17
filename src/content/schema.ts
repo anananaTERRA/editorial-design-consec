@@ -2,6 +2,8 @@ import type {
   CompositionStrategy,
   DocumentSection,
   EditorialDocument,
+  RoteiroPageContent,
+  RoteiroQuestion,
   SectionLayout,
   WorkbookField,
   WorkbookHeader,
@@ -16,14 +18,17 @@ const idPattern = /^[a-z][a-z0-9-]*$/
 const layoutForStrategy: Record<CompositionStrategy, SectionLayout> = {
   flow: 'standard',
   workbook: 'workbook',
+  roteiro: 'roteiro',
 }
 const sourcePrefix: Record<CompositionStrategy, string> = {
   flow: 'chapters/',
   workbook: 'workbook/',
+  roteiro: 'roteiros/',
 }
 const sourceExtension: Record<CompositionStrategy, string> = {
   flow: '.mdx',
   workbook: '.json',
+  roteiro: '.json',
 }
 
 export class ContentError extends Error {
@@ -96,8 +101,8 @@ export function parseDocument(value: unknown): EditorialDocument {
     }
     const sectionId = requireId(section.id, `${label}.id`, seenIds)
     const strategy = section.strategy
-    if (strategy !== 'flow' && strategy !== 'workbook') {
-      throw new ContentError(`${label}.strategy must be flow or workbook`)
+    if (strategy !== 'flow' && strategy !== 'workbook' && strategy !== 'roteiro') {
+      throw new ContentError(`${label}.strategy must be flow, workbook, or roteiro`)
     }
     const expectedLayout = layoutForStrategy[strategy]
     if (section.layout !== expectedLayout) {
@@ -339,4 +344,59 @@ export function parseWorkbookPage(value: unknown, source = 'workbook'): Workbook
   }
 
   throw new ContentError(`${source}.variant must be case, profile, trajectory, matrix, or process`)
+}
+
+export function parseRoteiroPage(value: unknown, source = 'roteiro'): RoteiroPageContent {
+  if (!isRecord(value)) throw new ContentError(`${source} must be an object`)
+  if (value.variant !== 'roteiro') {
+    throw new ContentError(`${source}.variant must be roteiro`)
+  }
+  const guests = requireArray(value.guests, `${source}.guests`).map((item, index) => {
+    const label = `${source}.guests[${index}]`
+    if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
+    return {
+      name: requireString(item.name, `${label}.name`),
+      role: requireString(item.role, `${label}.role`),
+    }
+  })
+  const questions = requireArray(value.questions, `${source}.questions`).map(
+    (item, index): RoteiroQuestion => {
+      const label = `${source}.questions[${index}]`
+      if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
+      return {
+        number: requireString(item.number, `${label}.number`),
+        text: requireString(item.text, `${label}.text`),
+        ...(item.followUp === undefined
+          ? {}
+          : { followUp: parseRoteiroFollowUp(item.followUp, `${label}.followUp`) }),
+      }
+    },
+  )
+  return {
+    variant: 'roteiro',
+    number: requireString(value.number, `${source}.number`),
+    axis: requireString(value.axis, `${source}.axis`),
+    city: requireString(value.city, `${source}.city`),
+    guests,
+    opening: requireString(value.opening, `${source}.opening`),
+    questions,
+  }
+}
+
+function parseRoteiroFollowUp(
+  value: unknown,
+  label: string,
+): NonNullable<RoteiroQuestion['followUp']> {
+  if (!isRecord(value)) throw new ContentError(`${label} must be an object`)
+  return {
+    label: requireString(value.label, `${label}.label`),
+    items: requireArray(value.items, `${label}.items`).map((entry, index) => {
+      const itemLabel = `${label}.items[${index}]`
+      if (!isRecord(entry)) throw new ContentError(`${itemLabel} must be an object`)
+      return {
+        marker: requireString(entry.marker, `${itemLabel}.marker`),
+        text: requireString(entry.text, `${itemLabel}.text`),
+      }
+    }),
+  }
 }
