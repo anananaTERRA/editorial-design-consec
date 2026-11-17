@@ -3,6 +3,7 @@ import path from 'node:path'
 import {
   ContentError,
   parseCasoPage,
+  parseCronogramaPage,
   parseDocument,
   parseRoteiroPage,
   parseVersoPage,
@@ -39,6 +40,7 @@ const manifestFiles = [
   'document.json',
   'document-experiencias.json',
   'document-casos.json',
+  'document-cronograma.json',
 ].map((name) => path.join(contentDir, name))
 const documents = manifestFiles.map((file) => {
   const manifest = readJson(file)
@@ -132,6 +134,8 @@ for (const document of loadedDocuments) {
             parseRoteiroPage(json, section.source)
           } else if (section.strategy === 'caso') {
             parseCasoPage(json, section.source)
+          } else if (section.strategy === 'cronograma') {
+            parseCronogramaPage(json, section.source)
           } else if (section.strategy === 'verso') {
             parseVersoPage(json, section.source)
           } else {
@@ -256,7 +260,7 @@ function resolveAsset(reference: string): string {
 
 function listContentFiles(): string[] {
   const files: string[] = []
-  for (const folder of ['chapters', 'workbook', 'roteiros', 'casos', 'verso']) {
+  for (const folder of ['chapters', 'workbook', 'roteiros', 'casos', 'cronograma', 'verso']) {
     const directory = path.join(contentDir, folder)
     if (!existsSync(directory)) continue
     for (const file of readdirSync(directory)) {

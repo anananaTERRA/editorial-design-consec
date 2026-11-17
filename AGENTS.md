@@ -14,13 +14,13 @@ This repository builds the CONSED editorial documents as a React site (Vite) and
 
 Three layers stay separate:
 
-1. **Content** — each document has its own reading order. `content/document.json` lists the ten workshop sheets in `content/workbook/`; `content/document-experiencias.json` lists the five interview scripts in `content/roteiros/` and the purple back page in `content/verso/`; `content/document-casos.json` lists the four case studies in `content/casos/`. The project has no cover page (`content/chapters/` is empty); the PDF starts at the first page.
-2. **Composition** — `src/layouts/WorkbookPage.tsx` renders five variants: `case`, `profile`, `trajectory`, `matrix`, `process`. `src/layouts/RoteiroPage.tsx` renders the `roteiro` variant. `src/layouts/CasoPage.tsx` renders the `caso` variant. `src/layouts/VersoPage.tsx` renders the `verso` page. The schema is `src/content/schema.ts`.
-3. **Output** — `src/lib/paginateDesk.ts` prints the sheets. Workshop, roteiro, caso, and verso pages are fixed (`data-paginate="off"`) and are not split. `scripts/build-pdf.ts` builds and prints with Playwright.
+1. **Content** — each document has its own reading order. `content/document.json` lists the ten workshop sheets in `content/workbook/`; `content/document-experiencias.json` lists the five interview scripts in `content/roteiros/` and the purple back page in `content/verso/`; `content/document-casos.json` lists the four case studies in `content/casos/`; `content/document-cronograma.json` lists the four schedule cards in `content/cronograma/`. The project has no cover page (`content/chapters/` is empty); the PDF starts at the first page.
+2. **Composition** — `src/layouts/WorkbookPage.tsx` renders five variants: `case`, `profile`, `trajectory`, `matrix`, `process`. `src/layouts/RoteiroPage.tsx` renders the `roteiro` variant. `src/layouts/CasoPage.tsx` renders the `caso` variant. `src/layouts/CronogramaPage.tsx` renders the `cronograma` variant. `src/layouts/VersoPage.tsx` renders the `verso` page. The schema is `src/content/schema.ts`.
+3. **Output** — `src/lib/paginateDesk.ts` prints the sheets. Workshop, roteiro, caso, cronograma, and verso pages are fixed (`data-paginate="off"`) and are not split. `scripts/build-pdf.ts` builds and prints with Playwright.
 
-A flow section (MDX) uses `.page-frame` / `.page-body` and can paginate. A workbook section uses `.wb-page` and must fit one sheet. A roteiro section uses `.rt-page` and must fit one sheet. A caso section uses `.cs-page` and must fit one sheet. A verso section uses `.vs-page` and fills one sheet. Do not mix the five.
+A flow section (MDX) uses `.page-frame` / `.page-body` and can paginate. A workbook section uses `.wb-page` and must fit one sheet. A roteiro section uses `.rt-page` and must fit one sheet. A caso section uses `.cs-page` and must fit one sheet. A cronograma section uses `.cr-page` and must fit one sheet. A verso section uses `.vs-page` and fills one sheet. Do not mix the six.
 
-The preview switches documents at runtime: `?doc=experiencias` loads the interview scripts, `?doc=casos` loads the case studies; the default loads the workshop workbook.
+The preview switches documents at runtime: `?doc=experiencias` loads the interview scripts, `?doc=casos` loads the case studies, `?doc=cronograma` loads the schedule cards; the default loads the workshop workbook.
 
 ## Page invariants
 
@@ -70,6 +70,16 @@ The interview scripts are printed at A5 landscape (A4 reduced to 70.7%). Their t
 
 If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not take the body below 11.5 pt. Do not copy the workbook's 6–8 pt settings into `roteiro.css`.
 
+## Cronograma content (Tempos e movimentos)
+
+- `content/cronograma/<slug>.json` matches the `cronograma` variant: `day`, `part`, `weekday`, `date` and `entries[]`. It is the printed programme of the two meeting days.
+- Four fixed cards: `dia-1-manha`, `dia-1-tarde`, `dia-2-manha`, `dia-2-tarde`. Each day is split at lunch, so the meeting day becomes two A5 fichas; the morning card closes with lunch.
+- Each entry has `start`, `end`, `duration` (minutes, as in the source plan), `kind` (`abertura`, `mesa`, `oficina`, `pausa`, `encerramento`, `sessao`), `title`, and optionally `label` (printed as an eyebrow, e.g. `Mesa 2 com Rio de Janeiro`), `method` (the dynamic, e.g. `Jornada do usuário`), `subtitle`, `description`, `intro`, `items`, `paragraphs`, `host` (quem conduz) and `note` (observações).
+- Text is transcribed from the editor's CSVs (`[Uso interno VdE] Planejamento: Tempos e Movimentos — Dia 1/2`). Keep names, times and wording verbatim. Where the source says `Definir.` for quem conduz, the card prints `A definir`.
+- The `Insumos` column is **not printed**: an A5 card only stays legible with two cards per day without it. `Observações` is printed as a small italic line, and `host` sits at the right of the entry title. Do not add a cover or a back page.
+- The card is drawn on the A4 landscape canvas (20 mm side margins, like the roteiros) and reduced to A5 (70,7%) by `scripts/impose-a5.ts`. Body is 9.8 pt on the canvas → ~6,9 pt at A5; do not take it below 9.6 pt.
+- `npm run gerar-pdf-cronograma-a5` exports `output/cronograma-digital.pdf` and imposes `output/cronograma-a5-frente.pdf`: two A5 cards per A4 portrait sheet, with cut marks. Pass `--sem-verso` to the imposition; without it the script treats the last page as a back art and drops a card.
+
 ## Verso (Experiências)
 
 - The back page is a document page, not a separate cover: `content/verso/experiencias.json` (`variant: "verso"`) is the last section of `content/document-experiencias.json`, so the preview, the PDF, and the A5 imposition all include it.
@@ -91,6 +101,16 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 - Text is transcribed from the editor's PDF (`CONSEC – Estudos de caso Governança e Infraestrutura`). Keep names, figures, questions, and punctuation verbatim; the extracted text contains broken words such as “pr ofessores”, which must be joined.
 - Four cases fit on one sheet each. If a case grows, adjust `caso.css` or ask for a text cut; do not reduce the body below 9.4 pt or let the sheet overflow.
 
+## Apresentação (deck .pptx)
+
+- `content/apresentacao/formacao-ia.json` is the manifest of the **slide deck** `Formação IA` (38 slides, 16:9). It is not a document of the editorial pipeline: there is no HTML composition and no PDF product. The `.pptx` is the master.
+- The master lives at `_entrada/conteudo/formacao-ia.pptx` and is never edited. Edits are declarative, in `content/apresentacao/formacao-ia.edits.json` (`slide`, `find`, `replace`, optional `occurrence`/`comment`). `npm run apresentacao:montar` applies them and writes `output/formacao-ia.pptx`.
+- Editing happens inside the OOXML: only the `<a:t>` runs of the requested slides are rewritten, so masters, layouts, images, notes, animation and untouched slides stay byte-identical. The build prints a hash diff; a no-edit build must report `230 de 230` intact parts.
+- A `find` string that spans runs is only merged when every touched run shares the same `<a:rPr>`; otherwise the edit fails with `spans-runs` and must be resolved by hand. Never flatten mixed formatting.
+- `npm run apresentacao:previa` renders the deck with LibreOffice into `output/formacao-ia/previa/` (PDF + one PNG per slide + `index.html` contact sheet). Slide 38 is hidden (`show="0"`), so the preview has 37 pages.
+- Do not rebuild these slides in React. A new deck that must return as `.pptx` keeps PowerPoint as the source of truth; the Vite site has no route for it.
+- Prefer text edits. A slide that needs a new diagram is designed as native pptx shapes, not pasted as a picture, unless the editor accepts losing editable text.
+
 ## Identity
 
 - Font: Instrument Sans via `@fontsource/instrument-sans` (400/500/600/700).
@@ -110,10 +130,19 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 | `npm run gerar-pdf-experiencias` | Print `output/experiencias-digital.pdf` |
 | `npm run gerar-pdf-grafica-experiencias` | Print `output/experiencias-print.pdf` with bleed |
 | `npm run gerar-pdf-experiencias-a5` | Print and impose `output/experiencias-a5-duplex.pdf` (front/back, 2 A5 cards per A4) |
+| `npm run gerar-pdf-experiencias-frente` | Print and impose only the fronts into `output/experiencias-a5-frente.pdf` |
 | `npm run gerar-verso-duplex` | Render the continuous A4 backs (two cards and one card) |
 | `npm run gerar-pdf-casos` | Print `output/casos-digital.pdf` (A4 portrait) |
 | `npm run gerar-pdf-grafica-casos` | Print `output/casos-print.pdf` with bleed (216 × 303 mm) |
-| `npm run validate` | All three manifests, workbook/roteiro/caso JSON, MDX, assets, geometry |
+| `npm run gerar-pdf-cronograma` | Print `output/cronograma-digital.pdf` (A4 landscape canvas) |
+| `npm run gerar-pdf-grafica-cronograma` | Print `output/cronograma-print.pdf` with bleed |
+| `npm run gerar-pdf-cronograma-a5` | Print and impose `output/cronograma-a5-frente.pdf` (4 fichas A5, 2 per A4 sheet) |
+| `npm run impor-cronograma` | Re-impose the existing `cronograma-digital.pdf` into A5 fichas |
+| `npm run apresentacao:abrir` | Inventory the deck: text, shapes, notes and review comments per slide |
+| `npm run apresentacao:montar` | Apply `formacao-ia.edits.json` and write `output/formacao-ia.pptx` |
+| `npm run apresentacao:previa` | Render the deck to PDF + PNG per slide + contact sheet |
+| `npm run apresentacao:conferir` | `apresentacao:montar` then `apresentacao:previa` |
+| `npm run validate` | All four manifests, workbook/roteiro/caso/cronograma JSON, MDX, assets, geometry |
 | `npm run check` | `validate` plus TypeScript |
 | `npm run test:visual` | Playwright against the Vite site |
 
@@ -122,7 +151,8 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 1. If a workshop grows, rebalance the panel grid in `workbook.css`; do not turn it into a flow page.
 2. If a roteiro grows, rebalance `roteiro.css` or ask for a text cut. Keep the body at 11.5 pt or larger for A5.
 3. If a caso grows, rebalance `caso.css` or ask for a text cut. The sheet is portrait and fixed; keep the two-column body and the decision panel on the same page.
-4. Look at the affected sheet in the Vite preview at full size. Check the rail/header, the body, and the footer. Use `?doc=experiencias` for the interview scripts and `?doc=casos` for the case studies.
-5. Run PDF export only when asked. If you run it, do not claim success without exit 0, page count, and media box.
-6. Do not commit generated `output/*.pdf`. `output/` is gitignored except `.gitkeep`.
-7. New source material goes in `_entrada/` (gitignored) following `docs/ENTRADA-DE-ARQUIVOS.md`.
+4. If a cronograma grows, rebalance `cronograma.css` or ask for a text cut. Keep the four cards and the lunch split; do not take the body below 9.6 pt on the A4 canvas.
+5. Look at the affected sheet in the Vite preview at full size. Check the rail/header, the body, and the footer. Use `?doc=experiencias` for the interview scripts, `?doc=casos` for the case studies and `?doc=cronograma` for the schedule cards.
+6. Run PDF export only when asked. If you run it, do not claim success without exit 0, page count, and media box.
+7. Do not commit generated `output/*.pdf`. `output/` is gitignored except `.gitkeep`.
+8. New source material goes in `_entrada/` (gitignored) following `docs/ENTRADA-DE-ARQUIVOS.md`.

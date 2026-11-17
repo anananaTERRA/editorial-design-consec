@@ -1,0 +1,33 @@
+{
+  "id": "tempos-e-movimentos",
+  "language": "pt-BR",
+  "title": "Tempos e movimentos",
+  "subtitle": "Cronograma dos dois dias",
+  "author": "CONSED",
+  "sections": [
+    {
+      "id": "dia-1-manha",
+      "strategy": "cronograma",
+      "layout": "cronograma",
+      "source": "cronograma/dia-1-manha.json"
+    },
+    {
+      "id": "dia-1-tarde",
+      "strategy": "cronograma",
+      "layout": "cronograma",
+      "source": "cronograma/dia-1-tarde.json"
+    },
+    {
+      "id": "dia-2-manha",
+      "strategy": "cronograma",
+      "layout": "cronograma",
+      "source": "cronograma/dia-2-manha.json"
+    },
+    {
+      "id": "dia-2-tarde",
+      "strategy": "cronograma",
+      "layout": "cronograma",
+      "source": "cronograma/dia-2-tarde.json"
+    }
+  ]
+}

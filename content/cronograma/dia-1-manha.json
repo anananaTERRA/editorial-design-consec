@@ -1,0 +1,120 @@
+{
+  "variant": "cronograma",
+  "day": "1",
+  "part": "MANHÃ",
+  "weekday": "quarta-feira",
+  "date": "18 de novembro",
+  "entries": [
+    {
+      "start": "08:30",
+      "end": "09:00",
+      "duration": "30",
+      "kind": "sessao",
+      "title": "Credenciamento",
+      "description": "Entrega de crachás e materiais.",
+      "host": "Consec e Vozes"
+    },
+    {
+      "start": "09:00",
+      "end": "09:10",
+      "duration": "10",
+      "kind": "sessao",
+      "title": "Boas-vindas e combinados",
+      "description": "Carol Campos dá boas-vindas, agradece a presença de todas as pessoas (Consec, FGV, Itaú Social, Telefônica Vivo, todas as redes presentes) e apresenta os combinados e o aviso de que tudo o que for produzido será fotografado e sistematizado.",
+      "host": "Carol Campos"
+    },
+    {
+      "start": "09:10",
+      "end": "09:40",
+      "duration": "30",
+      "kind": "abertura",
+      "title": "Solenidade de abertura",
+      "description": "Saudação inicial (até 5 minutos, exceto FGV que falará um pouco mais sobre o espaço):",
+      "items": [
+        {
+          "strong": "Consec:",
+          "text": "Secretário Hugo Nepomuceno (RJ)"
+        },
+        {
+          "strong": "Fundação Telefônica Vivo:",
+          "text": "Lia Glaz"
+        },
+        {
+          "strong": "Itaú Social:",
+          "text": "Eduardo Saron"
+        },
+        {
+          "strong": "FGV:",
+          "text": "Romeu Caputo (solicitar que compartilhe brevemente a história do espaço)."
+        }
+      ],
+      "host": "Carol Campos"
+    },
+    {
+      "start": "09:40",
+      "end": "11:30",
+      "duration": "110",
+      "kind": "mesa",
+      "label": "Mesa 1",
+      "title": "IA na educação: equidade, supervisão humana e legislação",
+      "items": [
+        {
+          "strong": "Eduardo Saron",
+          "text": "(até 15 minutos): temas a definir, garantindo a cobertura dos temas transversais."
+        },
+        {
+          "strong": "Lia Glaz",
+          "text": "(até 15 minutos): temas a definir, garantindo a cobertura dos temas transversais."
+        },
+        {
+          "strong": "MEC",
+          "text": "(até 20 minutos): o parecer do CNE e o que ele diz sobre autonomia e equidade."
+        },
+        {
+          "strong": "Henrique",
+          "text": "(até 20 minutos): experiências internacionais + diagnóstico CONSEC."
+        }
+      ],
+      "paragraphs": [
+        "Em seguida, dois blocos de três perguntas escritas seguidas.",
+        "Os 10 minutos finais ficam para falas ao microfone."
+      ],
+      "host": "Carol Campos",
+      "note": "Time Vozes: sistematizar as contribuições."
+    },
+    {
+      "start": "11:30",
+      "end": "11:40",
+      "duration": "10",
+      "kind": "pausa",
+      "title": "Pausa estratégica"
+    },
+    {
+      "start": "11:40",
+      "end": "11:50",
+      "duration": "10",
+      "kind": "sessao",
+      "title": "Fio condutor do encontro",
+      "description": "Apresentação dos cinco eixos e do racional que sustentou a sua elaboração.",
+      "host": "A definir"
+    },
+    {
+      "start": "11:50",
+      "end": "12:20",
+      "duration": "30",
+      "kind": "mesa",
+      "label": "Mesa 2 com Rio de Janeiro",
+      "title": "Governança",
+      "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
+      "host": "Carol Campos",
+      "note": "Time Vozes: sistematizar as contribuições."
+    },
+    {
+      "start": "12:20",
+      "end": "13:50",
+      "duration": "90",
+      "kind": "pausa",
+      "title": "Almoço"
+    }
+  ]
+}

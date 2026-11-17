@@ -44,12 +44,21 @@ Os roteiros ficam em `content/roteiros/*.json` e abrem em http://127.0.0.1:5173/
 
 Os estudos de caso ficam em `content/casos/*.json` e abrem em http://127.0.0.1:5173/?doc=casos. São folhas A4 retrato, uma por caso.
 
+**Editar o cronograma**
+
+> No Dia 1, a mesa 2 passa a começar às 12h e a terminar às 12h30.
+>
+> Na oficina 3.1, troque a quinta etapa por: …
+
+As fichas do cronograma ficam em `content/cronograma/*.json` e abrem em http://127.0.0.1:5173/?doc=cronograma. São quatro fichas A5 (Dia 1 manhã, Dia 1 tarde, Dia 2 manhã, Dia 2 tarde). O texto veio do planejamento interno; revise antes de publicar.
+
 ## O que o agente precisa saber
 
 - O conteúdo das oficinas fica em `content/workbook/*.json`.
 - O conteúdo dos roteiros fica em `content/roteiros/*.json`.
 - O conteúdo dos estudos de caso fica em `content/casos/*.json`.
-- A ordem das páginas fica em `content/document.json` (oficinas), `content/document-experiencias.json` (roteiros) e `content/document-casos.json` (estudos de caso).
+- O conteúdo do cronograma fica em `content/cronograma/*.json`.
+- A ordem das páginas fica em `content/document.json` (oficinas), `content/document-experiencias.json` (roteiros), `content/document-casos.json` (estudos de caso) e `content/document-cronograma.json` (cronograma).
 - A identidade (cores, fontes, margens) fica em `src/styles/tokens.css`.
 - O PDF só é gerado quando você pedir (“gerar o PDF”, “fechar a versão para a gráfica”).
 

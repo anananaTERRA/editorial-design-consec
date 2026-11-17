@@ -5,8 +5,8 @@ export type TextRun = {
   href?: string
 }
 
-export type CompositionStrategy = 'flow' | 'workbook' | 'roteiro' | 'caso' | 'verso'
-export type SectionLayout = 'standard' | 'workbook' | 'roteiro' | 'caso' | 'verso'
+export type CompositionStrategy = 'flow' | 'workbook' | 'roteiro' | 'caso' | 'cronograma' | 'verso'
+export type SectionLayout = 'standard' | 'workbook' | 'roteiro' | 'caso' | 'cronograma' | 'verso'
 
 export type DocumentSection = {
   id: string
@@ -202,6 +202,56 @@ export type CasoPageContent = {
   lead: string[]
   sections: CasoSection[]
   decision: string
+}
+
+/* ---------- Cronograma (fichas A5 de programação) ---------- */
+
+export type CronogramaKind =
+  | 'abertura'
+  | 'mesa'
+  | 'oficina'
+  | 'pausa'
+  | 'encerramento'
+  | 'sessao'
+
+export type CronogramaItem = {
+  /** Leading name or label, printed in semibold: speaker, city, etc. */
+  strong?: string
+  text: string
+}
+
+export type CronogramaEntry = {
+  start: string
+  end: string
+  /** Duration in minutes, as printed in the source plan. */
+  duration: string
+  kind: CronogramaKind
+  /** Small uppercase label printed beside the title: "Mesa 1", "Oficina 3.1". */
+  label?: string
+  /** Dynamic printed with the label: "Jornada do usuário", "Mapa da empatia". */
+  method?: string
+  title: string
+  subtitle?: string
+  description?: string
+  /** Paragraph printed between the description and the list of steps. */
+  intro?: string
+  items?: CronogramaItem[]
+  paragraphs?: string[]
+  /** Quem conduz. */
+  host?: string
+  /** Observações. */
+  note?: string
+}
+
+export type CronogramaPageContent = {
+  variant: 'cronograma'
+  /** Day number printed in the circle: "1", "2". */
+  day: string
+  /** Part of the day printed as the title: "MANHÃ", "TARDE". */
+  part: string
+  weekday: string
+  date: string
+  entries: CronogramaEntry[]
 }
 
 /* ---------- Verso (página roxa de fechamento) ---------- */

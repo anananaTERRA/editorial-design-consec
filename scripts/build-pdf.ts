@@ -13,7 +13,7 @@ const previewPort = 4174
 const profile = readFlag('--profile')
 if (profile !== 'digital' && profile !== 'print') {
   console.error(
-    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos]',
+    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos|cronograma]',
   )
   process.exit(1)
 }
@@ -22,10 +22,11 @@ const requestedDocument = readFlag('--doc') ?? 'oficinas'
 if (
   requestedDocument !== 'oficinas' &&
   requestedDocument !== 'experiencias' &&
-  requestedDocument !== 'casos'
+  requestedDocument !== 'casos' &&
+  requestedDocument !== 'cronograma'
 ) {
   console.error(
-    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos]',
+    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos|cronograma]',
   )
   process.exit(1)
 }
@@ -41,7 +42,8 @@ mkdirSync(path.dirname(outputPath), { recursive: true })
 /**
  * Page size and margins used by Chromium. They mirror paged.css (digital)
  * and print.css (A4 plus 3mm bleed on every edge). The case studies are the
- * only portrait document; the workbook and the scripts stay landscape.
+ * only portrait document; the workbook, the scripts and the schedule stay
+ * landscape. The schedule is designed at A4 to be imposed as A5 cards.
  */
 const geometry =
   requestedDocument === 'casos'

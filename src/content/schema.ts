@@ -2,6 +2,9 @@ import type {
   CasoPageContent,
   CasoSection,
   CompositionStrategy,
+  CronogramaEntry,
+  CronogramaItem,
+  CronogramaPageContent,
   DocumentMasthead,
   DocumentSection,
   EditorialDocument,
@@ -24,6 +27,7 @@ const layoutForStrategy: Record<CompositionStrategy, SectionLayout> = {
   workbook: 'workbook',
   roteiro: 'roteiro',
   caso: 'caso',
+  cronograma: 'cronograma',
   verso: 'verso',
 }
 const sourcePrefix: Record<CompositionStrategy, string> = {
@@ -31,6 +35,7 @@ const sourcePrefix: Record<CompositionStrategy, string> = {
   workbook: 'workbook/',
   roteiro: 'roteiros/',
   caso: 'casos/',
+  cronograma: 'cronograma/',
   verso: 'verso/',
 }
 const sourceExtension: Record<CompositionStrategy, string> = {
@@ -38,6 +43,7 @@ const sourceExtension: Record<CompositionStrategy, string> = {
   workbook: '.json',
   roteiro: '.json',
   caso: '.json',
+  cronograma: '.json',
   verso: '.json',
 }
 
@@ -118,10 +124,11 @@ export function parseDocument(value: unknown): EditorialDocument {
       strategy !== 'workbook' &&
       strategy !== 'roteiro' &&
       strategy !== 'caso' &&
+      strategy !== 'cronograma' &&
       strategy !== 'verso'
     ) {
       throw new ContentError(
-        `${label}.strategy must be flow, workbook, roteiro, caso, or verso`,
+        `${label}.strategy must be flow, workbook, roteiro, caso, cronograma, or verso`,
       )
     }
     const expectedLayout = layoutForStrategy[strategy]
@@ -461,6 +468,109 @@ export function parseCasoPage(value: unknown, source = 'caso'): CasoPageContent 
     sections,
     decision: requireString(value.decision, `${source}.decision`),
   }
+}
+
+export function parseCronogramaPage(
+  value: unknown,
+  source = 'cronograma',
+): CronogramaPageContent {
+  if (!isRecord(value)) throw new ContentError(`${source} must be an object`)
+  if (value.variant !== 'cronograma') {
+    throw new ContentError(`${source}.variant must be cronograma`)
+  }
+  const entries = requireArray(value.entries, `${source}.entries`).map(
+    (item, index): CronogramaEntry => {
+      const label = `${source}.entries[${index}]`
+      if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
+      const kind = item.kind
+      if (
+        kind !== 'abertura' &&
+        kind !== 'mesa' &&
+        kind !== 'oficina' &&
+        kind !== 'pausa' &&
+        kind !== 'encerramento' &&
+        kind !== 'sessao'
+      ) {
+        throw new ContentError(
+          `${label}.kind must be abertura, mesa, oficina, pausa, encerramento, or sessao`,
+        )
+      }
+      const duration = requireString(item.duration, `${label}.duration`)
+      if (!/^\d+$/.test(duration)) {
+        throw new ContentError(`${label}.duration must be a number of minutes`)
+      }
+      const items =
+        item.items === undefined
+          ? undefined
+          : parseCronogramaItems(item.items, `${label}.items`)
+      const paragraphs =
+        item.paragraphs === undefined
+          ? undefined
+          : requireArray(item.paragraphs, `${label}.paragraphs`).map((paragraph, pIndex) =>
+              requireString(paragraph, `${label}.paragraphs[${pIndex}]`),
+            )
+      return {
+        start: parseCronogramaTime(item.start, `${label}.start`),
+        end: parseCronogramaTime(item.end, `${label}.end`),
+        duration,
+        kind,
+        title: requireString(item.title, `${label}.title`),
+        ...(optionalString(item.label, `${label}.label`)
+          ? { label: optionalString(item.label, `${label}.label`) }
+          : {}),
+        ...(optionalString(item.method, `${label}.method`)
+          ? { method: optionalString(item.method, `${label}.method`) }
+          : {}),
+        ...(optionalString(item.subtitle, `${label}.subtitle`)
+          ? { subtitle: optionalString(item.subtitle, `${label}.subtitle`) }
+          : {}),
+        ...(optionalString(item.description, `${label}.description`)
+          ? { description: optionalString(item.description, `${label}.description`) }
+          : {}),
+        ...(optionalString(item.intro, `${label}.intro`)
+          ? { intro: optionalString(item.intro, `${label}.intro`) }
+          : {}),
+        ...(items ? { items } : {}),
+        ...(paragraphs ? { paragraphs } : {}),
+        ...(optionalString(item.host, `${label}.host`)
+          ? { host: optionalString(item.host, `${label}.host`) }
+          : {}),
+        ...(optionalString(item.note, `${label}.note`)
+          ? { note: optionalString(item.note, `${label}.note`) }
+          : {}),
+      }
+    },
+  )
+
+  return {
+    variant: 'cronograma',
+    day: requireString(value.day, `${source}.day`),
+    part: requireString(value.part, `${source}.part`),
+    weekday: requireString(value.weekday, `${source}.weekday`),
+    date: requireString(value.date, `${source}.date`),
+    entries,
+  }
+}
+
+function parseCronogramaTime(value: unknown, label: string): string {
+  const time = requireString(value, label)
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
+    throw new ContentError(`${label} must look like "08:30"`)
+  }
+  return time
+}
+
+function parseCronogramaItems(value: unknown, label: string): CronogramaItem[] {
+  return requireArray(value, label).map((item, index) => {
+    const itemLabel = `${label}[${index}]`
+    if (!isRecord(item)) throw new ContentError(`${itemLabel} must be an object`)
+    return {
+      text: requireString(item.text, `${itemLabel}.text`),
+      ...(optionalString(item.strong, `${itemLabel}.strong`)
+        ? { strong: optionalString(item.strong, `${itemLabel}.strong`) }
+        : {}),
+    }
+  })
 }
 
 export function parseVersoPage(value: unknown, source = 'verso'): VersoPageContent {

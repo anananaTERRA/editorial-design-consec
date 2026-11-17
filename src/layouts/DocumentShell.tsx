@@ -32,9 +32,14 @@ export function DocumentShell({ publication }: { publication: LoadedPublication 
     publication.sections.every(
       (section) => section.layout === 'roteiro' || section.layout === 'verso',
     )
-  const screenCopy = scriptDocument
-    ? 'Prévia em folhas A4 paisagem, uma por convidado. Impressão em A5 paisagem.'
-    : copy.screen
+  const scheduleDocument =
+    publication.sections.length > 0 &&
+    publication.sections.every((section) => section.layout === 'cronograma')
+  const screenCopy = scheduleDocument
+    ? 'Prévia em folhas A4 paisagem, duas fichas A5 por dia. A imposição corta cada folha em duas fichas.'
+    : scriptDocument
+      ? 'Prévia em folhas A4 paisagem, uma por convidado. Impressão em A5 paisagem.'
+      : copy.screen
 
   useEffect(() => {
     document.title = `${publication.title} — ${publication.subtitle}`

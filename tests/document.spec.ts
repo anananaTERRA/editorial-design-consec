@@ -156,3 +156,50 @@ test('the case studies render as four A4 portrait sheets', async ({ page }) => {
   expect(pageErrors).toEqual([])
   expect(failed).toEqual([])
 })
+
+test('the schedule renders as four fixed cards, two per day', async ({ page }) => {
+  const pageErrors: string[] = []
+  const failed: string[] = []
+  page.on('pageerror', (error) => pageErrors.push(error.message))
+  page.on('response', (response) => {
+    if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`)
+  })
+
+  await page.goto('/?doc=cronograma')
+  await page.waitForFunction(() => document.documentElement.dataset.pagesReady === '1')
+
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR')
+  await expect(page.locator('.preview-banner')).toContainText('duas fichas A5 por dia')
+
+  const sheets = await page.locator('.desk .sheet').evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const box = node.getBoundingClientRect()
+      const pageEl = node.querySelector('.cr-page')
+      return {
+        landscape: box.width > box.height,
+        overflow: pageEl ? pageEl.scrollHeight - pageEl.clientHeight : -1,
+        layout: node.getAttribute('data-layout') ?? '',
+        day: node.querySelector('.cr-day')?.textContent ?? '',
+        part: node.querySelector('.cr-title')?.textContent ?? '',
+        entries: node.querySelectorAll('.cr-entry').length,
+      }
+    }),
+  )
+
+  expect(sheets).toHaveLength(4)
+  expect(sheets.every((sheet) => sheet.landscape)).toBe(true)
+  expect(sheets.every((sheet) => sheet.layout === 'cronograma')).toBe(true)
+  expect(sheets.every((sheet) => sheet.overflow <= 2)).toBe(true)
+  expect(sheets.map((sheet) => sheet.day)).toEqual(['D1', 'D1', 'D2', 'D2'])
+  expect(sheets.map((sheet) => sheet.part)).toEqual(['MANHÃ', 'TARDE', 'MANHÃ', 'TARDE'])
+  expect(sheets.map((sheet) => sheet.entries)).toEqual([8, 6, 6, 6])
+
+  const broken = await page.evaluate(() =>
+    [...document.querySelectorAll('img')]
+      .filter((img) => !img.complete || img.naturalWidth === 0)
+      .map((img) => img.getAttribute('src')),
+  )
+  expect(broken).toEqual([])
+  expect(pageErrors).toEqual([])
+  expect(failed).toEqual([])
+})

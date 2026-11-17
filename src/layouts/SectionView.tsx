@@ -1,5 +1,6 @@
 import type { LoadedPublication, LoadedSection } from '../content/loadDocument'
 import { CasoPage } from './CasoPage'
+import { CronogramaPage } from './CronogramaPage'
 import { StandardPage } from './StandardPage'
 import { VersoPage } from './VersoPage'
 import { WorkbookPage } from './WorkbookPage'
@@ -39,6 +40,12 @@ export function SectionView({ section, publication, showMasthead }: SectionViewP
 
   if (section.layout === 'verso') {
     return <VersoPage id={section.id} />
+  }
+
+  if (section.layout === 'cronograma') {
+    return (
+      <CronogramaPage id={section.id} page={section.page} publication={publication} />
+    )
   }
 
   const Content = section.Content

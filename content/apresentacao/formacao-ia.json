@@ -1,0 +1,17 @@
+{
+  "id": "formacao-ia",
+  "title": "Uso e Governança de IA nas Redes",
+  "subtitle": "1º Encontro Presencial da Comissão de IA do CONSEC",
+  "author": "CONSED",
+  "format": "pptx",
+  "source": "_entrada/conteudo/formacao-ia.pptx",
+  "geometry": {
+    "cx": 9144000,
+    "cy": 5143500,
+    "widthIn": 10,
+    "heightIn": 5.625,
+    "orientation": "landscape"
+  },
+  "slides": 38,
+  "fonts": ["Instrument Sans", "Instrument Sans Medium", "Instrument Sans SemiBold"]
+}

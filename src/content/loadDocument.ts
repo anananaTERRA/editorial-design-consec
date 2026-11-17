@@ -2,9 +2,11 @@ import type { ComponentType } from 'react'
 import rawWorkbookDocument from '../../content/document.json'
 import rawRoteirosDocument from '../../content/document-experiencias.json'
 import rawCasosDocument from '../../content/document-casos.json'
+import rawCronogramaDocument from '../../content/document-cronograma.json'
 import {
   ContentError,
   parseCasoPage,
+  parseCronogramaPage,
   parseDocument,
   parseRoteiroPage,
   parseVersoPage,
@@ -12,6 +14,7 @@ import {
 } from './schema'
 import type {
   CasoPageContent,
+  CronogramaPageContent,
   EditorialDocument,
   RoteiroPageContent,
   VersoPageContent,
@@ -23,7 +26,7 @@ type MdxModule = {
   frontmatter?: unknown
 }
 
-export type DocumentKey = 'oficinas' | 'experiencias' | 'casos'
+export type DocumentKey = 'oficinas' | 'experiencias' | 'casos' | 'cronograma'
 
 export const documentChoices: {
   key: DocumentKey
@@ -48,6 +51,12 @@ export const documentChoices: {
     label: 'Estudos de caso',
     href: './?doc=casos',
     manifestId: 'estudos-de-caso-governanca-e-infraestrutura',
+  },
+  {
+    key: 'cronograma',
+    label: 'Tempos e movimentos',
+    href: './?doc=cronograma',
+    manifestId: 'tempos-e-movimentos',
   },
 ]
 
@@ -86,6 +95,13 @@ export type LoadedSection =
     }
   | {
       id: string
+      strategy: 'cronograma'
+      layout: 'cronograma'
+      source: string
+      page: CronogramaPageContent
+    }
+  | {
+      id: string
       strategy: 'verso'
       layout: 'verso'
       source: string
@@ -109,6 +125,10 @@ const casoModules = import.meta.glob('../../content/casos/*.json', {
   eager: true,
   import: 'default',
 })
+const cronogramaModules = import.meta.glob('../../content/cronograma/*.json', {
+  eager: true,
+  import: 'default',
+})
 const versoModules = import.meta.glob('../../content/verso/*.json', {
   eager: true,
   import: 'default',
@@ -119,6 +139,7 @@ export function documentKeyFromLocation(): DocumentKey {
   const requested = new URLSearchParams(window.location.search).get('doc')
   if (requested === 'experiencias') return 'experiencias'
   if (requested === 'casos') return 'casos'
+  if (requested === 'cronograma') return 'cronograma'
   return 'oficinas'
 }
 
@@ -128,7 +149,7 @@ function findModule(modules: Record<string, unknown>, source: string): unknown {
   )
   if (!match) {
     throw new ContentError(
-      `No loaded module matches content/${source}. The file must sit in content/chapters/, content/workbook/, content/roteiros/, content/casos/, or content/verso/.`,
+      `No loaded module matches content/${source}. The file must sit in content/chapters/, content/workbook/, content/roteiros/, content/casos/, content/cronograma/, or content/verso/.`,
     )
   }
   return match[1]
@@ -168,7 +189,9 @@ export function loadPublication(key: DocumentKey = documentKeyFromLocation()): L
       ? rawRoteirosDocument
       : key === 'casos'
         ? rawCasosDocument
-        : rawWorkbookDocument
+        : key === 'cronograma'
+          ? rawCronogramaDocument
+          : rawWorkbookDocument
   const document = parseDocument(manifest)
   const sections = document.sections.map((section): LoadedSection => {
     if (section.strategy === 'flow') {
@@ -219,6 +242,19 @@ export function loadPublication(key: DocumentKey = documentKeyFromLocation()): L
         layout: 'verso',
         source: section.source,
         page: parseVersoPage(findModule(versoModules, section.source), section.source),
+      }
+    }
+
+    if (section.strategy === 'cronograma') {
+      return {
+        id: section.id,
+        strategy: 'cronograma',
+        layout: 'cronograma',
+        source: section.source,
+        page: parseCronogramaPage(
+          findModule(cronogramaModules, section.source),
+          section.source,
+        ),
       }
     }
 

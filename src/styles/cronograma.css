@@ -1,0 +1,327 @@
+/*
+ * Tempos e movimentos — cronograma em fichas A5.
+ * A ficha é desenhada em A4 paisagem e reduzida a A5 na imposição (70,7%).
+ * Mesma margem lateral dos roteiros (20 mm) e mesma família tipográfica.
+ */
+
+.sheet.layout-cronograma {
+  padding-left: 20mm;
+  padding-right: 20mm;
+  background:
+    radial-gradient(circle at 107% -16%, transparent 0 35.6%, rgba(11, 83, 132, 0.05) 35.8% 36.1%, transparent 36.3%),
+    radial-gradient(circle at 107% -16%, rgba(62, 193, 210, 0.045) 0 27.4%, transparent 27.7%),
+    radial-gradient(circle at 107% -16%, rgba(100, 225, 94, 0.06) 0 19.2%, transparent 19.5%),
+    var(--color-paper);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.sheet.sheet-page.layout-cronograma {
+  padding-left: 20mm;
+  padding-right: 20mm;
+}
+
+.cr-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  hyphens: manual;
+}
+
+/* Header */
+.cr-header {
+  flex: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 70mm;
+  column-gap: 9mm;
+  align-items: end;
+  padding-top: 0.4mm;
+}
+
+.cr-heading {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 4.6mm;
+}
+
+.cr-day {
+  flex: none;
+  width: 13mm;
+  height: 13mm;
+  margin-top: -1.2mm;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cr-title {
+  margin: 0;
+  font-size: 27pt;
+  font-weight: 600;
+  line-height: 0.97;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  hyphens: manual;
+}
+
+.cr-when {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9mm;
+  padding-bottom: 0.4mm;
+}
+
+.cr-date {
+  margin: 0;
+  font-size: 9.8pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.cr-weekday {
+  margin: 0;
+  font-size: 9.2pt;
+  line-height: 1.15;
+  color: var(--color-muted);
+}
+
+.cr-window {
+  margin: 0.1mm 0 0;
+  font-size: 10.6pt;
+  font-weight: 600;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.cr-rule {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 1.4mm;
+  margin-top: 2mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}
+
+/* Body */
+.cr-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2.6mm;
+}
+
+.cr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Entry */
+.cr-entry {
+  display: grid;
+  grid-template-columns: 27mm minmax(0, 1fr);
+  column-gap: 4.6mm;
+  padding: 1.2mm 0 1.3mm;
+  border-top: 0.25mm solid #dfe9ef;
+}
+
+.cr-entry:first-child {
+  border-top: none;
+  padding-top: 0.4mm;
+}
+
+.cr-entry[data-kind='pausa'] {
+  margin: 0.7mm -3mm;
+  padding: 1.5mm 3mm;
+  border-top: none;
+  border-radius: 2mm;
+  background: var(--color-panel);
+}
+
+.cr-entry[data-kind='pausa'] .cr-time {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0;
+  padding-top: 0;
+}
+
+.cr-entry[data-kind='pausa'] .cr-start {
+  font-size: 11pt;
+}
+
+.cr-entry[data-kind='pausa'] .cr-end {
+  font-size: 9.6pt;
+}
+
+/* Time rail */
+.cr-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4mm;
+  padding-top: 0.2mm;
+  font-variant-numeric: tabular-nums;
+}
+
+.cr-start {
+  font-size: 12.2pt;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.cr-end {
+  font-size: 8.8pt;
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
+
+/* Entry copy */
+.cr-content {
+  min-width: 0;
+}
+
+.cr-entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+}
+
+.cr-entry-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 12.2pt;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+.cr-label {
+  margin-right: 2mm;
+  font-size: 7.8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
+
+.cr-host {
+  flex: none;
+  max-width: 48mm;
+  font-size: 8.2pt;
+  line-height: 1.2;
+  text-align: right;
+  color: var(--color-muted);
+}
+
+.cr-entry-sub {
+  margin: 0.4mm 0 0;
+  font-size: 9.8pt;
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--color-muted);
+}
+
+.cr-desc {
+  margin: 1mm 0 0;
+  font-size: 9.8pt;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.cr-desc--closing {
+  margin-top: 0.9mm;
+}
+
+.cr-items {
+  list-style: none;
+  margin: 1mm 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2mm;
+}
+
+.cr-items li {
+  display: grid;
+  grid-template-columns: 3.2mm minmax(0, 1fr);
+  font-size: 9.5pt;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.cr-item-dash {
+  font-weight: 700;
+  color: var(--color-turquoise);
+}
+
+.cr-item-strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.cr-note {
+  margin: 1mm 0 0;
+  font-size: 8.2pt;
+  line-height: 1.28;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Footer */
+.cr-footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  height: 6mm;
+  margin-top: 2.2mm;
+}
+
+.cr-footer-rule {
+  flex: 1;
+  height: 0.8mm;
+  border-radius: 1mm;
+  background: var(--gradient-brand);
+}
+
+.cr-footer-label {
+  flex: none;
+  font-size: 8.6pt;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
