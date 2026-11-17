@@ -70,7 +70,7 @@ The interview scripts are printed at A5 landscape (A4 reduced to 70.7%). Their t
 
 If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not take the body below 11.5 pt. Do not copy the workbook's 6–8 pt settings into `roteiro.css`.
 
-## Cronograma content (Tempos e movimentos)
+## Cronograma content (Minuto a minuto)
 
 - `content/cronograma/<slug>.json` matches the `cronograma` variant: `day`, `part`, `weekday`, `date` and `entries[]`. It is the printed programme of the two meeting days.
 - Four fixed cards: `dia-1-manha`, `dia-1-tarde`, `dia-2-manha`, `dia-2-tarde`. Each day is split at lunch, so the meeting day becomes two A5 fichas; the morning card closes with lunch.

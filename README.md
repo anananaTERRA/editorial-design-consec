@@ -9,7 +9,7 @@ Documentos editoriais da CONSED feitos como site: o conteúdo vive em JSON e MDX
 - **Caderno de oficinas — 10 páginas:** 10 folhas de oficina (casos 1A/1B, perfis 2A/2B/2C, oficinas 3.1, 3.2, 4 e casos 5A/5B). O caderno não tem capa.
 - **Experiências das Redes de Ensino — 5 roteiros + verso:** um roteiro de conversa por convidado (Governança/Rio, Formação/Manaus, Ensino e aprendizagem/Curitiba, Gestão/São Paulo, Infraestrutura e segurança/Fortaleza) e uma página roxa de fechamento. Texto transcrito do PDF da editoria, sem acréscimos.
 - **Estudos de caso — 4 páginas:** casos 1A/1B (Governança) e 5A/5B (Infraestrutura e segurança da informação), uma folha A4 retrato por caso. Texto e rodapé transcritos do PDF enviado, sem acréscimos. A folha não tem cabeçalho; a linha do encontro e o identificador do material ficam no rodapé. O PDF de origem não tem capa nem título de publicação; o documento também não inventa esses elementos.
-- **Tempos e movimentos — 4 fichas A5:** o cronograma dos dois dias de encontro (18 e 19 de novembro), com duas fichas por dia — manhã e tarde, divididas no almoço. Transcrito do planejamento interno da VdE. Sem capa e sem verso.
+- **Minuto a minuto — 4 fichas A5:** o cronograma dos dois dias de encontro (18 e 19 de novembro), com duas fichas por dia — manhã e tarde, divididas no almoço. Transcrito do planejamento interno da VdE. Sem capa e sem verso.
 - **Formato:** caderno e roteiros em A4 paisagem (297 × 210 mm); estudos de caso em A4 retrato (210 × 297 mm). A impressão usa 3 mm de sangria: 303 × 216 mm (paisagem) e 216 × 303 mm (retrato). O cronograma é desenhado no mesmo A4 paisagem e reduzido a A5.
 - **A5:** os roteiros serão impressos em A5 paisagem (redução de 70,7%). Por isso usam corpo de 11,5 pt, que chega a ~8,1 pt no A5.
 - **Identidade:** Instrument Sans (Fontsource), azul `#0b5384`, verde `#64e15e` e a paleta gráfica da CONSED.
@@ -39,7 +39,7 @@ O seletor no topo alterna entre os quatro documentos:
 - **Caderno de oficinas:** http://127.0.0.1:5173/
 - **Experiências das Redes de Ensino:** http://127.0.0.1:5173/?doc=experiencias
 - **Estudos de caso:** http://127.0.0.1:5173/?doc=casos
-- **Tempos e movimentos:** http://127.0.0.1:5173/?doc=cronograma
+- **Minuto a minuto:** http://127.0.0.1:5173/?doc=cronograma
 
 A edição é em arquivos, com o agente: os textos das oficinas ficam em `content/workbook/*.json`; os roteiros de conversa, em `content/roteiros/*.json`; os estudos de caso, em `content/casos/*.json`; e as fichas do cronograma, em `content/cronograma/*.json`.
 
@@ -75,7 +75,7 @@ npm run gerar-pdf-grafica-casos
 
 Geram `output/casos-digital.pdf` e `output/casos-print.pdf`. O perfil de impressão tem 216 × 303 mm, com 3 mm de sangria.
 
-Para o cronograma (`Tempos e movimentos`) em fichas A5:
+Para o cronograma (`Minuto a minuto`) em fichas A5:
 
 ```bash
 npm run gerar-pdf-cronograma-a5

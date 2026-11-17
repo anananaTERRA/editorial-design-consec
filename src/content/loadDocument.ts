@@ -54,9 +54,9 @@ export const documentChoices: {
   },
   {
     key: 'cronograma',
-    label: 'Tempos e movimentos',
+    label: 'Minuto a minuto',
     href: './?doc=cronograma',
-    manifestId: 'tempos-e-movimentos',
+    manifestId: 'minuto-a-minuto',
   },
 ]
 

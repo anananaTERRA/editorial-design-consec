@@ -117,7 +117,7 @@ for (let index = 0; index < fronts.length; index += 2) {
 
 imposed.setTitle(
   cardsOnly
-    ? 'Tempos e movimentos — fichas A5'
+    ? 'Minuto a minuto — fichas A5'
     : frontsOnly
       ? 'Experiências das Redes de Ensino — A5 frente'
       : 'Experiências das Redes de Ensino — A5 duplex',
