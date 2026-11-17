@@ -5,6 +5,7 @@ import type {
   CronogramaEntry,
   CronogramaItem,
   CronogramaPageContent,
+  CronogramaSlot,
   DocumentMasthead,
   DocumentSection,
   EditorialDocument,
@@ -482,63 +483,13 @@ export function parseCronogramaPage(
     (item, index): CronogramaEntry => {
       const label = `${source}.entries[${index}]`
       if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
-      const kind = item.kind
-      if (
-        kind !== 'abertura' &&
-        kind !== 'mesa' &&
-        kind !== 'oficina' &&
-        kind !== 'pausa' &&
-        kind !== 'encerramento' &&
-        kind !== 'sessao'
-      ) {
-        throw new ContentError(
-          `${label}.kind must be abertura, mesa, oficina, pausa, encerramento, or sessao`,
-        )
+      if (item.kind === 'mc') {
+        return {
+          kind: 'mc',
+          text: requireString(item.text, `${label}.text`),
+        }
       }
-      const duration = requireString(item.duration, `${label}.duration`)
-      if (!/^\d+$/.test(duration)) {
-        throw new ContentError(`${label}.duration must be a number of minutes`)
-      }
-      const items =
-        item.items === undefined
-          ? undefined
-          : parseCronogramaItems(item.items, `${label}.items`)
-      const paragraphs =
-        item.paragraphs === undefined
-          ? undefined
-          : requireArray(item.paragraphs, `${label}.paragraphs`).map((paragraph, pIndex) =>
-              requireString(paragraph, `${label}.paragraphs[${pIndex}]`),
-            )
-      return {
-        start: parseCronogramaTime(item.start, `${label}.start`),
-        end: parseCronogramaTime(item.end, `${label}.end`),
-        duration,
-        kind,
-        title: requireString(item.title, `${label}.title`),
-        ...(optionalString(item.label, `${label}.label`)
-          ? { label: optionalString(item.label, `${label}.label`) }
-          : {}),
-        ...(optionalString(item.method, `${label}.method`)
-          ? { method: optionalString(item.method, `${label}.method`) }
-          : {}),
-        ...(optionalString(item.subtitle, `${label}.subtitle`)
-          ? { subtitle: optionalString(item.subtitle, `${label}.subtitle`) }
-          : {}),
-        ...(optionalString(item.description, `${label}.description`)
-          ? { description: optionalString(item.description, `${label}.description`) }
-          : {}),
-        ...(optionalString(item.intro, `${label}.intro`)
-          ? { intro: optionalString(item.intro, `${label}.intro`) }
-          : {}),
-        ...(items ? { items } : {}),
-        ...(paragraphs ? { paragraphs } : {}),
-        ...(optionalString(item.host, `${label}.host`)
-          ? { host: optionalString(item.host, `${label}.host`) }
-          : {}),
-        ...(optionalString(item.note, `${label}.note`)
-          ? { note: optionalString(item.note, `${label}.note`) }
-          : {}),
-      }
+      return parseCronogramaSlot(item, label)
     },
   )
 
@@ -549,6 +500,73 @@ export function parseCronogramaPage(
     weekday: requireString(value.weekday, `${source}.weekday`),
     date: requireString(value.date, `${source}.date`),
     entries,
+  }
+}
+
+function parseCronogramaSlot(item: Record<string, unknown>, label: string): CronogramaSlot {
+  const kind = item.kind
+  if (
+    kind !== 'abertura' &&
+    kind !== 'mesa' &&
+    kind !== 'oficina' &&
+    kind !== 'pausa' &&
+    kind !== 'encerramento' &&
+    kind !== 'sessao'
+  ) {
+    throw new ContentError(
+      `${label}.kind must be abertura, mesa, oficina, pausa, encerramento, or sessao`,
+    )
+  }
+  const duration = requireString(item.duration, `${label}.duration`)
+  if (!/^\d+$/.test(duration)) {
+    throw new ContentError(`${label}.duration must be a number of minutes`)
+  }
+  const items =
+    item.items === undefined
+      ? undefined
+      : parseCronogramaItems(item.items, `${label}.items`)
+  const paragraphs =
+    item.paragraphs === undefined
+      ? undefined
+      : requireArray(item.paragraphs, `${label}.paragraphs`).map((paragraph, pIndex) =>
+          requireString(paragraph, `${label}.paragraphs[${pIndex}]`),
+        )
+  if (item.tone !== undefined && item.tone !== 'mc') {
+    throw new ContentError(`${label}.tone must be "mc" when present`)
+  }
+  return {
+    start: parseCronogramaTime(item.start, `${label}.start`),
+    end: parseCronogramaTime(item.end, `${label}.end`),
+    duration,
+    kind,
+    title: requireString(item.title, `${label}.title`),
+    ...(optionalString(item.label, `${label}.label`)
+      ? { label: optionalString(item.label, `${label}.label`) }
+      : {}),
+    ...(optionalString(item.method, `${label}.method`)
+      ? { method: optionalString(item.method, `${label}.method`) }
+      : {}),
+    ...(optionalString(item.subtitle, `${label}.subtitle`)
+      ? { subtitle: optionalString(item.subtitle, `${label}.subtitle`) }
+      : {}),
+    ...(optionalString(item.description, `${label}.description`)
+      ? { description: optionalString(item.description, `${label}.description`) }
+      : {}),
+    ...(optionalString(item.intro, `${label}.intro`)
+      ? { intro: optionalString(item.intro, `${label}.intro`) }
+      : {}),
+    ...(items ? { items } : {}),
+    ...(paragraphs ? { paragraphs } : {}),
+    ...(optionalString(item.host, `${label}.host`)
+      ? { host: optionalString(item.host, `${label}.host`) }
+      : {}),
+    ...(optionalString(item.supplies, `${label}.supplies`)
+      ? { supplies: optionalString(item.supplies, `${label}.supplies`) }
+      : {}),
+    ...(optionalString(item.note, `${label}.note`)
+      ? { note: optionalString(item.note, `${label}.note`) }
+      : {}),
+    ...(item.tone === 'mc' ? { tone: 'mc' as const } : {}),
   }
 }
 

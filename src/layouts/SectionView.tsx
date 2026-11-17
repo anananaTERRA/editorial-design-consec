@@ -44,7 +44,7 @@ export function SectionView({ section, publication, showMasthead }: SectionViewP
 
   if (section.layout === 'cronograma') {
     return (
-      <CronogramaPage id={section.id} page={section.page} publication={publication} />
+      <CronogramaPage id={section.id} page={section.page} />
     )
   }
 

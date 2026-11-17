@@ -86,18 +86,18 @@ O script é `scripts/impose-a5.ts`. Para refazer só a imposição, sem reexport
 
 ## Cronograma (fichas A5)
 
-O planejamento interno da VdE chega como duas planilhas (Dia 1 e Dia 2). O documento imprime cada dia em duas fichas A5, com a mesma família visual dos roteiros:
+O planejamento interno da VdE chega como duas planilhas (Dia 1 e Dia 2). O documento imprime o Dia 1 em três fichas A5 e o Dia 2 em duas, com a mesma família visual dos roteiros:
 
-- quatro fichas fixas: Dia 1 manhã/tarde e Dia 2 manhã/tarde, divididas no almoço (o almoço fecha a ficha da manhã);
+- seis fichas fixas: Dia 1 manhã, Dia 1 meio-dia, Dia 1 tarde, Dia 2 manhã, Dia 2 meio-dia e Dia 2 tarde. Os dois dias precisam de três porque as falas de condução (MC) entram no meio da programação; o Dia 1 se divide nas duas pausas e o Dia 2 na pausa da manhã e na pausa para o café;
 - desenhadas no A4 paisagem e reduzidas a A5 (70,7%) pela mesma imposição; a ficha final tem 210 × 148,5 mm;
 - margens laterais de 20 mm como os roteiros; corpo de 9,8 pt no A4 → ~6,9 pt no A5;
 - trilha de horários à esquerda (início forte; fim e duração juntos), atividade no centro e quem conduz à direita do título;
 - rótulo da mesa ou oficina em caixa alta ao lado do título, e o nome da dinâmica (jornada do usuário, mapa da empatia) no mesmo rótulo;
-- pausas e almoço em faixas cinza, para o olho achar as interrupções;
-- observações em itálico pequeno; a coluna de insumos não é impressa, para a ficha caber sem apertar o corpo;
+- pausas e almoço como linhas simples, sem faixa; as falas de condução (MC) e a Boas-vindas em **roxo claro `#d9d2e9`**, o mesmo destaque da planilha de origem;
+- insumos dentro do próprio horário, em linha discreta acima da observação; observações em itálico pequeno;
 - cabeçalho com o dia no círculo verde, a parte do dia como título e a data/horário à direita; rodapé com a marca CONSED, o fio degradê e o nome do documento.
 
-`npm run gerar-pdf-cronograma-a5` gera `output/cronograma-a5-frente.pdf`: 2 folhas A4 retrato com duas fichas cada e cruzes de corte; não há verso. O script é o mesmo `scripts/impose-a5.ts`, com `--sem-verso`.
+`npm run gerar-pdf-cronograma-a5` gera `output/cronograma-a5-frente.pdf`: 4 folhas A4 retrato — duas com duas fichas e duas com uma ficha (metade de baixo em branco) — e cruzes de corte; não há verso. O script é o mesmo `scripts/impose-a5.ts`, com `--sem-verso`.
 
 ## Verso (Experiências)
 

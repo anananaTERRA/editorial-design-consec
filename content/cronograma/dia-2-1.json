@@ -6,30 +6,43 @@
   "date": "19 de novembro",
   "entries": [
     {
+      "kind": "mc",
+      "text": "[TOCA MÚSICA] Carol Campos dá boas-vindas, retoma o dia 1 e apresenta agenda para o Dia 2."
+    },
+    {
+      "kind": "abertura",
       "start": "08:30",
       "end": "08:50",
       "duration": "20",
-      "kind": "abertura",
       "title": "Abertura",
       "description": "Boas-vindas, retomada do Dia 1 e apresentação da agenda para o Dia 2.",
-      "host": "Vozes"
+      "host": "Vozes",
+      "supplies": "Slides."
     },
     {
+      "kind": "mc",
+      "text": "Carol agradece Consec, FGV e todas as pessoas do dia 1 e introduz mesa 4 com Curitiba, explicando que ela mesma conduzirá a entrevista."
+    },
+    {
+      "kind": "mesa",
       "start": "08:50",
       "end": "09:20",
       "duration": "30",
-      "kind": "mesa",
       "label": "Mesa 4 com Curitiba",
       "title": "IA no ensino e na aprendizagem",
       "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
       "host": "Carol Campos",
-      "note": "Time Vozes: sistematizar as contribuições."
+      "note": "Time Vozes: Sistematizar as contribuições."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece Curitiba, relembra funcionamento das oficinas e introduz a Oficina 3.1"
+    },
+    {
+      "kind": "oficina",
       "start": "09:20",
       "end": "10:50",
       "duration": "90",
-      "kind": "oficina",
       "label": "Oficina 3.1",
       "method": "Jornada do usuário",
       "title": "IA no ensino e na aprendizagem",
@@ -53,51 +66,19 @@
         }
       ],
       "host": "Carol Campos",
-      "note": "Registro fotográfico antes de recolher os materiais impressos."
+      "note": "Registro fotográfico antes de recolher os materiais impressos.",
+      "supplies": "Slides e templates impressos."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece a participação na oficina e anuncia pausa estratégica de 10 min para café e banheiro. Toca música."
+    },
+    {
+      "kind": "pausa",
       "start": "10:50",
       "end": "11:00",
       "duration": "10",
-      "kind": "pausa",
       "title": "Pausa estratégica"
-    },
-    {
-      "start": "11:00",
-      "end": "12:30",
-      "duration": "90",
-      "kind": "oficina",
-      "label": "Oficina 3.2",
-      "method": "Jornada por usuário",
-      "title": "IA no ensino e na aprendizagem",
-      "subtitle": "Trajetória do Educador",
-      "intro": "Metade dos grupos mapeia a semana da professora Helena (Educação Infantil) e metade a do professor Caio (Anos Finais).",
-      "items": [
-        {
-          "text": "10 para explicação da dinâmica;"
-        },
-        {
-          "text": "10 minutos de leitura e registro individual"
-        },
-        {
-          "text": "30 minutos para marcar, em cada etapa da jornada, onde a IA entra, o risco e onde a validação humana é obrigatória."
-        },
-        {
-          "text": "20 minutos de fechamento comum: o que a rede incentiva, limita ou proíbe e qual orientação geral sai daqui."
-        },
-        {
-          "text": "20 minutos de troca entre grupos."
-        }
-      ],
-      "host": "A definir",
-      "note": "Registro fotográfico antes de recolher os materiais impressos."
-    },
-    {
-      "start": "12:30",
-      "end": "13:30",
-      "duration": "60",
-      "kind": "pausa",
-      "title": "Almoço"
     }
   ]
 }

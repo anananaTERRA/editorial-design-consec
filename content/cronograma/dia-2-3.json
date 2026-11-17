@@ -6,67 +6,41 @@
   "date": "19 de novembro",
   "entries": [
     {
-      "start": "13:30",
-      "end": "14:00",
-      "duration": "30",
-      "kind": "mesa",
-      "label": "Mesa 5 com São Paulo",
-      "title": "Gestão educacional com IA",
-      "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
-      "host": "Carol Campos",
-      "note": "Time Vozes: sistematizar as contribuições."
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece pela oficina e anuncia pausa para o café. Toca música."
     },
     {
-      "start": "14:00",
-      "end": "15:10",
-      "duration": "70",
-      "kind": "oficina",
-      "label": "Oficina 4",
-      "title": "Gestão educacional com IA",
-      "description": "Os grupos recebem situações hipotéticas. A partir delas, eles tem:",
-      "items": [
-        {
-          "text": "5 minutos para apresentação da dinâmica e compartilhamento de dúvidas;"
-        },
-        {
-          "text": "5 minutos de leitura e registro individual;"
-        },
-        {
-          "text": "30 minutos de decisão do grupo (o que incentivar, limitar ou proibir, e a consequência de cada caminho);"
-        },
-        {
-          "text": "10 minutos para escrever a orientação geral;"
-        },
-        {
-          "text": "20 minutos de plenária, comparando as decisões dos grupos."
-        }
-      ],
-      "host": "Carol Campos",
-      "note": "Registro fotográfico antes de recolher os materiais impressos."
-    },
-    {
+      "kind": "pausa",
       "start": "15:10",
       "end": "15:30",
       "duration": "20",
-      "kind": "pausa",
       "title": "Pausa para o café"
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, anuncia retorno e introduz mesa 6 com Fortaleza, explicando que ela mesma conduzirá a entrevista."
+    },
+    {
+      "kind": "mesa",
       "start": "15:30",
       "end": "16:00",
       "duration": "30",
-      "kind": "mesa",
       "label": "Mesa 6 com Fortaleza",
       "title": "Infraestrutura e segurança da informação",
       "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
       "host": "Carol Campos",
-      "note": "Time Vozes: sistematizar as contribuições."
+      "note": "Time Vozes: Sistematizar as contribuições.",
+      "supplies": "Roteiro."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece Fortaleza e introduz Oficina 5."
+    },
+    {
+      "kind": "oficina",
       "start": "16:00",
       "end": "16:50",
       "duration": "50",
-      "kind": "oficina",
       "label": "Oficina 5",
       "title": "Infraestrutura e segurança da informação",
       "description": "Os grupos recebem situações hipotéticas. A partir delas, eles têm:",
@@ -85,13 +59,18 @@
         }
       ],
       "host": "Carol Campos",
-      "note": "Registro fotográfico antes de recolher os materiais impressos."
+      "note": "Registro fotográfico antes de recolher os materiais impressos.",
+      "supplies": "Slides e templates impressos."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece pelos dois dias de evento em nome do Vozes e passa a palavra para o Consec."
+    },
+    {
+      "kind": "encerramento",
       "start": "16:50",
       "end": "17:00",
       "duration": "10",
-      "kind": "encerramento",
       "title": "Encerramento",
       "description": "Agradecimentos e como o material vira o guia (quem sistematiza, prazos, como as redes revisam e validam).",
       "host": "Consec"

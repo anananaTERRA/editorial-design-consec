@@ -50,7 +50,7 @@ Os estudos de caso ficam em `content/casos/*.json` e abrem em http://127.0.0.1:5
 >
 > Na oficina 3.1, troque a quinta etapa por: …
 
-As fichas do cronograma ficam em `content/cronograma/*.json` e abrem em http://127.0.0.1:5173/?doc=cronograma. São quatro fichas A5 (Dia 1 manhã, Dia 1 tarde, Dia 2 manhã, Dia 2 tarde). O texto veio do planejamento interno; revise antes de publicar.
+As fichas do cronograma ficam em `content/cronograma/*.json` e abrem em http://127.0.0.1:5173/?doc=cronograma. São seis fichas A5 (Dia 1 manhã, Dia 1 meio-dia, Dia 1 tarde, Dia 2 manhã, Dia 2 meio-dia, Dia 2 tarde). As falas de condução em roxo são as entradas `kind: "mc"`. O texto veio do planejamento interno; revise antes de publicar.
 
 ## O que o agente precisa saber
 

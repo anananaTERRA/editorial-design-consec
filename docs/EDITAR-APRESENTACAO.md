@@ -37,3 +37,15 @@ Depois de cada rodada:
 - `npm run apresentacao:abrir` lista o que há em cada slide: texto, formas, imagens, notas e comentários.
 
 O slide 38 (paleta de cores) está oculto no arquivo original, então ele não aparece na prévia.
+
+## A fonte da prévia
+
+A prévia só mostra o desenho certo se a **Instrument Sans** estiver instalada na máquina. Cada peso do arquivo é uma família separada:
+
+- `Instrument Sans`
+- `Instrument Sans Medium`
+- `Instrument Sans SemiBold`
+
+Instale os `.ttf` (Regular, Itálico, Negrito e Negrito Itálico de cada uma) em `~/Library/Fonts`. Sem isso o LibreOffice troca tudo por uma serifa: a diagramação parece errada e não está.
+
+Se a prévia abrir com serifa, é isso que aconteceu. O comando avisa quando não encontra a fonte.

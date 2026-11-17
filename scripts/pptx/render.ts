@@ -15,6 +15,7 @@ import {
   hiddenSlides,
   readEdits,
   readManifest,
+  root,
   run,
   slideOrder,
 } from './lib'
@@ -43,20 +44,44 @@ if (!soffice) {
 }
 if (!existsSync(paths.work)) extract(manifest)
 
+const fontDirs = ['Library/Fonts', 'System/Library/Fonts'].map((dir) =>
+  path.join(process.env.HOME ?? '', dir),
+)
+const hasInstrument = fontDirs.some(
+  (dir) =>
+    existsSync(dir) &&
+    readdirSync(dir).some((file) => /^InstrumentSans/i.test(file)),
+)
+if (!hasInstrument) {
+  console.warn(
+    'Instrument Sans não está instalada: a prévia vai cair numa fonte de reserva e mentir sobre a tipografia.',
+  )
+  console.warn('Instale os arquivos .ttf em ~/Library/Fonts antes de conferir o desenho.')
+}
+
 rmSync(previewDir, { recursive: true, force: true })
 mkdirSync(previewDir, { recursive: true })
 
 const profile = path.join(previewDir, '.lo-profile')
-run(soffice, [
-  '--headless',
-  '--norestore',
-  `-env:UserInstallation=file://${profile}`,
-  '--convert-to',
-  'pdf',
-  '--outdir',
-  previewDir,
-  source,
-])
+run(
+  soffice,
+  [
+    '--headless',
+    '--norestore',
+    `-env:UserInstallation=file://${profile}`,
+    '--convert-to',
+    'pdf',
+    '--outdir',
+    previewDir,
+    source,
+  ],
+  {
+    env: {
+      ...process.env,
+      FONTCONFIG_FILE: path.join(root, 'scripts', 'pptx', 'fonts.conf'),
+    },
+  },
+)
 rmSync(profile, { recursive: true, force: true })
 
 const produced = readdirSync(previewDir).find((file) => file.endsWith('.pdf'))

@@ -6,65 +6,41 @@
   "date": "18 de novembro",
   "entries": [
     {
-      "start": "13:50",
-      "end": "14:10",
-      "duration": "20",
-      "kind": "sessao",
-      "title": "Fio condutor das oficinas",
-      "description": "Apresentação do racional das oficinas, incluindo breve apresentação das dinâmicas.",
-      "host": "Carol Campos"
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece as equipes e anuncia pausa para o café. Toca música."
     },
     {
-      "start": "14:10",
-      "end": "15:30",
-      "duration": "80",
-      "kind": "oficina",
-      "label": "Oficina 1",
-      "title": "Governança",
-      "description": "Os grupos recebem situações hipotéticas. A partir delas, eles têm:",
-      "items": [
-        {
-          "text": "5 minutos para apresentação da dinâmica e compartilhamento de dúvidas;"
-        },
-        {
-          "text": "5 minutos de leitura e registro individual;"
-        },
-        {
-          "text": "30 minutos de decisão do grupo (o que incentivar, limitar ou proibir, e a consequência de cada caminho);"
-        },
-        {
-          "text": "10 minutos para escrever a orientação geral;"
-        },
-        {
-          "text": "30 minutos de plenária, comparando as decisões dos grupos."
-        }
-      ],
-      "host": "Carol Campos",
-      "note": "Registro fotográfico antes de recolher os materiais impressos."
-    },
-    {
+      "kind": "pausa",
       "start": "15:30",
       "end": "15:50",
       "duration": "20",
-      "kind": "pausa",
       "title": "Pausa para o café"
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, anuncia volta dos trabalhos e introduz mesa 3 com Manaus, explicando que ela mesma conduzirá a entrevista."
+    },
+    {
+      "kind": "mesa",
       "start": "15:50",
       "end": "16:20",
       "duration": "30",
-      "kind": "mesa",
       "label": "Mesa 3 com Manaus",
       "title": "Formação",
       "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
       "host": "Carol Campos",
-      "note": "Time Vozes: sistematizar as contribuições."
+      "note": "Time Vozes: Sistematizar as contribuições.",
+      "supplies": "Roteiro."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece Manaus e introduz Oficina 2, incluindo breve apresentação da dinâmica."
+    },
+    {
+      "kind": "oficina",
       "start": "16:20",
       "end": "17:30",
       "duration": "70",
-      "kind": "oficina",
       "label": "Oficina 2",
       "method": "Mapa da empatia",
       "title": "Formação",
@@ -89,10 +65,14 @@
       "note": "Registro fotográfico antes de recolher os materiais impressos."
     },
     {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece as equipes e anuncia agenda do dia seguinte. Pede para deixar os papéis organizados nas mesas. Toca música."
+    },
+    {
+      "kind": "encerramento",
       "start": "17:30",
       "end": "18:00",
       "duration": "30",
-      "kind": "encerramento",
       "title": "Encerramento",
       "description": "Agenda do dia seguinte e pedido para deixar os papéis organizados nas mesas.",
       "host": "Carol Campos"

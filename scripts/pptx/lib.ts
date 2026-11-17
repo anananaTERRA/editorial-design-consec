@@ -315,8 +315,16 @@ export function hasCommand(command: string) {
   return spawnSync('which', [command], { encoding: 'utf8' }).status === 0
 }
 
-export function run(command: string, args: string[], options: { cwd?: string } = {}) {
-  const result = spawnSync(command, args, { cwd: options.cwd, encoding: 'utf8' })
+export function run(
+  command: string,
+  args: string[],
+  options: { cwd?: string; env?: NodeJS.ProcessEnv } = {},
+) {
+  const result = spawnSync(command, args, {
+    cwd: options.cwd,
+    encoding: 'utf8',
+    env: options.env ?? process.env,
+  })
   if (result.status !== 0) {
     throw new Error(`${command} ${args.join(' ')} failed\n${result.stderr || result.stdout}`)
   }

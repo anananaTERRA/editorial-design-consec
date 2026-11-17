@@ -157,7 +157,7 @@ test('the case studies render as four A4 portrait sheets', async ({ page }) => {
   expect(failed).toEqual([])
 })
 
-test('the schedule renders as four fixed cards, two per day', async ({ page }) => {
+test('the schedule renders as six fixed cards, three per day', async ({ page }) => {
   const pageErrors: string[] = []
   const failed: string[] = []
   page.on('pageerror', (error) => pageErrors.push(error.message))
@@ -169,7 +169,7 @@ test('the schedule renders as four fixed cards, two per day', async ({ page }) =
   await page.waitForFunction(() => document.documentElement.dataset.pagesReady === '1')
 
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR')
-  await expect(page.locator('.preview-banner')).toContainText('duas fichas A5 por dia')
+  await expect(page.locator('.preview-banner')).toContainText('uma ficha A5 por parte do dia')
 
   const sheets = await page.locator('.desk .sheet').evaluateAll((nodes) =>
     nodes.map((node) => {
@@ -182,17 +182,28 @@ test('the schedule renders as four fixed cards, two per day', async ({ page }) =
         day: node.querySelector('.cr-day')?.textContent ?? '',
         part: node.querySelector('.cr-title')?.textContent ?? '',
         entries: node.querySelectorAll('.cr-entry').length,
+        mc: node.querySelectorAll('.cr-entry[data-kind="mc"]').length,
+        supplies: node.querySelectorAll('.cr-supplies').length,
       }
     }),
   )
 
-  expect(sheets).toHaveLength(4)
+  expect(sheets).toHaveLength(6)
   expect(sheets.every((sheet) => sheet.landscape)).toBe(true)
   expect(sheets.every((sheet) => sheet.layout === 'cronograma')).toBe(true)
   expect(sheets.every((sheet) => sheet.overflow <= 2)).toBe(true)
-  expect(sheets.map((sheet) => sheet.day)).toEqual(['D1', 'D1', 'D2', 'D2'])
-  expect(sheets.map((sheet) => sheet.part)).toEqual(['MANHÃ', 'TARDE', 'MANHÃ', 'TARDE'])
-  expect(sheets.map((sheet) => sheet.entries)).toEqual([8, 6, 6, 6])
+  expect(sheets.map((sheet) => sheet.day)).toEqual(['Dia 1', 'Dia 1', 'Dia 1', 'Dia 2', 'Dia 2', 'Dia 2'])
+  expect(sheets.map((sheet) => sheet.part)).toEqual([
+    'MANHÃ',
+    'MEIO-DIA',
+    'TARDE',
+    'MANHÃ',
+    'MEIO-DIA',
+    'TARDE',
+  ])
+  expect(sheets.map((sheet) => sheet.entries)).toEqual([7, 9, 8, 8, 8, 8])
+  expect(sheets.map((sheet) => sheet.mc)).toEqual([2, 4, 4, 4, 4, 4])
+  expect(sheets.map((sheet) => sheet.supplies)).toEqual([2, 4, 1, 2, 2, 2])
 
   const broken = await page.evaluate(() =>
     [...document.querySelectorAll('img')]

@@ -33,6 +33,12 @@ const CUT_MARK_COLOR = rgb(0.55, 0.62, 0.68)
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const cardsOnly = process.argv.includes('--sem-verso')
 const frontsOnly = process.argv.includes('--frente') || cardsOnly
+/** Optional card index (1-based) after which a new A4 sheet starts: `--quebra=3`. */
+const breakAfter = process.argv
+  .filter((argument) => argument.startsWith('--quebra='))
+  .flatMap((argument) => argument.slice('--quebra='.length).split(','))
+  .map(Number)
+  .filter((value) => Number.isInteger(value) && value > 0)
 const positional = process.argv.slice(2).filter((argument) => !argument.startsWith('--'))
 const input =
   positional[0] ??
@@ -90,6 +96,13 @@ if (pages.length < (cardsOnly ? 1 : 2)) {
    página; a imposição usa as costas contínuas e não ela. Nas fichas sem verso
    (cronograma), todas as páginas são frentes. */
 const fronts = cardsOnly ? pages : pages.slice(0, -1)
+
+/* `--quebra=N` insere uma ficha em branco depois do card N, para começar uma
+   nova folha (por exemplo, separar o Dia 1 do Dia 2). */
+const slots: ((typeof fronts)[number] | null)[] = [...fronts]
+for (const after of [...breakAfter].sort((a, b) => b - a)) {
+  if (after < slots.length) slots.splice(after, 0, null)
+}
 const backTwoPage = twoDoc
   ? (await imposed.embedPdf(twoDoc, twoDoc.getPageIndices()))[0]
   : undefined
@@ -97,13 +110,13 @@ const backOnePage = oneDoc
   ? (await imposed.embedPdf(oneDoc, oneDoc.getPageIndices()))[0]
   : undefined
 
-for (let index = 0; index < fronts.length; index += 2) {
-  const first = fronts[index]
-  const second = fronts[index + 1]
+for (let index = 0; index < slots.length; index += 2) {
+  const first = slots[index]
+  const second = slots[index + 1]
 
   /* Frente: dois cards, com as marcas de corte na margem de segurança. */
   const front = imposed.addPage([A4_WIDTH, A4_HEIGHT])
-  drawPage(front, first, HALF_HEIGHT)
+  if (first) drawPage(front, first, HALF_HEIGHT)
   if (second) drawPage(front, second, 0)
   drawCutMarks(front)
 
@@ -134,7 +147,7 @@ imposed.setSubject(
 mkdirSync(path.dirname(output), { recursive: true })
 writeFileSync(output, await imposed.save())
 
-const sheets = Math.ceil(fronts.length / 2)
+const sheets = Math.ceil(slots.length / 2)
 console.log(
   cardsOnly
     ? `Imposição de fichas: ${fronts.length} cards → ${sheets} folhas A4 retrato`

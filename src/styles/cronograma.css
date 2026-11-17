@@ -34,8 +34,7 @@
 .cr-header {
   flex: none;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 70mm;
-  column-gap: 9mm;
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
   padding-top: 0.4mm;
 }
@@ -47,18 +46,25 @@
   gap: 4.6mm;
 }
 
+.cr-heading-copy {
+  min-width: 0;
+}
+
 .cr-day {
   flex: none;
-  width: 13mm;
+  box-sizing: border-box;
+  min-width: 22mm;
   height: 13mm;
   margin-top: -1.2mm;
-  border-radius: 50%;
+  padding: 0 4mm;
+  border-radius: 6.5mm;
   background: var(--color-accent);
   color: var(--color-ink);
-  font-size: 12pt;
+  font-size: 10.5pt;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   line-height: 1;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,37 +81,11 @@
 }
 
 .cr-when {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9mm;
-  padding-bottom: 0.4mm;
-}
-
-.cr-date {
-  margin: 0;
-  font-size: 9.8pt;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--color-ink);
-}
-
-.cr-weekday {
-  margin: 0;
-  font-size: 9.2pt;
-  line-height: 1.15;
-  color: var(--color-muted);
-}
-
-.cr-window {
-  margin: 0.1mm 0 0;
-  font-size: 10.6pt;
-  font-weight: 600;
-  line-height: 1.05;
+  margin: 1.1mm 0 0;
+  font-size: 8.8pt;
+  line-height: 1.22;
   font-variant-numeric: tabular-nums;
-  color: var(--color-ink);
+  color: var(--color-muted);
 }
 
 .cr-rule {
@@ -143,20 +123,26 @@
   grid-template-columns: 27mm minmax(0, 1fr);
   column-gap: 4.6mm;
   padding: 1.2mm 0 1.3mm;
-  border-top: 0.25mm solid #dfe9ef;
+  border-top: 0.25mm solid #e6eef3;
 }
 
-.cr-entry:first-child {
+.cr-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4mm;
+}
+
+.cr-entry[data-kind='mc'] + .cr-entry {
+  border-top: none;
+}
+
+.cr-group:first-child > .cr-entry:first-child {
   border-top: none;
   padding-top: 0.4mm;
 }
 
 .cr-entry[data-kind='pausa'] {
-  margin: 0.7mm -3mm;
-  padding: 1.5mm 3mm;
-  border-top: none;
-  border-radius: 2mm;
-  background: var(--color-panel);
+  padding: 1.6mm 0 1.7mm;
 }
 
 .cr-entry[data-kind='pausa'] .cr-time {
@@ -167,11 +153,57 @@
 }
 
 .cr-entry[data-kind='pausa'] .cr-start {
-  font-size: 11pt;
+  font-size: 10.6pt;
+  font-weight: 500;
+  color: var(--color-muted);
 }
 
 .cr-entry[data-kind='pausa'] .cr-end {
-  font-size: 9.6pt;
+  font-size: 9.2pt;
+}
+
+.cr-entry[data-kind='pausa'] .cr-entry-title {
+  font-size: 11.4pt;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+/* Condução (MC): faixa roxa clara, como na planilha de origem. */
+.cr-entry[data-kind='mc'] {
+  grid-template-columns: 27mm minmax(0, 1fr);
+  column-gap: 4.6mm;
+  margin: 0.6mm -3mm;
+  padding: 1.25mm 3mm;
+  border-top: none;
+  border-radius: 2mm;
+  background: #d9d2e9;
+}
+
+.cr-mc {
+  display: inline-block;
+  margin-top: 0.5mm;
+  font-size: 7.8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.cr-cue {
+  margin: 0;
+  font-size: 9pt;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+/* Bloco conduzido pela Carol (Boas-vindas) recebe o mesmo roxo da planilha. */
+.cr-entry[data-tone='mc'] {
+  margin: 0.6mm -3mm;
+  padding: 1.25mm 3mm;
+  border-top: none;
+  border-radius: 2mm;
+  background: #d9d2e9;
 }
 
 /* Time rail */
@@ -291,37 +323,26 @@
 }
 
 .cr-note {
-  margin: 1mm 0 0;
+  margin: 0.8mm 0 0;
   font-size: 8.2pt;
   line-height: 1.28;
   color: var(--color-muted);
   font-style: italic;
 }
 
-/* Footer */
-.cr-footer {
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: 3mm;
-  height: 6mm;
-  margin-top: 2.2mm;
-}
-
-.cr-footer-rule {
-  flex: 1;
-  height: 0.8mm;
-  border-radius: 1mm;
-  background: var(--gradient-brand);
-}
-
-.cr-footer-label {
-  flex: none;
-  font-size: 8.6pt;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
+/* Insumos dentro do horário. */
+.cr-supplies {
+  margin: 0.45mm 0 0;
+  font-size: 8.2pt;
+  line-height: 1.26;
   color: var(--color-muted);
+}
+
+.cr-supplies-label {
+  margin-right: 1.2mm;
+  font-size: 6.9pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
 }

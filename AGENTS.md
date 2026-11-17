@@ -14,7 +14,7 @@ This repository builds the CONSED editorial documents as a React site (Vite) and
 
 Three layers stay separate:
 
-1. **Content** — each document has its own reading order. `content/document.json` lists the ten workshop sheets in `content/workbook/`; `content/document-experiencias.json` lists the five interview scripts in `content/roteiros/` and the purple back page in `content/verso/`; `content/document-casos.json` lists the four case studies in `content/casos/`; `content/document-cronograma.json` lists the four schedule cards in `content/cronograma/`. The project has no cover page (`content/chapters/` is empty); the PDF starts at the first page.
+1. **Content** — each document has its own reading order. `content/document.json` lists the ten workshop sheets in `content/workbook/`; `content/document-experiencias.json` lists the five interview scripts in `content/roteiros/` and the purple back page in `content/verso/`; `content/document-casos.json` lists the four case studies in `content/casos/`; `content/document-cronograma.json` lists the six schedule cards in `content/cronograma/`. The project has no cover page (`content/chapters/` is empty); the PDF starts at the first page.
 2. **Composition** — `src/layouts/WorkbookPage.tsx` renders five variants: `case`, `profile`, `trajectory`, `matrix`, `process`. `src/layouts/RoteiroPage.tsx` renders the `roteiro` variant. `src/layouts/CasoPage.tsx` renders the `caso` variant. `src/layouts/CronogramaPage.tsx` renders the `cronograma` variant. `src/layouts/VersoPage.tsx` renders the `verso` page. The schema is `src/content/schema.ts`.
 3. **Output** — `src/lib/paginateDesk.ts` prints the sheets. Workshop, roteiro, caso, cronograma, and verso pages are fixed (`data-paginate="off"`) and are not split. `scripts/build-pdf.ts` builds and prints with Playwright.
 
@@ -73,12 +73,13 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 ## Cronograma content (Minuto a minuto)
 
 - `content/cronograma/<slug>.json` matches the `cronograma` variant: `day`, `part`, `weekday`, `date` and `entries[]`. It is the printed programme of the two meeting days.
-- Four fixed cards: `dia-1-manha`, `dia-1-tarde`, `dia-2-manha`, `dia-2-tarde`. Each day is split at lunch, so the meeting day becomes two A5 fichas; the morning card closes with lunch.
-- Each entry has `start`, `end`, `duration` (minutes, as in the source plan), `kind` (`abertura`, `mesa`, `oficina`, `pausa`, `encerramento`, `sessao`), `title`, and optionally `label` (printed as an eyebrow, e.g. `Mesa 2 com Rio de Janeiro`), `method` (the dynamic, e.g. `Jornada do usuário`), `subtitle`, `description`, `intro`, `items`, `paragraphs`, `host` (quem conduz) and `note` (observações).
-- Text is transcribed from the editor's CSVs (`[Uso interno VdE] Planejamento: Tempos e Movimentos — Dia 1/2`). Keep names, times and wording verbatim. Where the source says `Definir.` for quem conduz, the card prints `A definir`.
-- The `Insumos` column is **not printed**: an A5 card only stays legible with two cards per day without it. `Observações` is printed as a small italic line, and `host` sits at the right of the entry title. Do not add a cover or a back page.
+- Six fixed cards: `dia-1-1` (morning), `dia-1-2` (mid-day), `dia-1-3` (afternoon), `dia-2-1` (morning), `dia-2-2` (mid-day) and `dia-2-3` (afternoon). Both days need three fichas because of the MC cues: Day 1 breaks at the two pauses, Day 2 at the morning pause and at the coffee pause.
+- A timed entry (`kind` `abertura`, `mesa`, `oficina`, `pausa`, `encerramento`, `sessao`) has `start`, `end`, `duration` (minutes, as in the source plan), `title`, and optionally `label` (e.g. `Mesa 2 com Rio de Janeiro`), `method` (`Jornada do usuário`), `subtitle`, `description`, `intro`, `items`, `paragraphs`, `host` (quem conduz), `note` (observações) and `tone: "mc"`.
+- An MC entry is `{ "kind": "mc", "text": "Carol volta ao mic…" }`: a stage direction between blocks, with no time. It is printed as a light purple band (`#d9d2e9`), exactly like the purple rows of the source sheet. The Boas-vindas row also carries `tone: "mc"` because it is highlighted in the source.
+- Text is transcribed from the editor's `[VF]` PDF pages (`_entrada/conteudo/planejamento-tempos-e-movimentos-dia-1.pdf` and `planejamento-tempos-e-movimentos-dia-2.pdf`); the HTML pages and the CSVs are earlier versions and lack several Day 2 MC cues. Keep names, times and wording verbatim. Where the source says `Definir.` for quem conduz, the card prints `A definir`.
+- A timed entry may carry `supplies`: its own insumos (`Slides.`, `Roteiro.`), printed as a small line inside that time slot, above the note. `Observações` is a small italic line; `host` sits at the right of the entry title. Pauses are plain rows, not filled bands.
 - The card is drawn on the A4 landscape canvas (20 mm side margins, like the roteiros) and reduced to A5 (70,7%) by `scripts/impose-a5.ts`. Body is 9.8 pt on the canvas → ~6,9 pt at A5; do not take it below 9.6 pt.
-- `npm run gerar-pdf-cronograma-a5` exports `output/cronograma-digital.pdf` and imposes `output/cronograma-a5-frente.pdf`: two A5 cards per A4 portrait sheet, with cut marks. Pass `--sem-verso` to the imposition; without it the script treats the last page as a back art and drops a card.
+- `npm run gerar-pdf-cronograma-a5` exports `output/cronograma-digital.pdf` and imposes `output/cronograma-a5-frente.pdf`: two A5 cards per A4 portrait sheet, with cut marks (6 cards → 4 sheets; sheets 2 and 4 carry one card each and leave the lower half white). Pass `--sem-verso` to the imposition and `--quebra=3` to start a new sheet after the third card, keeping Day 1 and Day 2 apart; without it the script treats the last page as a back art and drops a card.
 
 ## Verso (Experiências)
 
@@ -108,6 +109,8 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 - Editing happens inside the OOXML: only the `<a:t>` runs of the requested slides are rewritten, so masters, layouts, images, notes, animation and untouched slides stay byte-identical. The build prints a hash diff; a no-edit build must report `230 de 230` intact parts.
 - A `find` string that spans runs is only merged when every touched run shares the same `<a:rPr>`; otherwise the edit fails with `spans-runs` and must be resolved by hand. Never flatten mixed formatting.
 - `npm run apresentacao:previa` renders the deck with LibreOffice into `output/formacao-ia/previa/` (PDF + one PNG per slide + `index.html` contact sheet). Slide 38 is hidden (`show="0"`), so the preview has 37 pages.
+- The preview is only truthful with **Instrument Sans installed** in `~/Library/Fonts` (`Instrument Sans`, `Instrument Sans Medium`, `Instrument Sans SemiBold`, each Regular/Italic/Bold/BoldItalic, generated from the Google Fonts variable font). The `render.ts` script points `FONTCONFIG_FILE` at `scripts/pptx/fonts.conf`, because the fontconfig bundled with LibreOffice does not read the macOS font folders; without both, every slide falls back to a serif and the proof lies about typography.
+- Do not record any visual decision from a render that warns about the missing font. LibreOffice also differs from PowerPoint in autofit and in some shape effects; treat the PNG as a proof of typography and composition, not of PowerPoint's exact raster.
 - Do not rebuild these slides in React. A new deck that must return as `.pptx` keeps PowerPoint as the source of truth; the Vite site has no route for it.
 - Prefer text edits. A slide that needs a new diagram is designed as native pptx shapes, not pasted as a picture, unless the editor accepts losing editable text.
 
@@ -136,7 +139,7 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 | `npm run gerar-pdf-grafica-casos` | Print `output/casos-print.pdf` with bleed (216 × 303 mm) |
 | `npm run gerar-pdf-cronograma` | Print `output/cronograma-digital.pdf` (A4 landscape canvas) |
 | `npm run gerar-pdf-grafica-cronograma` | Print `output/cronograma-print.pdf` with bleed |
-| `npm run gerar-pdf-cronograma-a5` | Print and impose `output/cronograma-a5-frente.pdf` (4 fichas A5, 2 per A4 sheet) |
+| `npm run gerar-pdf-cronograma-a5` | Print and impose `output/cronograma-a5-frente.pdf` (6 fichas A5, 2 per A4 sheet) |
 | `npm run impor-cronograma` | Re-impose the existing `cronograma-digital.pdf` into A5 fichas |
 | `npm run apresentacao:abrir` | Inventory the deck: text, shapes, notes and review comments per slide |
 | `npm run apresentacao:montar` | Apply `formacao-ia.edits.json` and write `output/formacao-ia.pptx` |

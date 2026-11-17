@@ -9,7 +9,7 @@ Documentos editoriais da CONSED feitos como site: o conteúdo vive em JSON e MDX
 - **Caderno de oficinas — 10 páginas:** 10 folhas de oficina (casos 1A/1B, perfis 2A/2B/2C, oficinas 3.1, 3.2, 4 e casos 5A/5B). O caderno não tem capa.
 - **Experiências das Redes de Ensino — 5 roteiros + verso:** um roteiro de conversa por convidado (Governança/Rio, Formação/Manaus, Ensino e aprendizagem/Curitiba, Gestão/São Paulo, Infraestrutura e segurança/Fortaleza) e uma página roxa de fechamento. Texto transcrito do PDF da editoria, sem acréscimos.
 - **Estudos de caso — 4 páginas:** casos 1A/1B (Governança) e 5A/5B (Infraestrutura e segurança da informação), uma folha A4 retrato por caso. Texto e rodapé transcritos do PDF enviado, sem acréscimos. A folha não tem cabeçalho; a linha do encontro e o identificador do material ficam no rodapé. O PDF de origem não tem capa nem título de publicação; o documento também não inventa esses elementos.
-- **Minuto a minuto — 4 fichas A5:** o cronograma dos dois dias de encontro (18 e 19 de novembro), com duas fichas por dia — manhã e tarde, divididas no almoço. Transcrito do planejamento interno da VdE. Sem capa e sem verso.
+- **Minuto a minuto — 6 fichas A5:** o cronograma dos dois dias de encontro (18 e 19 de novembro). Cada dia ocupa três fichas (manhã, meio-dia e tarde) por causa das falas de condução. Transcrito do planejamento interno da VdE. Sem capa e sem verso.
 - **Formato:** caderno e roteiros em A4 paisagem (297 × 210 mm); estudos de caso em A4 retrato (210 × 297 mm). A impressão usa 3 mm de sangria: 303 × 216 mm (paisagem) e 216 × 303 mm (retrato). O cronograma é desenhado no mesmo A4 paisagem e reduzido a A5.
 - **A5:** os roteiros serão impressos em A5 paisagem (redução de 70,7%). Por isso usam corpo de 11,5 pt, que chega a ~8,1 pt no A5.
 - **Identidade:** Instrument Sans (Fontsource), azul `#0b5384`, verde `#64e15e` e a paleta gráfica da CONSED.
@@ -81,7 +81,7 @@ Para o cronograma (`Minuto a minuto`) em fichas A5:
 npm run gerar-pdf-cronograma-a5
 ```
 
-Gera `output/cronograma-digital.pdf` (o desenho em A4 paisagem) e `output/cronograma-a5-frente.pdf`: **2 folhas A4 retrato** com duas fichas A5 cada, mais as cruzes de corte no meio. Corte cada folha na horizontal e ficam quatro fichas: Dia 1 manhã, Dia 1 tarde, Dia 2 manhã e Dia 2 tarde. Não há verso.
+Gera `output/cronograma-digital.pdf` (o desenho em A4 paisagem) e `output/cronograma-a5-frente.pdf`: **4 folhas A4 retrato** — duas com duas fichas e duas com uma ficha (metade de baixo em branco) —, mais as cruzes de corte no meio. Corte cada folha na horizontal e ficam seis fichas: Dia 1 manhã e Dia 1 meio-dia na primeira folha; Dia 1 tarde na segunda (a metade de baixo é branca); Dia 2 manhã e Dia 2 meio-dia na terceira; Dia 2 tarde na quarta (a metade de baixo é branca). Não há verso.
 
 Para refazer só a imposição, sem reexportar: `npm run impor-cronograma`. O PDF do cronograma em A4 paisagem, com sangria, sai com `npm run gerar-pdf-grafica-cronograma`.
 
@@ -128,7 +128,7 @@ Para a impressão, `npm run gerar-verso-duplex` gera a costa A4 (`scripts/verso/
 | `npm run gerar-pdf-grafica-casos` | PDF dos estudos de caso com sangria |
 | `npm run gerar-pdf-cronograma` | PDF digital do cronograma, A4 paisagem |
 | `npm run gerar-pdf-grafica-cronograma` | PDF do cronograma com sangria |
-| `npm run gerar-pdf-cronograma-a5` | Exporta e impõe as 4 fichas A5, 2 por folha A4 |
+| `npm run gerar-pdf-cronograma-a5` | Exporta e impõe as 6 fichas A5, 2 por folha A4 |
 | `npm run impor-cronograma` | Refaz só a imposição das fichas A5 |
 | `npm run validate` | Manifestos, JSONs, MDX, assets e geometria |
 | `npm run check` | `validate` + TypeScript |
@@ -145,7 +145,7 @@ Para a impressão, `npm run gerar-verso-duplex` gera a costa A4 (`scripts/verso/
 | `content/workbook/*.json` | Conteúdo das 10 folhas de oficina |
 | `content/roteiros/*.json` | Conteúdo dos 5 roteiros de conversa |
 | `content/casos/*.json` | Conteúdo dos 4 estudos de caso |
-| `content/cronograma/*.json` | Conteúdo das 4 fichas do cronograma |
+| `content/cronograma/*.json` | Conteúdo das 6 fichas do cronograma |
 | `src/layouts/WorkbookPage.tsx` | Modelos `case`, `profile`, `trajectory`, `matrix` e `process` |
 | `src/layouts/RoteiroPage.tsx` | Modelo `roteiro` (uma folha por convidado) |
 | `src/layouts/CasoPage.tsx` | Modelo `caso` (uma folha A4 retrato por caso) |
@@ -187,8 +187,9 @@ Cada estudo de caso é um JSON com `variant: "caso"`:
 Cada ficha do cronograma é um JSON com `variant: "cronograma"`:
 
 - `day`, `part`, `weekday` e `date` montam o cabeçalho (o dia no círculo, a parte do dia como título, a data à direita).
-- `entries` traz os blocos na ordem do dia: `start`, `end`, `duration` (em minutos), `kind`, `title` e, quando houver, `label`, `method`, `subtitle`, `description`, `intro`, `items`, `paragraphs`, `host` e `note`.
-- Os horários do fim e a duração aparecem juntos na trilha da esquerda; quem conduz fica à direita do título.
+- `entries` traz os blocos na ordem do dia. Um bloco com horário tem `start`, `end`, `duration` (em minutos), `kind`, `title` e, quando houver, `label`, `method`, `subtitle`, `description`, `intro`, `items`, `paragraphs`, `host`, `supplies` (os insumos daquele bloco) e `note`.
+- Uma fala de condução é `{ "kind": "mc", "text": "Carol volta ao mic…" }` e vira uma faixa roxa clara, sem horário. A linha da Boas-vindas também leva `tone: "mc"` porque é roxa na planilha.
+- Os horários do fim e a duração aparecem juntos na trilha da esquerda; quem conduz fica à direita do título; os insumos ficam dentro do próprio horário, acima da observação.
 - As pausas e o almoço usam `kind: "pausa"` e viram faixas cinza.
 
 O schema em `src/content/schema.ts` rejeita campos faltando, variantes desconhecidas e etapas fora do formato. Cada documento tem seu próprio manifesto de leitura (`content/document.json`, `content/document-experiencias.json`, `content/document-casos.json` e `content/document-cronograma.json`).
@@ -204,6 +205,6 @@ O que ainda depende de você:
 5. Revisar o texto transcrito do PDF de origem.
 6. Confirmar a revisão dos 5 roteiros e se a impressão em A5 deve manter o corpo de 8,1 pt (ou dividir cada roteiro em duas páginas para aumentar a letra).
 7. Revisar os 4 estudos de caso e confirmar se o formato A4 retrato e a divisão em duas colunas atendem à leitura prevista.
-8. Revisar as 4 fichas do cronograma: confirmar os horários, os responsáveis marcados como “A definir” e se a coluna de insumos precisa voltar (hoje ela não é impressa para manter a ficha legível).
+8. Revisar as 6 fichas do cronograma: confirmar os horários, os responsáveis marcados como “A definir” e as falas de condução (MC) em roxo.
 
 Checklist completo: [docs/ENTRADA-DE-ARQUIVOS.md](docs/ENTRADA-DE-ARQUIVOS.md). Decisões de desenho: [docs/DESIGN-NOTES.md](docs/DESIGN-NOTES.md).

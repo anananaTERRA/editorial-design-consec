@@ -1,0 +1,93 @@
+{
+  "variant": "cronograma",
+  "day": "1",
+  "part": "MEIO-DIA",
+  "weekday": "quarta-feira",
+  "date": "18 de novembro",
+  "entries": [
+    {
+      "kind": "mc",
+      "text": "Carol volta ao mic, convoca as pessoas a retornarem a seus lugares e anuncia Henrique como a pessoa que vai explicar os eixos e o racional do encontro"
+    },
+    {
+      "kind": "sessao",
+      "start": "11:40",
+      "end": "11:50",
+      "duration": "10",
+      "title": "Fio condutor do encontro",
+      "description": "Apresentação dos cinco eixos e do racional que sustentou a sua elaboração.",
+      "host": "A definir",
+      "supplies": "Slides."
+    },
+    {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece Henrique e introduz mesa 2 com RJ, explicando que ela mesma conduzirá a entrevista."
+    },
+    {
+      "kind": "mesa",
+      "start": "11:50",
+      "end": "12:20",
+      "duration": "30",
+      "label": "Mesa 2 com Rio de Janeiro",
+      "title": "Governança",
+      "description": "Conversa de 30 minutos sobre o processo de construção, seguida de 20 minutos de perguntas das redes.",
+      "host": "Carol Campos",
+      "note": "Time Vozes: Sistematizar as contribuições.",
+      "supplies": "Roteiro."
+    },
+    {
+      "kind": "mc",
+      "text": "Carol volta ao mic, agradece RJ e anuncia almoço: 1h30 de almoço, no 5o andar do mesmo prédio. Toca música."
+    },
+    {
+      "kind": "pausa",
+      "start": "12:20",
+      "end": "13:50",
+      "duration": "90",
+      "title": "Almoço"
+    },
+    {
+      "kind": "mc",
+      "text": "Carol volta ao mic, anuncia retorno e racional das oficinas, incluindo breve apresentação das dinâmicas (ter isso em PPT)"
+    },
+    {
+      "kind": "sessao",
+      "start": "13:50",
+      "end": "14:10",
+      "duration": "20",
+      "title": "Fio condutor das oficinas",
+      "description": "Apresentação do racional das oficinas, incluindo breve apresentação das dinâmicas.",
+      "host": "Carol Campos",
+      "supplies": "Slides."
+    },
+    {
+      "kind": "oficina",
+      "start": "14:10",
+      "end": "15:30",
+      "duration": "80",
+      "label": "Oficina 1",
+      "title": "Governança",
+      "description": "Os grupos recebem situações hipotéticas. A partir delas, eles têm:",
+      "items": [
+        {
+          "text": "5 minutos para apresentação da dinâmica e compartilhamento de dúvidas;"
+        },
+        {
+          "text": "5 minutos de leitura e registro individual;"
+        },
+        {
+          "text": "30 minutos de decisão do grupo (o que incentivar, limitar ou proibir, e a consequência de cada caminho);"
+        },
+        {
+          "text": "10 minutos para escrever a orientação geral;"
+        },
+        {
+          "text": "30 minutos de plenária, comparando as decisões dos grupos."
+        }
+      ],
+      "host": "Carol Campos",
+      "note": "Registro fotográfico antes de recolher os materiais impressos.",
+      "supplies": "Slides e templates impressos."
+    }
+  ]
+}

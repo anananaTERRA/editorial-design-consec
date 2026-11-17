@@ -220,12 +220,13 @@ export type CronogramaItem = {
   text: string
 }
 
-export type CronogramaEntry = {
+/** Timed block of the programme. */
+export type CronogramaSlot = {
+  kind: CronogramaKind
   start: string
   end: string
   /** Duration in minutes, as printed in the source plan. */
   duration: string
-  kind: CronogramaKind
   /** Small uppercase label printed beside the title: "Mesa 1", "Oficina 3.1". */
   label?: string
   /** Dynamic printed with the label: "Jornada do usuário", "Mapa da empatia". */
@@ -239,13 +240,25 @@ export type CronogramaEntry = {
   paragraphs?: string[]
   /** Quem conduz. */
   host?: string
+  /** Insumos do bloco ("Slides.", "Roteiro."), impressos dentro do horário. */
+  supplies?: string
   /** Observações. */
   note?: string
+  /** Light purple highlight, as in the source sheet (Carol's script). */
+  tone?: 'mc'
 }
+
+/** Stage direction between blocks ("Carol volta ao mic..."). */
+export type CronogramaCue = {
+  kind: 'mc'
+  text: string
+}
+
+export type CronogramaEntry = CronogramaSlot | CronogramaCue
 
 export type CronogramaPageContent = {
   variant: 'cronograma'
-  /** Day number printed in the circle: "1", "2". */
+  /** Day number printed in the green pill: "1", "2". */
   day: string
   /** Part of the day printed as the title: "MANHÃ", "TARDE". */
   part: string
