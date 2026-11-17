@@ -53,8 +53,6 @@ function WorkbookHeaderView({ header }: { header: WorkbookHeader }) {
         </div>
         {header.fields ? (
           <div className="wb-group-fields" aria-hidden="true">
-            <span className="wb-group-label">Grupo</span>
-            <span className="wb-group-line" />
             <span className="wb-group-label">Relator(a)</span>
             <span className="wb-group-line wb-group-line--wide" />
           </div>
@@ -171,19 +169,6 @@ function CaseBody({ page }: { page: WorkbookCasePage }) {
         <div className="wb-decision">
           <FieldBox field={page.decision.paths} />
           <FieldBox field={page.decision.recommendation} />
-          <div className="wb-questions">
-            <p className="wb-questions-title">{page.decision.questions.title}</p>
-            {page.decision.questions.categories.map((category, index) => (
-              <div className="wb-question" key={index}>
-                <p className="wb-question-cat">{category.title}</p>
-                {category.questions.map((question, qIndex) => (
-                  <p className="wb-question-line" key={qIndex}>
-                    {question}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
       </Panel>
 

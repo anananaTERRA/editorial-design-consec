@@ -85,7 +85,7 @@ export type WorkbookCasePage = {
   decision: WorkbookPanel & {
     paths: WorkbookField
     recommendation: WorkbookField
-    questions: {
+    questions?: {
       title: string
       categories: { title: string; questions: string[] }[]
     }

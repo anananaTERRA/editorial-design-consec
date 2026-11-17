@@ -36,7 +36,7 @@ Digital trim is A4 landscape. Print adds 3 mm bleed on every edge. No crop marks
 
 - `content/workbook/<slug>.json` must match one variant in `src/content/schema.ts`.
 - `case`: fields + decision + orientation.
-- `profile`: empathy map (6 zones) + training (4 fields) + orientation.
+- `profile`: empathy map (6 zones) + training (2+ fields) + orientation.
 - `trajectory`: 3 stages + 3 rows + orientation.
 - `matrix`: 3 cells + note + orientation.
 - `process`: 3 columns + orientation.

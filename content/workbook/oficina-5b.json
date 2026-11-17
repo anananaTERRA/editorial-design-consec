@@ -31,7 +31,7 @@
         "number": "2",
         "title": "A decisão do grupo",
         "time": "15 min",
-        "body": "Pensem em mais de um caminho antes de escolher. As três perguntas do quadro ao lado ajudam a testar a escolha, e o cartão da Resolução também. Se o grupo não chegar a um acordo, anotem as duas posições."
+        "body": "Pensem em mais de um caminho antes de escolher. As três perguntas do quadro ao lado ajudam a testar a escolha. Se o grupo não chegar a um acordo, anotem as duas posições."
       },
       {
         "kind": "step",
@@ -70,30 +70,6 @@
     "recommendation": {
       "title": "Nossa recomendação",
       "hint": "Que infraestrutura adotar, para quais escolas e quem responde."
-    },
-    "questions": {
-      "title": "Três perguntas para testar a escolha",
-      "categories": [
-        {
-          "title": "Autonomia e supervisão humana",
-          "questions": [
-            "Quem decide os limites desse uso?",
-            "Onde uma pessoa precisa validar?"
-          ]
-        },
-        {
-          "title": "Equidade",
-          "questions": [
-            "Quem é afetado? Alguém fica de fora?"
-          ]
-        },
-        {
-          "title": "Legislações e normas",
-          "questions": [
-            "Que dados entram nisso? O que precisa estar no contrato?"
-          ]
-        }
-      ]
     }
   },
   "orientation": {

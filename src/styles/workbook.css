@@ -382,49 +382,9 @@
   width: 100%;
   min-height: 0;
   display: grid;
-  grid-template-columns: 1.08fr 1.02fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 2.6mm;
-}
-
-.wb-questions {
-  box-sizing: border-box;
-  padding: 2.8mm 3.4mm;
-  border-radius: 1.8mm;
-  background: var(--color-panel);
-}
-
-.wb-questions-title {
-  margin: 0 0 2.4mm;
-  font-size: 8.8pt;
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--color-ink);
-}
-
-.wb-question {
-  margin-bottom: 2.4mm;
-}
-
-.wb-question:last-child {
-  margin-bottom: 0;
-}
-
-.wb-question-cat {
-  margin: 0;
-  font-size: 6.1pt;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-ink);
-}
-
-.wb-question-line {
-  margin: 0.75mm 0 0;
-  font-size: 6.3pt;
-  line-height: 1.25;
-  color: var(--color-text);
 }
 
 /* Orientation */
@@ -668,6 +628,11 @@
 
 .wb-inline-field .wb-dash {
   margin-top: auto;
+}
+
+/* Campo único na coluna do treinamento: a área de escrita fica lisa, sem régua. */
+.wb-training-side .wb-inline-field:only-child .wb-dash {
+  display: none;
 }
 
 /* Trajectory */

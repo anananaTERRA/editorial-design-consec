@@ -211,22 +211,24 @@ export function parseWorkbookPage(value: unknown, source = 'workbook'): Workbook
       throw new ContentError(`${source} case needs fields and decision objects`)
     }
     const decision = value.decision
-    if (!isRecord(decision.questions)) {
-      throw new ContentError(`${source}.decision.questions must be an object`)
-    }
-    const categories = requireArray(
-      decision.questions.categories,
-      `${source}.decision.questions.categories`,
-    ).map((item, index) => {
-      const label = `${source}.decision.questions.categories[${index}]`
-      if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
-      return {
-        title: requireString(item.title, `${label}.title`),
-        questions: requireArray(item.questions, `${label}.questions`).map((question, qIndex) =>
-          requireString(question, `${label}.questions[${qIndex}]`),
-        ),
-      }
-    })
+    const questions = isRecord(decision.questions)
+      ? {
+          title: requireString(decision.questions.title, `${source}.decision.questions.title`),
+          categories: requireArray(
+            decision.questions.categories,
+            `${source}.decision.questions.categories`,
+          ).map((item, index) => {
+            const label = `${source}.decision.questions.categories[${index}]`
+            if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
+            return {
+              title: requireString(item.title, `${label}.title`),
+              questions: requireArray(item.questions, `${label}.questions`).map((question, qIndex) =>
+                requireString(question, `${label}.questions[${qIndex}]`),
+              ),
+            }
+          }),
+        }
+      : undefined
     return {
       variant,
       header,
@@ -240,10 +242,7 @@ export function parseWorkbookPage(value: unknown, source = 'workbook'): Workbook
         ...parsePanel(decision, `${source}.decision`),
         paths: parseField(decision.paths, `${source}.decision.paths`),
         recommendation: parseField(decision.recommendation, `${source}.decision.recommendation`),
-        questions: {
-          title: requireString(decision.questions.title, `${source}.decision.questions.title`),
-          categories,
-        },
+        ...(questions ? { questions } : {}),
       },
       orientation,
     }
@@ -259,7 +258,7 @@ export function parseWorkbookPage(value: unknown, source = 'workbook'): Workbook
     if (zones.length !== 6) {
       throw new ContentError(`${source}.empathy.zones must contain exactly 6 zones`)
     }
-    const fields = requireArray(value.training.fields, `${source}.training.fields`, 4).map(
+    const fields = requireArray(value.training.fields, `${source}.training.fields`, 2).map(
       (item, index) => parseField(item, `${source}.training.fields[${index}]`),
     )
     return {
