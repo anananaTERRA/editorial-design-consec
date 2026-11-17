@@ -77,7 +77,9 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 - `src/assets/verso/vozes-assinatura-branca.svg` is the official signature in white (vector). `src/assets/verso/vozes-grafismo.png` is generated from page 2 of `_entrada/marca/vozes-grafismos.ai`, recolored to `#8146cb` on transparency. Re-render if the AI changes.
 - In the print profile the purple extends by `--bleed` (3 mm) beyond the trim; in the digital profile it stops at the trim.
 - The page is fixed (`data-paginate="off"`, `data-folio="off"`); do not let it paginate.
-- Printer margin: the roteiro sheets have 20 mm side margins, so a 5 mm unprintable border falls in white and cuts no text. The purple runs to the edge, so full-bleed requires a print shop; an office printer leaves a white border.
+- A5 duplex (`scripts/impose-a5.ts`): the verso is one continuous A4 artwork, so the pattern crosses the cut with no seam; `scripts/verso/duplex.html` renders it with one logo at each card centre; `scripts/build-verso-duplex.ts` produces `experiencias-verso-duplex-2.pdf` (two cards) and `experiencias-verso-duplex-1.pdf` (one card, lower half white). The imposition interleaves front and back (`f1, v1, f2, v2, f3, v3`); print duplex with the long-edge flip. The last sheet carries one card and leaves the lower half white.
+- Cut marks appear only on the front, at the horizontal midline, as crosses (horizontal + vertical) whose intersection sits exactly on the cut line, 5 mm from the side edge. The back stays clean.
+- The front keeps its content inside 20 mm side and 11 mm top/bottom margins (A4 design), so the 5 mm printer margin falls in white. The purple back reaches the sheet edge; full bleed needs a print shop, while an office printer leaves a white border.
 
 ## Caso content
 
@@ -107,7 +109,8 @@ If a roteiro page is tight, adjust spacing or ask the editor to cut text; do not
 | `npm run pdf:print` / `gerar-pdf-grafica` | Print `output/document-print.pdf` with bleed |
 | `npm run gerar-pdf-experiencias` | Print `output/experiencias-digital.pdf` |
 | `npm run gerar-pdf-grafica-experiencias` | Print `output/experiencias-print.pdf` with bleed |
-| `npm run gerar-pdf-experiencias-a5` | Print and impose `output/experiencias-a5-2up.pdf` (2 A5 per A4, verso included) |
+| `npm run gerar-pdf-experiencias-a5` | Print and impose `output/experiencias-a5-duplex.pdf` (front/back, 2 A5 cards per A4) |
+| `npm run gerar-verso-duplex` | Render the continuous A4 backs (two cards and one card) |
 | `npm run gerar-pdf-casos` | Print `output/casos-digital.pdf` (A4 portrait) |
 | `npm run gerar-pdf-grafica-casos` | Print `output/casos-print.pdf` with bleed (216 × 303 mm) |
 | `npm run validate` | All three manifests, workbook/roteiro/caso JSON, MDX, assets, geometry |

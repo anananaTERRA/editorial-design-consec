@@ -40,8 +40,16 @@ export function paginateInto(source: HTMLElement, desk: HTMLElement): () => void
   void (async () => {
     await document.fonts.ready
     const images = [...source.querySelectorAll('img')]
+    /* Decode may never settle for a hidden image in some browsers; cap the wait. */
     await Promise.all(
-      images.map((img) => (img.decode ? img.decode().catch(() => undefined) : Promise.resolve())),
+      images.map((img) =>
+        img.decode
+          ? Promise.race([
+              img.decode().catch(() => undefined),
+              new Promise((resolve) => setTimeout(resolve, 1500)),
+            ])
+          : Promise.resolve(),
+      ),
     )
     run()
   })()

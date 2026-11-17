@@ -70,15 +70,17 @@ O PDF da editoria (`_entrada/conteudo/experiencias-redes-ensino.pdf`) traz 5 rot
 
 Páginas com menos perguntas (São Paulo) ficam com mais ar. É consequência do texto curto e do corpo grande, não de conteúdo faltando. Se a editoria preferir ocupar essa área, o caminho é dividir o roteiro em duas páginas (abertura + perguntas) ou aumentar o corpo, não encolher a fonte.
 
-## Impressão A5 (2-up)
+## Impressão A5 duplex
 
-`npm run gerar-pdf-experiencias-a5` exporta o PDF digital e cria `output/experiencias-a5-2up.pdf` com a imposição:
+`npm run gerar-pdf-experiencias-a5` exporta o PDF digital e cria `output/experiencias-a5-duplex.pdf` com a imposição:
 
-- folha A4 retrato (210 × 297 mm) com duas páginas A5 paisagem (210 × 148,5 mm) empilhadas;
-- ordem sequencial: 1–2, 3–4, 5–verso;
-- marcas de corte de 5 mm nas laterais, no meio da folha;
-- sem sangria: as páginas já têm 20 mm de margem lateral e 11 mm no topo/base;
-- imprimir em A4 retrato, a 100%, sem “ajustar à página”, e cortar na horizontal no meio.
+- folha A4 retrato (210 × 297 mm) com dois cards A5 paisagem (210 × 148,5 mm) empilhados;
+- 6 páginas A4 intercaladas frente/verso: f1, v1, f2, v2, f3, v3;
+- o verso é uma arte A4 contínua, sem emenda na linha de corte, com um logo no centro de cada card; a última folha leva um card e deixa a metade de baixo em branco;
+- o roxo do verso vai até a borda da folha, cobrindo a margem de segurança de 5 mm;
+- marcas de corte só na frente: uma cruz (horizontal + vertical) em cada lado, no meio da folha, com o cruzamento exatamente na linha de corte e a 5 mm da borda lateral;
+- frente com conteúdo a 20 mm das laterais e 11 mm do topo/base (medidas do desenho A4);
+- imprimir em A4 retrato, duplex virando na borda longa, a 100%, sem “ajustar à página”; cortar na horizontal no meio.
 
 O script é `scripts/impose-a5.ts`. Para refazer só a imposição, sem reexportar: `npm run impor-experiencias` (usa o `experiencias-digital.pdf` existente).
 

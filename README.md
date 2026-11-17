@@ -79,11 +79,18 @@ Para a impressão em A5, com duas páginas por folha A4:
 npm run gerar-pdf-experiencias-a5
 ```
 
-Gera `output/experiencias-a5-2up.pdf`: 3 folhas A4 retrato, cada uma com duas páginas A5 paisagem empilhadas (1–2, 3–4, 5–verso). Imprima em A4 retrato, a 100%, sem “ajustar à página”, e corte na horizontal no meio.
+Gera `output/experiencias-a5-duplex.pdf`: **6 páginas A4 retrato** intercaladas frente/verso — f1, v1, f2, v2, f3, v3. Cada folha leva dois cards A5 paisagem empilhados.
 
-O verso roxo é a última página do documento (`content/verso/experiencias.json`): fundo `#493975`, grafismos da Vozes em `#8146cb` e assinatura branca centralizada, sem texto. Ele já entra no site e na imposição.
+- **Frente:** os cards com marcas de corte em cruz (horizontal e vertical) no meio da folha, a 5 mm da borda lateral, dentro da faixa branca de segurança. As marcas existem só na frente.
+- **Verso:** uma arte A4 contínua, sem emenda; o padrão atravessa a linha de corte e cada card recebe um logo no centro. O roxo vai até a borda da folha, além da margem de segurança. A última folha leva um card e deixa a metade de baixo em branco.
 
-**Margem da impressora:** o conteúdo dos roteiros tem 20 mm de margem, então a área não imprimível (normalmente 5 mm) cai dentro da margem branca e não corta texto. O roxo chega até a borda; para isso, é preciso uma gráfica com sangria. Na impressora de escritório, o roxo fica com uma borda branca.
+Imprima em A4 retrato, **frente e verso**, **virando na borda longa** (long edge), a 100%, sem “ajustar à página”. Depois corte cada folha na horizontal, no meio, usando as marcas da frente.
+
+O verso roxo é a última página do documento (`content/verso/experiencias.json`): fundo `#493975`, grafismos da Vozes em `#8146cb` e assinatura branca centralizada, sem texto. Ele já entra no site e na prévia.
+
+Para a impressão, `npm run gerar-verso-duplex` gera a costa A4 (`scripts/verso/duplex.html`): uma única arte cobre a folha inteira, os grafismos atravessam a linha de corte sem emenda e cada card recebe um logo no centro — assim o corte não deixa marca de divisão.
+
+**Margem de segurança:** o conteúdo dos cards começa a 20 mm das laterais e a 11 mm do topo e da base (medidas do desenho A4, reduzidas a A5), então os 5 mm não imprimíveis da impressora ficam em branco e não cortam texto. O roxo do verso chega até a borda; para isso, é preciso uma gráfica com sangria. Na impressora de escritório, o roxo fica com uma borda branca.
 
 ## Comandos
 
@@ -94,7 +101,8 @@ O verso roxo é a última página do documento (`content/verso/experiencias.json
 | `npm run pdf:print` / `gerar-pdf-grafica` | PDF com sangria |
 | `npm run gerar-pdf-experiencias` | PDF digital dos roteiros |
 | `npm run gerar-pdf-grafica-experiencias` | PDF dos roteiros com sangria |
-| `npm run gerar-pdf-experiencias-a5` | Exporta e impõe os roteiros em A5, 2 por folha A4, com o verso |
+| `npm run gerar-pdf-experiencias-a5` | Exporta e impõe os cards em A5 duplex, 2 por folha A4 |
+| `npm run gerar-verso-duplex` | Gera as costas A4 contínuas (dois cards e um card) |
 | `npm run gerar-pdf-casos` | PDF digital dos estudos de caso, A4 retrato |
 | `npm run gerar-pdf-grafica-casos` | PDF dos estudos de caso com sangria |
 | `npm run validate` | Manifestos, JSONs, MDX, assets e geometria |
