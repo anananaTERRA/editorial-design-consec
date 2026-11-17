@@ -81,7 +81,7 @@ Para o cronograma (`Minuto a minuto`) em fichas A5:
 npm run gerar-pdf-cronograma-a5
 ```
 
-Gera `output/cronograma-digital.pdf` (o desenho em A4 paisagem) e `output/cronograma-a5-frente.pdf`: **4 folhas A4 retrato** — duas com duas fichas e duas com uma ficha (metade de baixo em branco) —, mais as cruzes de corte no meio. Corte cada folha na horizontal e ficam seis fichas: Dia 1 manhã e Dia 1 meio-dia na primeira folha; Dia 1 tarde na segunda (a metade de baixo é branca); Dia 2 manhã e Dia 2 meio-dia na terceira; Dia 2 tarde na quarta (a metade de baixo é branca). Não há verso.
+Gera `output/cronograma-digital.pdf` (o desenho em A4 paisagem) e `output/cronograma-a5-frente.pdf`: **3 folhas A4 retrato, cada uma com duas fichas**, mais as cruzes de corte no meio. Corte cada folha na horizontal e ficam seis fichas: Dia 1 manhã e Dia 1 meio-dia na primeira folha; Dia 1 tarde e Dia 2 manhã na segunda; Dia 2 meio-dia e Dia 2 tarde na terceira. Não há verso.
 
 Para refazer só a imposição, sem reexportar: `npm run impor-cronograma`. O PDF do cronograma em A4 paisagem, com sangria, sai com `npm run gerar-pdf-grafica-cronograma`.
 

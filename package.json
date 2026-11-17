@@ -21,7 +21,7 @@
     "gerar-pdf-cronograma": "tsx scripts/build-pdf.ts --profile digital --doc cronograma",
     "gerar-pdf-grafica-cronograma": "tsx scripts/build-pdf.ts --profile print --doc cronograma",
     "impor-experiencias": "tsx scripts/impose-a5.ts",
-    "impor-cronograma": "tsx scripts/impose-a5.ts output/cronograma-digital.pdf output/cronograma-a5-frente.pdf --frente --sem-verso --quebra=3",
+    "impor-cronograma": "tsx scripts/impose-a5.ts output/cronograma-digital.pdf output/cronograma-a5-frente.pdf --frente --sem-verso",
     "gerar-pdf-cronograma-a5": "npm run gerar-pdf-cronograma && npm run impor-cronograma",
     "gerar-verso-duplex": "tsx scripts/build-verso-duplex.ts",
     "gerar-pdf-experiencias-a5": "npm run gerar-pdf-experiencias && npm run gerar-verso-duplex && npm run impor-experiencias",

@@ -97,7 +97,7 @@ O planejamento interno da VdE chega como duas planilhas (Dia 1 e Dia 2). O docum
 - insumos dentro do próprio horário, em linha discreta acima da observação; observações em itálico pequeno;
 - cabeçalho com o dia no círculo verde, a parte do dia como título e a data/horário à direita; rodapé com a marca CONSED, o fio degradê e o nome do documento.
 
-`npm run gerar-pdf-cronograma-a5` gera `output/cronograma-a5-frente.pdf`: 4 folhas A4 retrato — duas com duas fichas e duas com uma ficha (metade de baixo em branco) — e cruzes de corte; não há verso. O script é o mesmo `scripts/impose-a5.ts`, com `--sem-verso`.
+`npm run gerar-pdf-cronograma-a5` gera `output/cronograma-a5-frente.pdf`: 3 folhas A4 retrato, cada uma com duas fichas, e cruzes de corte; não há verso. A folha do meio junta o Dia 1 tarde com o Dia 2 manhã. O script é o mesmo `scripts/impose-a5.ts`, com `--sem-verso`.
 
 ## Verso (Experiências)
 
