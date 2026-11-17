@@ -16,6 +16,12 @@
   margin: 0;
 }
 
+/* Estudos de caso: A4 retrato mais 3 mm de sangria em cada borda. */
+@page caso {
+  size: 216mm 303mm;
+  margin: 0;
+}
+
 @page :left {
   margin: 0;
 }

@@ -1,0 +1,20 @@
+{
+  "variant": "caso",
+  "number": "1B",
+  "axis": "Governança",
+  "title": "Capital B",
+  "descriptor": "Cerca de 650 mil habitantes · rede municipal com Educação Infantil e ensino fundamental (anos iniciais e finais) · algumas escolas na zona rural",
+  "lead": [
+    "Na Capital B, as redes municipal e estadual dividem o atendimento aos anos finais no mesmo território, e os estudantes da rede municipal participam da avaliação do estado. A secretaria tem uma equipe de tecnologia educacional e uma equipe de planejamento que acompanha os indicadores da rede. As escolas da zona rural têm conexão limitada. Não há normativo sobre IA, e o Conselho Municipal de Educação ainda não tratou do tema."
+  ],
+  "sections": [
+    {
+      "title": "A adesão ao programa estadual",
+      "paragraphs": [
+        "Em setembro, o governo do estado lançou um programa de IA para os anos finais e convidou os municípios a aderir. A plataforma oferece tutoria em Língua Portuguesa e Matemática, com um assistente conversacional que orienta o estudante na preparação para as avaliações externas. O estado fornece licenças, tablets e formação. O município, por sua vez, integra seu sistema de gestão escolar à plataforma estadual e compartilha dados nominais de matrícula, frequência e desempenho. A adesão é feita por termo padrão, sem possibilidade de ajustes. O termo atribui ao município a responsabilidade pelo uso nas escolas e ao estado a gestão da plataforma, mas não define quem responde pelos dados compartilhados nem pelos erros do assistente. Os resultados passarão a compor o indicador estadual usado na distribuição de recursos aos municípios.",
+        "O secretário pediu manifestação às áreas, e as respostas divergiram. A equipe de planejamento defendeu a adesão, pelo custo zero e pelo peso no indicador. A área pedagógica apontou que os conteúdos seguem a matriz da avaliação estadual, e não o currículo municipal aprovado pelo Conselho. A equipe de tecnologia alertou que a integração abre o sistema municipal ao estado e que as escolas da zona rural não terão conexão para usar a plataforma, o que pode ampliar a distância entre elas e as escolas urbanas. A equipe de formação observou que a formação estadual trata apenas do uso da plataforma. A assessoria jurídica perguntou quem seria o responsável pelos dados e como a secretaria acompanharia o uso que o estado fará deles."
+      ]
+    }
+  ],
+  "decision": "O prazo de adesão é de 30 dias. O secretário precisa decidir se adere, em que condições e quem responderá pela decisão."
+}

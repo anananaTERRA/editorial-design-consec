@@ -1,0 +1,21 @@
+{
+  "variant": "caso",
+  "number": "1A",
+  "axis": "Governança",
+  "title": "Capital A",
+  "descriptor": "Cerca de 850 mil habitantes · rede municipal com Educação Infantil, ensino fundamental (anos iniciais e finais) e EJA",
+  "lead": [
+    "Na Capital A, a inteligência artificial chegou às escolas antes de qualquer orientação da secretaria. Os professores passaram a usar ferramentas de IA para planejar aulas e elaborar atividades, quase sempre em versões gratuitas e contas pessoais. Não há normativo sobre o tema nem instância responsável por ele, e as propostas de parceria são analisadas pela diretoria que as recebe."
+  ],
+  "sections": [
+    {
+      "title": "A proposta de parceria",
+      "paragraphs": [
+        "No início do semestre, os professores souberam que dois municípios da região metropolitana haviam contratado uma plataforma de IA para suas redes, para que os profissionais deixassem de usar contas pessoais. A pergunta chegou à secretaria pelos diretores de escola: quando a capital faria o mesmo?",
+        "Semanas depois, a empresa responsável pela plataforma procurou o gabinete com uma parceria sem custo por um ano. A oferta incluía contas institucionais para todos os professores, com apoio ao planejamento e correção de redações com sugestão de nota, um módulo de tutoria para estudantes dos anos finais e um painel com o risco de abandono de cada estudante. Segundo a empresa, a versão institucional usa um modelo mais avançado que o das versões gratuitas e gera menos alucinações. A preparação dos professores ficaria a cargo de um treinamento sobre o uso da plataforma. Em troca, a empresa poderia usar os dados de uso para aprimorar o produto e divulgar a parceria como caso de referência.",
+        "O secretário pediu manifestação às áreas, e as respostas divergiram. A Diretoria de Ensino Fundamental defendeu a adesão: a parceria atenderia à demanda dos professores e encerraria o uso de contas pessoais. A equipe de formação questionou se um único treinamento sobre a ferramenta bastaria para o letramento digital dos professores, que inclui compreender limites, vieses e riscos da IA. A área de tecnologia lembrou que a plataforma não passou por avaliação prévia e que a rede não tem critérios para isso. A assessoria jurídica alertou que uma parceria sem custo com uma única empresa pode exigir chamamento público. O encarregado pelo tratamento de dados pessoais perguntou quais dados seriam usados para aprimorar o produto. Consultados, os municípios vizinhos relataram boa aceitação, mas nenhum avaliou os resultados."
+      ]
+    }
+  ],
+  "decision": "O secretário precisa decidir se aceita a parceria, em que condições e quem responderá pela decisão."
+}

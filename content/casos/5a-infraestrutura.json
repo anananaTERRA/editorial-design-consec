@@ -1,0 +1,20 @@
+{
+  "variant": "caso",
+  "number": "5A",
+  "axis": "Infraestrutura e segurança da informação",
+  "title": "Capital C",
+  "descriptor": "Mais de 2 milhões de habitantes · rede municipal com Educação Infantil, ensino fundamental (anos iniciais e finais) e EJA · sede e diretorias regionais",
+  "lead": [
+    "Na Capital C, a secretaria acompanha as escolas por meio de diretorias regionais e de uma assessoria de monitoramento e avaliação, com parte da equipe formada por professores cedidos das escolas. A prefeitura oferece aos servidores um pacote institucional de e-mail e documentos com assistente de IA integrado, mais preciso que as versões gratuitas e com menos alucinações, mas a empresa municipal de informática o mantém desativado até que exista normativo. Sem alternativa institucional, as equipes usam IAs em versões gratuitas, em contas pessoais."
+  ],
+  "sections": [
+    {
+      "title": "A planilha na conta pessoal",
+      "paragraphs": [
+        "No primeiro semestre, uma professora cedida à assessoria passou a usar uma ferramenta gratuita de IA, em sua conta pessoal, para preparar as devolutivas da avaliação municipal. Carregou planilhas com os resultados nominais de cerca de 40 mil estudantes do 5º e do 9º ano: nome, data de nascimento, escola, turma, desempenho e indicação de atendimento educacional especializado. Os benefícios foram concretos. As devolutivas por escola, que levavam seis semanas, passaram a sair em uma, e as diretorias regionais identificaram a tempo as turmas com maior defasagem e os estudantes com faltas recorrentes. No início do segundo semestre, a professora voltou para a sala de aula. As conversas e os arquivos continuam em sua conta pessoal.",
+        "A rotina veio à tona no inventário de dados pessoais solicitado pela Controladoria. O secretário pediu manifestação às áreas, e as respostas divergiram. A assessoria de avaliação quis manter o método e pediu uma ferramenta institucional. A assessoria jurídica entendeu que há incidente a ser comunicado à Agência Nacional de Proteção de Dados, porque a secretaria não controla os dados nem sabe se as conversas foram usadas para treinar modelos. A empresa municipal argumentou que não há evidência de acesso por terceiros e reafirmou que só ativará o assistente institucional após o normativo. As diretorias regionais avisaram que as devolutivas voltarão a atrasar. A área de gestão de pessoas perguntou como tratar a situação da professora, que agiu sem regra que a orientasse."
+      ]
+    }
+  ],
+  "decision": "O secretário precisa decidir o que fazer com os dados já carregados e como as equipes passarão a usar a IA. O gabinete pediu uma recomendação em uma semana."
+}

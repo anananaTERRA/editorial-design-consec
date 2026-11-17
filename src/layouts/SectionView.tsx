@@ -1,5 +1,7 @@
 import type { LoadedPublication, LoadedSection } from '../content/loadDocument'
+import { CasoPage } from './CasoPage'
 import { StandardPage } from './StandardPage'
+import { VersoPage } from './VersoPage'
 import { WorkbookPage } from './WorkbookPage'
 import { RoteiroPage } from './RoteiroPage'
 
@@ -20,6 +22,23 @@ export function SectionView({ section, publication, showMasthead }: SectionViewP
     return (
       <RoteiroPage id={section.id} page={section.page} />
     )
+  }
+
+  if (section.layout === 'caso') {
+    const pageNumber = publication.sections.findIndex((item) => item.id === section.id) + 1
+    return (
+      <CasoPage
+        id={section.id}
+        page={section.page}
+        publication={publication}
+        pageNumber={pageNumber}
+        pageCount={publication.sections.length}
+      />
+    )
+  }
+
+  if (section.layout === 'verso') {
+    return <VersoPage id={section.id} />
   }
 
   const Content = section.Content

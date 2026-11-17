@@ -70,6 +70,45 @@ O PDF da editoria (`_entrada/conteudo/experiencias-redes-ensino.pdf`) traz 5 rot
 
 Páginas com menos perguntas (São Paulo) ficam com mais ar. É consequência do texto curto e do corpo grande, não de conteúdo faltando. Se a editoria preferir ocupar essa área, o caminho é dividir o roteiro em duas páginas (abertura + perguntas) ou aumentar o corpo, não encolher a fonte.
 
+## Impressão A5 (2-up)
+
+`npm run gerar-pdf-experiencias-a5` exporta o PDF digital e cria `output/experiencias-a5-2up.pdf` com a imposição:
+
+- folha A4 retrato (210 × 297 mm) com duas páginas A5 paisagem (210 × 148,5 mm) empilhadas;
+- ordem sequencial: 1–2, 3–4, 5–verso;
+- marcas de corte de 5 mm nas laterais, no meio da folha;
+- sem sangria: as páginas já têm 20 mm de margem lateral e 11 mm no topo/base;
+- imprimir em A4 retrato, a 100%, sem “ajustar à página”, e cortar na horizontal no meio.
+
+O script é `scripts/impose-a5.ts`. Para refazer só a imposição, sem reexportar: `npm run impor-experiencias` (usa o `experiencias-digital.pdf` existente).
+
+## Verso (Experiências)
+
+O verso é a última página do documento, não uma capa separada: `content/verso/experiencias.json` fecha a ordem de leitura de `content/document-experiencias.json`, então ele aparece na prévia, no PDF e na imposição A5.
+
+- fundo `#493975` e grafismos da Vozes em `#8146cb`, extraídos da página 2 de `_entrada/marca/vozes-grafismos.ai`;
+- assinatura Vozes em branco, vetorial (`src/assets/verso/vozes-assinatura-branca.svg`), centralizada e grande;
+- sem texto, sem logo TumTum e sem fólio;
+- no perfil de impressão o roxo avança 3 mm (`--bleed`) além do corte; no digital ele para no corte.
+
+O padrão é um PNG de 4000 × 2250 px; o logo continua vetorial. A folha é fixa (`data-paginate="off"`): não deve paginar.
+
+A área não imprimível da impressora (normalmente 5 mm) deixa uma borda branca no roxo. Para o roxo chegar até a borda, é preciso gráfica com sangria.
+
+## Estudos de caso (A4 retrato)
+
+O PDF da editoria traz quatro casos em A4 retrato, com capa ausente e texto corrido. A composição mantém a leitura em uma folha por caso e a família visual do caderno:
+
+- sem cabeçalho corrido: a folha abre na etiqueta do caso; a linha do encontro e o identificador do material vão para o rodapé;
+- nenhum título, logotipo ou rótulo novo: a folha reproduz só o que está no PDF de origem;
+- etiqueta `CASO 1A` em azul, eixo temático em caixa alta, título do território em 35 pt e fio degradê;
+- abertura em corpo maior (11,2 pt) e seções em duas colunas (9,8 pt), com fio entre colunas;
+- barra de seção verde com texto em azul, e não texto branco: mantém o contraste e a cor da marca;
+- fecho do caso em painel azul-claro sem borda e texto em azul, logo depois do texto;
+- rodapé com a marca CONSED à esquerda do fio degradê (como no caderno de oficinas) e, abaixo, o complemento `Estudos de caso para a oficina`, a linha `Material de apoio ao encontro de 18 e 19 de novembro de 2026` e o número `1 de 4`.
+
+As quatro folhas têm extensão parecida (cerca de 430 palavras cada), então a mancha de texto termina no mesmo terço inferior. O espaço que sobra antes do rodapé é respiro de leitura, não conteúdo faltando. Se um caso crescer, ajustar `caso.css` ou cortar texto; não reduzir o corpo abaixo de 9,4 pt.
+
 ## O que é provisório
 
 - Título, subtítulo e ausência de ano.

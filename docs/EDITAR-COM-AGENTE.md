@@ -34,13 +34,22 @@ Você não precisa mexer em código. Peça em português, como faria para uma pe
 
 > No roteiro da Juliana (São Paulo), acrescente uma pergunta depois da 3: …
 
-Os roteiros ficam em `content/roteiros/*.json` e abrem em http://127.0.0.1:5173/?doc=experiencias.
+Os roteiros ficam em `content/roteiros/*.json` e abrem em http://127.0.0.1:5173/?doc=experiencias. A página roxa de fechamento é fixa e fica em `content/verso/experiencias.json`.
+
+**Editar um estudo de caso**
+
+> No caso 1A (Capital A), troque o trecho “…” por: …
+>
+> No caso 5B, o fecho da decisão passa a ser: …
+
+Os estudos de caso ficam em `content/casos/*.json` e abrem em http://127.0.0.1:5173/?doc=casos. São folhas A4 retrato, uma por caso.
 
 ## O que o agente precisa saber
 
 - O conteúdo das oficinas fica em `content/workbook/*.json`.
 - O conteúdo dos roteiros fica em `content/roteiros/*.json`.
-- A ordem das páginas fica em `content/document.json` (oficinas) e `content/document-experiencias.json` (roteiros).
+- O conteúdo dos estudos de caso fica em `content/casos/*.json`.
+- A ordem das páginas fica em `content/document.json` (oficinas), `content/document-experiencias.json` (roteiros) e `content/document-casos.json` (estudos de caso).
 - A identidade (cores, fontes, margens) fica em `src/styles/tokens.css`.
 - O PDF só é gerado quando você pedir (“gerar o PDF”, “fechar a versão para a gráfica”).
 

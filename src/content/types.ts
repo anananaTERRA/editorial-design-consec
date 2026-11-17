@@ -5,8 +5,8 @@ export type TextRun = {
   href?: string
 }
 
-export type CompositionStrategy = 'flow' | 'workbook' | 'roteiro'
-export type SectionLayout = 'standard' | 'workbook' | 'roteiro'
+export type CompositionStrategy = 'flow' | 'workbook' | 'roteiro' | 'caso' | 'verso'
+export type SectionLayout = 'standard' | 'workbook' | 'roteiro' | 'caso' | 'verso'
 
 export type DocumentSection = {
   id: string
@@ -15,12 +15,19 @@ export type DocumentSection = {
   source: string
 }
 
+/** Running head used by documents that print their own masthead (e.g. the case studies). */
+export type DocumentMasthead = {
+  note: string
+  footer: string
+}
+
 export type EditorialDocument = {
   id: string
   language: string
   title: string
   subtitle: string
   author: string
+  masthead?: DocumentMasthead
   sections: DocumentSection[]
 }
 
@@ -174,4 +181,31 @@ export type RoteiroPageContent = {
   guests: RoteiroGuest[]
   opening: string
   questions: RoteiroQuestion[]
+}
+
+/* ---------- Estudo de caso content model ---------- */
+
+export type CasoSection = {
+  title: string
+  paragraphs: string[]
+}
+
+export type CasoPageContent = {
+  variant: 'caso'
+  /** Case label as printed: "1A", "1B", "5A", "5B". */
+  number: string
+  /** Thematic axis: "Governança", "Infraestrutura e segurança da informação". */
+  axis: string
+  /** Territory name used as the page title: "Capital A". */
+  title: string
+  descriptor: string
+  lead: string[]
+  sections: CasoSection[]
+  decision: string
+}
+
+/* ---------- Verso (página roxa de fechamento) ---------- */
+
+export type VersoPageContent = {
+  variant: 'verso'
 }

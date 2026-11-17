@@ -1,10 +1,20 @@
 import type { ComponentType } from 'react'
 import rawWorkbookDocument from '../../content/document.json'
 import rawRoteirosDocument from '../../content/document-experiencias.json'
-import { ContentError, parseDocument, parseRoteiroPage, parseWorkbookPage } from './schema'
+import rawCasosDocument from '../../content/document-casos.json'
+import {
+  ContentError,
+  parseCasoPage,
+  parseDocument,
+  parseRoteiroPage,
+  parseVersoPage,
+  parseWorkbookPage,
+} from './schema'
 import type {
+  CasoPageContent,
   EditorialDocument,
   RoteiroPageContent,
+  VersoPageContent,
   WorkbookPageContent,
 } from './types'
 
@@ -13,7 +23,7 @@ type MdxModule = {
   frontmatter?: unknown
 }
 
-export type DocumentKey = 'oficinas' | 'experiencias'
+export type DocumentKey = 'oficinas' | 'experiencias' | 'casos'
 
 export const documentChoices: {
   key: DocumentKey
@@ -32,6 +42,12 @@ export const documentChoices: {
     label: 'Experiências das Redes de Ensino',
     href: './?doc=experiencias',
     manifestId: 'experiencias-redes-ensino',
+  },
+  {
+    key: 'casos',
+    label: 'Estudos de caso',
+    href: './?doc=casos',
+    manifestId: 'estudos-de-caso-governanca-e-infraestrutura',
   },
 ]
 
@@ -61,6 +77,20 @@ export type LoadedSection =
       source: string
       page: RoteiroPageContent
     }
+  | {
+      id: string
+      strategy: 'caso'
+      layout: 'caso'
+      source: string
+      page: CasoPageContent
+    }
+  | {
+      id: string
+      strategy: 'verso'
+      layout: 'verso'
+      source: string
+      page: VersoPageContent
+    }
 
 export type LoadedPublication = Omit<EditorialDocument, 'sections'> & {
   sections: LoadedSection[]
@@ -75,11 +105,21 @@ const roteiroModules = import.meta.glob('../../content/roteiros/*.json', {
   eager: true,
   import: 'default',
 })
+const casoModules = import.meta.glob('../../content/casos/*.json', {
+  eager: true,
+  import: 'default',
+})
+const versoModules = import.meta.glob('../../content/verso/*.json', {
+  eager: true,
+  import: 'default',
+})
 
 export function documentKeyFromLocation(): DocumentKey {
   if (typeof window === 'undefined') return 'oficinas'
   const requested = new URLSearchParams(window.location.search).get('doc')
-  return requested === 'experiencias' ? 'experiencias' : 'oficinas'
+  if (requested === 'experiencias') return 'experiencias'
+  if (requested === 'casos') return 'casos'
+  return 'oficinas'
 }
 
 function findModule(modules: Record<string, unknown>, source: string): unknown {
@@ -88,7 +128,7 @@ function findModule(modules: Record<string, unknown>, source: string): unknown {
   )
   if (!match) {
     throw new ContentError(
-      `No loaded module matches content/${source}. The file must sit in content/chapters/, content/workbook/, or content/roteiros/.`,
+      `No loaded module matches content/${source}. The file must sit in content/chapters/, content/workbook/, content/roteiros/, content/casos/, or content/verso/.`,
     )
   }
   return match[1]
@@ -123,7 +163,13 @@ function readFrontmatter(frontmatter: unknown, source: string) {
 }
 
 export function loadPublication(key: DocumentKey = documentKeyFromLocation()): LoadedPublication {
-  const document = parseDocument(key === 'experiencias' ? rawRoteirosDocument : rawWorkbookDocument)
+  const manifest =
+    key === 'experiencias'
+      ? rawRoteirosDocument
+      : key === 'casos'
+        ? rawCasosDocument
+        : rawWorkbookDocument
+  const document = parseDocument(manifest)
   const sections = document.sections.map((section): LoadedSection => {
     if (section.strategy === 'flow') {
       const loaded = findModule(mdxModules, section.source)
@@ -153,6 +199,26 @@ export function loadPublication(key: DocumentKey = documentKeyFromLocation()): L
         layout: 'roteiro',
         source: section.source,
         page: parseRoteiroPage(findModule(roteiroModules, section.source), section.source),
+      }
+    }
+
+    if (section.strategy === 'caso') {
+      return {
+        id: section.id,
+        strategy: 'caso',
+        layout: 'caso',
+        source: section.source,
+        page: parseCasoPage(findModule(casoModules, section.source), section.source),
+      }
+    }
+
+    if (section.strategy === 'verso') {
+      return {
+        id: section.id,
+        strategy: 'verso',
+        layout: 'verso',
+        source: section.source,
+        page: parseVersoPage(findModule(versoModules, section.source), section.source),
       }
     }
 

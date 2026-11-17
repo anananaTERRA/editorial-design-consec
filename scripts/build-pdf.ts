@@ -12,13 +12,21 @@ const previewPort = 4174
 
 const profile = readFlag('--profile')
 if (profile !== 'digital' && profile !== 'print') {
-  console.error('Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias]')
+  console.error(
+    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos]',
+  )
   process.exit(1)
 }
 
 const requestedDocument = readFlag('--doc') ?? 'oficinas'
-if (requestedDocument !== 'oficinas' && requestedDocument !== 'experiencias') {
-  console.error('Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias]')
+if (
+  requestedDocument !== 'oficinas' &&
+  requestedDocument !== 'experiencias' &&
+  requestedDocument !== 'casos'
+) {
+  console.error(
+    'Usage: tsx scripts/build-pdf.ts --profile digital|print [--doc oficinas|experiencias|casos]',
+  )
   process.exit(1)
 }
 
@@ -32,20 +40,35 @@ mkdirSync(path.dirname(outputPath), { recursive: true })
 
 /**
  * Page size and margins used by Chromium. They mirror paged.css (digital)
- * and print.css (A4 landscape plus 3mm bleed on every edge).
+ * and print.css (A4 plus 3mm bleed on every edge). The case studies are the
+ * only portrait document; the workbook and the scripts stay landscape.
  */
-const geometry = {
-  digital: {
-    width: '297mm',
-    height: '210mm',
-    margin: { top: '0', right: '0', bottom: '0', left: '0' },
-  },
-  print: {
-    width: '303mm',
-    height: '216mm',
-    margin: { top: '3mm', right: '3mm', bottom: '3mm', left: '3mm' },
-  },
-} as const
+const geometry =
+  requestedDocument === 'casos'
+    ? ({
+        digital: {
+          width: '210mm',
+          height: '297mm',
+          margin: { top: '0', right: '0', bottom: '0', left: '0' },
+        },
+        print: {
+          width: '216mm',
+          height: '303mm',
+          margin: { top: '3mm', right: '3mm', bottom: '3mm', left: '3mm' },
+        },
+      } as const)
+    : ({
+        digital: {
+          width: '297mm',
+          height: '210mm',
+          margin: { top: '0', right: '0', bottom: '0', left: '0' },
+        },
+        print: {
+          width: '303mm',
+          height: '216mm',
+          margin: { top: '3mm', right: '3mm', bottom: '3mm', left: '3mm' },
+        },
+      } as const)
 
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm'
 run(npm, ['run', 'validate'])
@@ -67,7 +90,7 @@ if (printFailed) process.exit(1)
 const report = await inspectPdfResolved(outputPath)
 console.log(`\n${formatPdfReport(outputPath, report)}`)
 try {
-  assertPdfProfile(profile, report)
+  assertPdfProfile(profile, report, requestedDocument === 'casos' ? 'portrait' : 'landscape')
 } catch (error) {
   console.error(error instanceof Error ? error.message : error)
   process.exit(1)
@@ -97,14 +120,18 @@ async function printSite(file: string, outputProfile: PdfOutputProfile) {
   const browser = await chromium.launch()
   try {
     const page = await browser.newPage({
-      viewport: { width: 1123, height: 794 },
+      viewport:
+        requestedDocument === 'casos'
+          ? { width: 794, height: 1123 }
+          : { width: 1123, height: 794 },
     })
     page.setDefaultTimeout(180_000)
     page.setDefaultNavigationTimeout(180_000)
-    await page.goto(
-      `http://127.0.0.1:${previewPort}/${requestedDocument === 'experiencias' ? '?doc=experiencias' : ''}`,
-      { waitUntil: 'networkidle' },
-    )
+    const documentQuery =
+      requestedDocument === 'oficinas' ? '' : `?doc=${requestedDocument}`
+    await page.goto(`http://127.0.0.1:${previewPort}/${documentQuery}`, {
+      waitUntil: 'networkidle',
+    })
     await page.waitForFunction(() => {
       const root = globalThis as unknown as {
         document: { documentElement: { dataset: { pagesReady?: string } } }
@@ -113,15 +140,14 @@ async function printSite(file: string, outputProfile: PdfOutputProfile) {
     })
     const sheetCount = await page.locator('.desk .sheet').count()
     if (sheetCount < 1) {
-      throw new Error('O site não paginou nenhuma folha A4 paisagem antes da impressão.')
+      throw new Error(
+        `O site não paginou nenhuma folha A4 ${requestedDocument === 'casos' ? 'retrato' : 'paisagem'} antes da impressão.`,
+      )
     }
     await page.emulateMedia({ media: 'print' })
     await page.evaluate(prepareDomForPdfExportInBrowser)
     const box = geometry[outputProfile]
-    const printOverride =
-      outputProfile === 'digital'
-        ? '@page { size: 297mm 210mm; margin: 0; }'
-        : '@page { size: 303mm 216mm; margin: 0; }'
+    const printOverride = `@page { size: ${box.width} ${box.height}; margin: 0; }`
     await page.addStyleTag({
       content: [
         printOverride,

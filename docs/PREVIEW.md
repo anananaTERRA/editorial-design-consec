@@ -8,9 +8,11 @@ O documento é um site. A prévia é esse site. O PDF é a impressão dele, gera
 npm run dev
 ```
 
-Abra **http://127.0.0.1:5173**. Cada seção é uma folha A4 paisagem. Salvar atualiza na hora.
+Abra **http://127.0.0.1:5173**. Cada seção é uma folha A4. O caderno e os roteiros são paisagem; os estudos de caso são retrato. Salvar atualiza na hora.
 
 `npm run visualizar` e `npm run editar` abrem o mesmo site.
+
+O seletor no topo leva aos três documentos: caderno (`/`), roteiros (`/?doc=experiencias`) e estudos de caso (`/?doc=casos`).
 
 ## PDF final
 
@@ -33,3 +35,5 @@ Para a versão com sangria: `npm run pdf:print` → `output/document-print.pdf` 
 | Prévia (site) | `npm run dev` | http://127.0.0.1:5173 |
 | PDF digital | `npm run build` | `output/document-digital.pdf` |
 | PDF com sangria | `npm run pdf:print` | `output/document-print.pdf` |
+| PDF dos casos | `npm run gerar-pdf-casos` | `output/casos-digital.pdf` (A4 retrato) |
+| PDF dos casos com sangria | `npm run gerar-pdf-grafica-casos` | `output/casos-print.pdf` (216 × 303 mm) |

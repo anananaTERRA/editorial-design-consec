@@ -11,6 +11,8 @@ Coloque os arquivos em `_entrada/`. A pasta fica fora do git até a triagem.
 | Documento de origem (10 páginas) | Recebido | `_entrada/conteudo/consec_origin.pdf` |
 | Texto do original (OCR) | Recebido | `_entrada/conteudo/consec_origin-ocr.txt` |
 | Roteiros de conversa (5 páginas) | Recebido | `_entrada/conteudo/experiencias-redes-ensino.pdf` |
+| Assinatura Vozes (SVG) | Recebido | `_entrada/marca/vozes-assinatura.svg` |
+| Grafismos Vozes (AI) | Recebido | `_entrada/marca/vozes-grafismos.ai` |
 | Logo CONSED em vetor | **Pendente** | — |
 | Logos de apoio em vetor | **Pendente** | — |
 | Arquivos de fonte | **Pendente (opcional)** | — |

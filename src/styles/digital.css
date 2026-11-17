@@ -1,3 +1,9 @@
 :root {
   --bleed: 0mm;
 }
+
+/* Os estudos de caso usam a folha nomeada `caso` em A4 retrato. */
+@page caso {
+  size: 210mm 297mm;
+  margin: 0;
+}

@@ -34,6 +34,12 @@
       "strategy": "roteiro",
       "layout": "roteiro",
       "source": "roteiros/5-infraestrutura-seguranca.json"
+    },
+    {
+      "id": "verso",
+      "strategy": "verso",
+      "layout": "verso",
+      "source": "verso/experiencias.json"
     }
   ]
 }

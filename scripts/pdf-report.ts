@@ -16,6 +16,12 @@ export type PdfReport = {
 export const LANDSCAPE_WIDTH_PT = 841.89
 export const LANDSCAPE_HEIGHT_PT = 595.28
 
+/** A4 portrait in PostScript points. */
+export const PORTRAIT_WIDTH_PT = 595.28
+export const PORTRAIT_HEIGHT_PT = 841.89
+
+export type PageOrientation = 'landscape' | 'portrait'
+
 const TOLERANCE_PT = 8
 const MIN_PAGES = 1
 
@@ -79,7 +85,11 @@ export async function inspectPdfResolved(file: string): Promise<PdfReport> {
   }
 }
 
-export function assertPdfProfile(profile: 'digital' | 'print', report: PdfReport): void {
+export function assertPdfProfile(
+  profile: 'digital' | 'print',
+  report: PdfReport,
+  orientation: PageOrientation = 'landscape',
+): void {
   if (report.pageCount < MIN_PAGES) {
     throw new Error(`Expected at least ${MIN_PAGES} page, found ${report.pageCount}.`)
   }
@@ -91,21 +101,24 @@ export function assertPdfProfile(profile: 'digital' | 'print', report: PdfReport
 
   const width = box[2] - box[0]
   const height = box[3] - box[1]
+  const trimWidth = orientation === 'portrait' ? PORTRAIT_WIDTH_PT : LANDSCAPE_WIDTH_PT
+  const trimHeight = orientation === 'portrait' ? PORTRAIT_HEIGHT_PT : LANDSCAPE_HEIGHT_PT
+  const orientationLabel = orientation === 'portrait' ? 'portrait' : 'landscape'
 
   if (profile === 'digital') {
-    const widthOk = Math.abs(width - LANDSCAPE_WIDTH_PT) <= TOLERANCE_PT
-    const heightOk = Math.abs(height - LANDSCAPE_HEIGHT_PT) <= TOLERANCE_PT
+    const widthOk = Math.abs(width - trimWidth) <= TOLERANCE_PT
+    const heightOk = Math.abs(height - trimHeight) <= TOLERANCE_PT
     if (!widthOk || !heightOk) {
       throw new Error(
-        `Digital PDF media box is ${width.toFixed(2)} × ${height.toFixed(2)} pt. Expected A4 landscape (${LANDSCAPE_WIDTH_PT} × ${LANDSCAPE_HEIGHT_PT}).`,
+        `Digital PDF media box is ${width.toFixed(2)} × ${height.toFixed(2)} pt. Expected A4 ${orientationLabel} (${trimWidth} × ${trimHeight}).`,
       )
     }
     return
   }
 
-  if (width <= LANDSCAPE_WIDTH_PT + TOLERANCE_PT || height <= LANDSCAPE_HEIGHT_PT + TOLERANCE_PT) {
+  if (width <= trimWidth + TOLERANCE_PT || height <= trimHeight + TOLERANCE_PT) {
     throw new Error(
-      `Print layout media box is ${width.toFixed(2)} × ${height.toFixed(2)} pt. Bleed should make it larger than the A4 landscape trim.`,
+      `Print layout media box is ${width.toFixed(2)} × ${height.toFixed(2)} pt. Bleed should make it larger than the A4 ${orientationLabel} trim.`,
     )
   }
 }

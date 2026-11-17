@@ -1,10 +1,14 @@
 import type {
+  CasoPageContent,
+  CasoSection,
   CompositionStrategy,
+  DocumentMasthead,
   DocumentSection,
   EditorialDocument,
   RoteiroPageContent,
   RoteiroQuestion,
   SectionLayout,
+  VersoPageContent,
   WorkbookField,
   WorkbookHeader,
   WorkbookOrientation,
@@ -19,16 +23,22 @@ const layoutForStrategy: Record<CompositionStrategy, SectionLayout> = {
   flow: 'standard',
   workbook: 'workbook',
   roteiro: 'roteiro',
+  caso: 'caso',
+  verso: 'verso',
 }
 const sourcePrefix: Record<CompositionStrategy, string> = {
   flow: 'chapters/',
   workbook: 'workbook/',
   roteiro: 'roteiros/',
+  caso: 'casos/',
+  verso: 'verso/',
 }
 const sourceExtension: Record<CompositionStrategy, string> = {
   flow: '.mdx',
   workbook: '.json',
   roteiro: '.json',
+  caso: '.json',
+  verso: '.json',
 }
 
 export class ContentError extends Error {
@@ -92,6 +102,8 @@ export function parseDocument(value: unknown): EditorialDocument {
     throw new ContentError('sections must be a non-empty array')
   }
 
+  const masthead = parseMasthead(value.masthead)
+
   const seenIds = new Set<string>()
   const seenSources = new Set<string>()
   const sections = value.sections.map((section, index): DocumentSection => {
@@ -101,8 +113,16 @@ export function parseDocument(value: unknown): EditorialDocument {
     }
     const sectionId = requireId(section.id, `${label}.id`, seenIds)
     const strategy = section.strategy
-    if (strategy !== 'flow' && strategy !== 'workbook' && strategy !== 'roteiro') {
-      throw new ContentError(`${label}.strategy must be flow, workbook, or roteiro`)
+    if (
+      strategy !== 'flow' &&
+      strategy !== 'workbook' &&
+      strategy !== 'roteiro' &&
+      strategy !== 'caso' &&
+      strategy !== 'verso'
+    ) {
+      throw new ContentError(
+        `${label}.strategy must be flow, workbook, roteiro, caso, or verso`,
+      )
     }
     const expectedLayout = layoutForStrategy[strategy]
     if (section.layout !== expectedLayout) {
@@ -123,7 +143,16 @@ export function parseDocument(value: unknown): EditorialDocument {
     return { id: sectionId, strategy, layout: expectedLayout, source }
   })
 
-  return { id, language, title, subtitle, author, sections }
+  return { id, language, title, subtitle, author, ...(masthead ? { masthead } : {}), sections }
+}
+
+function parseMasthead(value: unknown): DocumentMasthead | undefined {
+  if (value === undefined) return undefined
+  if (!isRecord(value)) throw new ContentError('masthead must be an object')
+  return {
+    note: requireString(value.note, 'masthead.note'),
+    footer: requireString(value.footer, 'masthead.footer'),
+  }
 }
 
 function parseHeader(value: unknown, label: string): WorkbookHeader {
@@ -399,4 +428,45 @@ function parseRoteiroFollowUp(
       }
     }),
   }
+}
+
+export function parseCasoPage(value: unknown, source = 'caso'): CasoPageContent {
+  if (!isRecord(value)) throw new ContentError(`${source} must be an object`)
+  if (value.variant !== 'caso') {
+    throw new ContentError(`${source}.variant must be caso`)
+  }
+  const lead = requireArray(value.lead, `${source}.lead`).map((item, index) =>
+    requireString(item, `${source}.lead[${index}]`),
+  )
+  const sections = requireArray(value.sections, `${source}.sections`).map(
+    (item, index): CasoSection => {
+      const label = `${source}.sections[${index}]`
+      if (!isRecord(item)) throw new ContentError(`${label} must be an object`)
+      return {
+        title: requireString(item.title, `${label}.title`),
+        paragraphs: requireArray(item.paragraphs, `${label}.paragraphs`).map(
+          (paragraph, paragraphIndex) =>
+            requireString(paragraph, `${label}.paragraphs[${paragraphIndex}]`),
+        ),
+      }
+    },
+  )
+  return {
+    variant: 'caso',
+    number: requireString(value.number, `${source}.number`),
+    axis: requireString(value.axis, `${source}.axis`),
+    title: requireString(value.title, `${source}.title`),
+    descriptor: requireString(value.descriptor, `${source}.descriptor`),
+    lead,
+    sections,
+    decision: requireString(value.decision, `${source}.decision`),
+  }
+}
+
+export function parseVersoPage(value: unknown, source = 'verso'): VersoPageContent {
+  if (!isRecord(value)) throw new ContentError(`${source} must be an object`)
+  if (value.variant !== 'verso') {
+    throw new ContentError(`${source}.variant must be verso`)
+  }
+  return { variant: 'verso' }
 }

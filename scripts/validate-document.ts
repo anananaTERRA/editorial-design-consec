@@ -1,6 +1,13 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
-import { ContentError, parseDocument, parseRoteiroPage, parseWorkbookPage } from '../src/content/schema'
+import {
+  ContentError,
+  parseCasoPage,
+  parseDocument,
+  parseRoteiroPage,
+  parseVersoPage,
+  parseWorkbookPage,
+} from '../src/content/schema'
 import { assertDesignTokens, assertLength, readCustomProperty, readText } from './design-tokens'
 
 const root = process.cwd()
@@ -28,9 +35,11 @@ function guard(run: () => void) {
   }
 }
 
-const manifestFiles = ['document.json', 'document-experiencias.json'].map((name) =>
-  path.join(contentDir, name),
-)
+const manifestFiles = [
+  'document.json',
+  'document-experiencias.json',
+  'document-casos.json',
+].map((name) => path.join(contentDir, name))
 const documents = manifestFiles.map((file) => {
   const manifest = readJson(file)
   return manifest === undefined
@@ -80,6 +89,18 @@ guard(() => {
   if (!/size:\s*303mm\s+216mm\s*;/.test(printCss)) {
     throw new Error(`${printFile} must keep the literal "size: 303mm 216mm".`)
   }
+  if (!/size:\s*216mm\s+303mm\s*;/.test(printCss)) {
+    throw new Error(`${printFile} must keep the portrait bleed literal "size: 216mm 303mm".`)
+  }
+
+  /* Os estudos de caso trocam a folha para A4 retrato sem mexer no caderno. */
+  const casoFile = 'src/styles/caso.css'
+  const caso = readText(path.join(root, casoFile))
+  const casoWidth = readCustomProperty(caso, '--page-width', casoFile)
+  const casoHeight = readCustomProperty(caso, '--page-height', casoFile)
+  if (casoWidth !== '210mm' || casoHeight !== '297mm') {
+    throw new Error(`${casoFile} must set A4 portrait (210mm × 297mm); got ${casoWidth} × ${casoHeight}`)
+  }
 })
 
 const referenced = new Set<string>()
@@ -88,6 +109,12 @@ const referencedAssets = new Set<string>()
 const loadedDocuments = documents.filter((document) => document !== undefined)
 
 for (const document of loadedDocuments) {
+  const casoSections = document.sections.filter((section) => section.strategy === 'caso').length
+  if (casoSections > 0 && casoSections !== document.sections.length) {
+    fail(
+      `${document.id} mixes caso and non-caso sections. A document has one page orientation, so caso sheets cannot share it with landscape sheets.`,
+    )
+  }
   for (const section of document.sections) {
     const absolute = path.join(contentDir, section.source)
     referenced.add(section.source)
@@ -100,11 +127,17 @@ for (const document of loadedDocuments) {
     } else {
       const json = readJson(absolute)
       if (json !== undefined) {
-        guard(() =>
-          section.strategy === 'roteiro'
-            ? parseRoteiroPage(json, section.source)
-            : parseWorkbookPage(json, section.source),
-        )
+        guard(() => {
+          if (section.strategy === 'roteiro') {
+            parseRoteiroPage(json, section.source)
+          } else if (section.strategy === 'caso') {
+            parseCasoPage(json, section.source)
+          } else if (section.strategy === 'verso') {
+            parseVersoPage(json, section.source)
+          } else {
+            parseWorkbookPage(json, section.source)
+          }
+        })
       }
     }
   }
@@ -223,7 +256,7 @@ function resolveAsset(reference: string): string {
 
 function listContentFiles(): string[] {
   const files: string[] = []
-  for (const folder of ['chapters', 'workbook', 'roteiros']) {
+  for (const folder of ['chapters', 'workbook', 'roteiros', 'casos', 'verso']) {
     const directory = path.join(contentDir, folder)
     if (!existsSync(directory)) continue
     for (const file of readdirSync(directory)) {

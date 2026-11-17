@@ -1,0 +1,20 @@
+{
+  "variant": "caso",
+  "number": "5B",
+  "axis": "Infraestrutura e segurança da informação",
+  "title": "Capital D",
+  "descriptor": "Mais de 1 milhão de habitantes · rede municipal com Educação Infantil, ensino fundamental (anos iniciais e finais) e EJA · escolas próprias e instituições parceiras",
+  "lead": [
+    "Na Capital D, as escolas de ensino fundamental têm laboratórios de informática, e os estudantes usam contas institucionais do pacote educacional contratado pela rede. A maior parte das escolas está ligada à rede de fibra da prefeitura; algumas, na área rural, dependem de conexão via rádio. O datacenter da prefeitura é mantido pela empresa municipal de processamento de dados. O currículo municipal incorporou a BNCC Computação, que prevê o uso de tecnologias digitais pelos estudantes de forma crítica e responsável."
+  ],
+  "sections": [
+    {
+      "title": "O letramento em IA nos anos finais",
+      "paragraphs": [
+        "Ao longo do ano letivo, os professores dos anos finais notaram que muitos estudantes já usavam IA no celular, fora da escola, sem orientação. Copiavam respostas prontas em trabalhos, tomavam como certas informações que não verificavam e inseriam dados pessoais nas conversas. A Diretoria de Ensino Fundamental concluiu que ignorar o uso não resolveria o problema e propôs incluir o letramento em IA no 8º e no 9º ano, com uso das ferramentas em sala, sob mediação do professor. Faltava definir a infraestrutura.",
+        "O secretário pediu propostas às áreas, e cada uma apontou um caminho. A gerência de tecnologia educacional sugeriu ativar, nas contas dos estudantes, o assistente de IA já disponível no pacote educacional. Seria a solução mais rápida e de melhor qualidade, mas o fornecedor exige idade mínima de 13 anos, processa os dados fora do país, e o contrato vigente precisaria de aditivo. A empresa municipal ofereceu instalar um modelo de código aberto no datacenter da prefeitura, o que manteria os dados sob controle do município; o modelo, no entanto, comete mais erros, e os servidores e a equipe de manutenção não estão previstos no orçamento. A assessoria pedagógica defendeu começar com o uso apenas pelo professor, que projetaria a ferramenta para a turma e analisaria as respostas com os estudantes, sem contas individuais. Os professores contestaram: sem praticar, os estudantes não aprenderiam a usar a IA com responsabilidade. A área de infraestrutura acrescentou que, no uso individual, as escolas conectadas por rádio não suportariam uma turma inteira conectada."
+      ]
+    }
+  ],
+  "decision": "O planejamento do próximo ano letivo começa em 30 dias. Até lá, o secretário precisa decidir que infraestrutura adotar, para quais escolas e quem responderá pela decisão."
+}
